@@ -7,10 +7,10 @@ require(SYS_PATH.'/classes/model.php'); //Inclui a classe Model
 if(!class_exists('App')):
 
 class App{
-	public $config;
-	public $db;
-	public $route;
-	private $control;
+	public $config; 	// configurações da aplicação
+	public $db;			// configurações de banco de dados
+	public $route;		// configurações de rotas
+	private $control;	// objeto do controlador
 	
 	function __construct($config='',$db='',$route=''){
 		$this->config = $config;
@@ -19,20 +19,27 @@ class App{
 	}
 	
 	public function run(){
-		if(!isset($_GET['r']))
+		if(!isset($_GET['r'])) // se não houver passagem de endereço por $_GET, carrega-se o controlador principal 
 			$this->load_controller($this->route['main']);
-		else
+		else // caso contrário, carrega o indicado pela rota
 			$this->load_controller($_GET['r']);
 	}
 	
-	private function load_controller($route){
+	private function load_controller($route){ //recebe um endereço
+		if(in_array($route,array_keys($this->route))) // se o endereço passar estiver roteado, carrega-se a rota dele
+			$route = $this->route[$route];
+			
 		$route = explode("/", $route);
-		require_once(APP_PATH.'/classes/controllers/'.$route[0].'.php');
-		$this->control = new $route[0]();
-		$this->control->{$route[1]}();
+		require_once(APP_PATH.'/controllers/'.$route[0].'.php'); // inclui o controlador especificado
+		$this->control = new $route[0]();	// instancia o controlador
+		
+		if(isset($route[1]))
+			$this->control->{$route[1]}(); 		// chama o método desejado, caso seja definido
+		else
+			$this->control->index(); 		// chama o método index
 	}
 }
 
 endif;
 
-$app = new App($config,$database,$route);
+$app = new App($config,$database,$route); // executa a aplicação
