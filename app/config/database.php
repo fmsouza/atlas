@@ -1,20 +1,11 @@
-<?php /* if(!class_exists('Database')):
+<?php  if(!class_exists('Database')):
 
 class Database{
-	public String $hostname	= '';
-	public String $username	= '';
-	public String $password = '';
-	public String $prefix	= '';
-	public String $driver	= '';
+	public static $hostname	= '';
+	public static $username	= '';
+	public static $password = '';
+	public static $prefix	= '';
+	public static $driver	= '';
 }
 
 endif;
-*/
-
-$database = array(
-	'hostname'  => '',
-	'username'  => '',
-	'password'  => '',
-	'prefix'	=> '',
-	'driver'	=> ''
-);

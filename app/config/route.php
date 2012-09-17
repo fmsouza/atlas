@@ -1,12 +1,8 @@
-<?php /* if(!class_exists('Route')):
+<?php if(!class_exists('Route')):
 
 class Route{
-	public String $main		= 'main/index';
-	public String $teste	= 'teste/index';
+	static public $main		= 'main/index'; //rota do controlador principal
+	static public $teste	= 'teste/index';
 }
 
 endif;
-*/
-
-$route['main']  = 'main/index';
-$route['teste'] = 'teste/index';
