@@ -1,6 +1,7 @@
 <?php
-include(APP_PATH.'/config/config.php'); // Inclui o arquivo de configuração
-include(APP_PATH.'/config/database.php'); // Inclui os dados do acesso ao banco
+require(APP_PATH.'/config/config.php'); // Inclui o arquivo de configuração
+require(APP_PATH.'/config/route.php'); // Inclui o arquivo de rotas
+require(APP_PATH.'/config/database.php'); // Inclui os dados do acesso ao banco
 require(SYS_PATH.'/classes/controller.php'); //Inclui a classe Controller
 require(SYS_PATH.'/classes/model.php'); //Inclui a classe Model
 
@@ -16,6 +17,9 @@ class App{
 		$this->config = $config;
 		$this->db = $db;
 		$this->route = $route;
+		
+		if(DEFINED(DEBUG) && DEBUG) error_reporting(E_ALL);
+		else error_reporting(0);
 	}
 	
 	public function run(){
