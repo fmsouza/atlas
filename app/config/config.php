@@ -1,12 +1,21 @@
 <?php
 if(!class_exists('Config')):
 
+/**
+ * 
+ * Classe Config
+ * 
+ * Armazena as configurações da aplicação
+ * 
+ * 
+ * @author Frederico Souza
+ *
+ */
 class Config{
-	static public $charset = 'UTF-8';
-	
-	static public function base_url(){
-		return "http://{$_SERVER['SERVER_NAME']}/";
-	}
+	const charset		= 'UTF-8';
+	const base_url		= 'http://localhost/';
 }
 
 endif;
+
+//Fim do arquivo config.php

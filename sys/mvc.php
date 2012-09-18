@@ -18,14 +18,14 @@ class App{
 	
 	public function run(){
 		if(!isset($_GET['r'])) // se não houver passagem de endereço por $_GET, carrega-se o controlador principal 
-			$this->load_controller(Route::$main);
+			$this->load_controller(Route::main);
 		else // caso contrário, carrega o indicado pela rota
 			$this->load_controller($_GET['r']);
 	}
 	
 	private function load_controller($route){ //recebe um endereço
 		if(in_array($route, array_keys(get_object_vars(new Route)))) // se o endereço passar estiver roteado, carrega-se a rota dele
-			$route = Route::${$route};
+			$route = Route::{$route};
 			
 		$route = explode("/", $route);
 		require_once(APP_PATH.'/controllers/'.$route[0].'.php'); // inclui o controlador especificado
@@ -41,3 +41,5 @@ class App{
 endif;
 
 $app = new App(); // executa a aplicação
+
+//Fim do arquivo mvc.php

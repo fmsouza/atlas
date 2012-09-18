@@ -1,11 +1,23 @@
 <?php  if(!class_exists('Database')):
 
+/**
+ * 
+ * Classe Database
+ * 
+ * Armazena as configurações do banco de dados e do
+ * servidor ativo.
+ * 
+ * @author Frederico Souza
+ *
+ */
 class Database{
-	public static $hostname	= '';
-	public static $username	= '';
-	public static $password = '';
-	public static $prefix	= '';
-	public static $driver	= '';
+	const hostname	= '';
+	const username	= '';
+	const password = '';
+	const prefix	= '';
+	const driver	= '';
 }
 
 endif;
+
+//Fim do arquivo database.php

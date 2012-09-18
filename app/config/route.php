@@ -1,8 +1,23 @@
 <?php if(!class_exists('Route')):
 
+/**
+ * 
+ * Classe Route
+ * 
+ * Classe que armazena as rotas da aplicação que serão
+ * acessadas na aplicação. Não é de uso obrigatório, porém
+ * facilita o redirecionamento da aplicação
+ * 
+ * @author Frederico Souza
+ * @static $main, $teste
+ *
+ */
+
 class Route{
-	static public $main		= 'main/index'; //rota do controlador principal
-	static public $teste	= 'teste/index';
+	const main		= 'main/index'; //rota do controlador principal
+	const teste		= 'teste/index';
 }
 
 endif;
+
+//Fim do arquivo route.php
