@@ -9,7 +9,7 @@ if(!class_exists('App')):
 
 class App{
 	private $control;	// objeto do controlador
-	private $main_method = 'index'; //método default
+	private $main_method = Config::main_method; //método default
 	
 	function __construct(){
 		if(DEFINED(DEBUG) && DEBUG) error_reporting(E_ALL);
@@ -25,7 +25,7 @@ class App{
 	
 	private function load_controller($route){ //recebe um endereço
 		if(in_array($route, array_keys(get_object_vars(new Route)))) // se o endereço passar estiver roteado, carrega-se a rota dele
-			$route = Route::{$route};
+			$route = Route::$route;
 			
 		$route = explode("/", $route);
 		require_once(APP_PATH.'/controllers/'.$route[0].'.php'); // inclui o controlador especificado

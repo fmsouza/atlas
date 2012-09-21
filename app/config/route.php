@@ -9,7 +9,6 @@
  * facilita o redirecionamento da aplicação
  * 
  * @author Frederico Souza
- * @static $main, $teste
  *
  */
 

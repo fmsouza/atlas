@@ -11,11 +11,12 @@
  *
  */
 class Database{
-	const hostname	= '';
-	const username	= '';
-	const password = '';
+	const hostname	= 'localhost';
+	const username	= 'root';
+	const password	= '71553736';
+	const dbname	= 'geocart_emprestimos';
 	const prefix	= '';
-	const driver	= '';
+	const driver	= 'mysql';
 }
 
 endif;
