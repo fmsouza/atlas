@@ -9,15 +9,15 @@
 			return getcwd();
 		}
 		public static function SYS_PATH(){
-			return self::BASE()."/sys";
+			return self::BASE()."/system";
 		}
 		public static function ENV_PATH(){
-			return self::SYS_PATH()."/env";
+			return self::SYS_PATH()."/environment";
 		}
 		public static function CTRL_PATH(){
-			return self::SYS_PATH()."/ctrl";
+			return self::SYS_PATH()."/control";
 		}
 		public static function VIEW_PATH(){
-			return self::SYS_PATH()."/ctrl";
+			return self::SYS_PATH()."/view";
 		}
 	}	

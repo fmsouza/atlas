@@ -9,18 +9,18 @@
 		}
 
 		public static function HOME(){
-			return self::BASE()."/aplication";
+			return self::BASE()."/application";
 		}
 
 		public static function ENV(){
-			return self::BASE()."/aplication/env";
+			return self::BASE()."/application/environment";
 		}
 
 		public static function VIEW(){
-			return self::BASE()."/aplication/view";
+			return self::BASE()."/application/view";
 		}
 
 		public static function SRC(){
-			return self::BASE()."/aplication/src";
+			return self::BASE()."/application/src";
 		}
 	}	
