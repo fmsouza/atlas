@@ -54,3 +54,5 @@ abstract class Controller{
 }
 
 endif;
+
+// Fim do arquivo controller.php

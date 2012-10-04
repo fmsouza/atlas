@@ -4,12 +4,14 @@ require(APP_PATH.'/config/route.php'); // Inclui o arquivo de rotas
 require(APP_PATH.'/config/database.php'); // Inclui os dados do acesso ao banco
 require(SYS_PATH.'/classes/controller.php'); //Inclui a classe Controller
 require(SYS_PATH.'/classes/model.php'); //Inclui a classe Model
+require(SYS_PATH.'/classes/view.php'); //Inclui a classe View
 
 if(!class_exists('App')):
 
 class App{
 	private $control;	// objeto do controlador
 	private $main_method = Config::main_method; //método default
+	private $main_route = Route::main; //rota default
 	
 	function __construct(){
 		if(DEFINED(DEBUG) && DEBUG) error_reporting(E_ALL);
@@ -18,7 +20,7 @@ class App{
 	
 	public function run(){
 		if(!isset($_GET['r'])) // se não houver passagem de endereço por $_GET, carrega-se o controlador principal 
-			$this->load_controller(Route::main);
+			$this->load_controller($this->main_route);
 		else // caso contrário, carrega o indicado pela rota
 			$this->load_controller($_GET['r']);
 	}
