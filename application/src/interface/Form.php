@@ -1,4 +1,4 @@
-<?php if(!class_exists('Form')):
+<?php
     /**
      * Classe Form
      * 
@@ -71,7 +71,5 @@
                 return $line;
         }
     }
-
-endif;
 
 // Fim do arquivo Form.php

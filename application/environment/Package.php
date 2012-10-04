@@ -1,4 +1,4 @@
-<?php if(!class_exists('Package')):
+<?php
     /**
      * 
      * Classe Package
@@ -18,7 +18,5 @@
             );
         }
     }
-
-endif;
 
 // Fim do arquivo Package.php
