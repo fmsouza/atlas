@@ -4,10 +4,6 @@
      */
     
     class Config{
-        public static function main_controller(){
-            return 'main';
-        }
-        public static function main_method(){
-            return 'index';
-        }
+        public static $main_controller = 'Main';
+        public static $main_method = 'index';
     }

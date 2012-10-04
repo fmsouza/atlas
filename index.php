@@ -1,17 +1,5 @@
 <?php
-
-	function include_all_php($folder){
-	    foreach (glob("{$folder}/*.php") as $filename){
-            echo $filename.'<br/>';
-            require $filename;
-	    }
-	}
-
-	include_all_php("system");
-	include_all_php(_GLOBAL::ENV_PATH());
-	include_all_php(_GLOBAL::CTRL_PATH());
-    include_all_php(_GLOBAL::VIEW_PATH());
-    include_all_php(_USER::ENV());
-    include_all_php(_USER::SRC());
-    
-    new _APP($_GET['r']);
+    require_once("system/_GLOBAL.php"); // Chama a classe que com os endereços globais da aplicação
+    require(_GLOBAL::CTRL_PATH().'/_APP.php'); // Inclui o core da aplicação
+    //_GLOBAL::$DEBUG = false; // Muda as respostas de erro do sistema
+    new _APP($_GET['r']); // Monta a aplicação carregada no arquivo _APP.php
