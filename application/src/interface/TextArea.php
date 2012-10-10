@@ -11,7 +11,11 @@ class TextArea extends Element {
 		$this->value = $value;
 	}
 
-	public function render() {
+	/**
+	 * Este método gera uma string contendo o html referente aos objetos.
+	 * @return string 
+	 */
+	public function toRender() {
 		return "<textarea name='{$this->name}'>{$this->value}</textarea>";
 	}
 

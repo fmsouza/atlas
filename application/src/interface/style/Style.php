@@ -1,13 +1,12 @@
 <?php
 
-abstract class Style {
+class Style {
 
 	private $name;
 	private $type;
 
-	// association with StyleAttribute class
+
 	public $attributes;
-	// association with Events class
 	public $event;
 
     public function __construct($name, $type='tag'){
@@ -45,7 +44,7 @@ abstract class Style {
     
     public function compose(){
         $return = "{$this->type}{$this->name}{";
-        foreach($this->attributes as $att) $return .= "{$this->getName()}:{$this->getValue()};";
+        foreach($this->attributes as $att) $return .= "{$att->getName()}:{$att->getValue()};";
         $return .= "}";
         return $return; 
     }

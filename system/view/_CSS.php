@@ -6,7 +6,10 @@ class _CSS {
 	public $styles;
     
 	public function generate() {
-        return $this->styles->compose();
+		$return = "";
+		foreach($this->styles as $style)
+			$return .= $style->compose();
+        return $return;
 	}
 
 

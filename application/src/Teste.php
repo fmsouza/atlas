@@ -3,20 +3,32 @@
     class Teste{
         
         public function index(){
+			
             $html = new _HTML();
-            $form = new Form('post','?r=teste/outro');
-            $form->add(new InputText('nome','Deu bom!'));
-            $form->add(new BtnSubmit('Fazer dar bom'));
+			$form = Form::layoutInflater("testforminflater.html");
+            // $form = new Form('post','?r=teste/outro');
+            // $form->add(new InputText('nome','Deu bom!'));
+            // $form->add(new BtnSubmit('Fazer dar bom'));
             $html->add($form);
-            echo $html->render();
+            echo $html->toRender();
+			
         }
         
         public function outro(){
             $html = new _HTML();
-            $form = new Form('post','#');
-            $form->add(new TextArea('nome',$_POST['nome']));
-            $html->add($form);
-            $form->action = 'viiiish';
-            echo $html->render();
+			$form = Form::layoutInflater("outro.html");
+            // $form = new Form('post','#');
+            // $form->add(new TextArea('nome',$_POST['nome']));
+            $html->addToBody($form);
+            // $form->action = 'viiiish';
+            echo $html->toRender();
         }
+		
+		public function genCSS(){
+			$css = new _CSS();
+			$st = new Style("input");
+			$st->createAttribute("color", "#FF0000");
+			$css->addStyle($st);
+			echo "{$css->generate()}";
+		}
     }

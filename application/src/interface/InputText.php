@@ -11,7 +11,11 @@ class InputText extends Element {
 		$this->value = $value;
 	}
 
-	public function render() {
+	/**
+	 * Este método gera uma string contendo o html referente aos objetos.
+	 * @return string 
+	 */
+	public function toRender() {
 		return "<input type='text' name='{$this->name}' value='{$this->value}' />";
 	}
 

@@ -9,7 +9,11 @@ class BtnSubmit extends Element {
 		$this->value = $value;
 	}
 
-	public function render() {
+	/**
+	 * Este método gera uma string contendo o html referente aos objetos.
+	 * @return string 
+	 */
+	public function toRender() {
 		return "<input type='submit' value='{$this->value}' />";
 	}
 
