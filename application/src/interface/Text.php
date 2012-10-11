@@ -1,9 +1,9 @@
 <?php
     /**
      * 
-     * Classe TextArea
+     * Classe Text
      * 
-     * Esta classe representa um elemento html do tipo textarea pronta para ser renderizada
+     * Esta classe representa um elemento html do tipo p pronta para ser renderizada
      * 
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
 	 * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
@@ -12,23 +12,29 @@
      * @method toRender
      * 
      */
-class TextArea extends Element {
+class Text extends Element {
+	
+	private $value;
 
-	public $name;
-	public $value;
-
-	public function __construct($name, $value=''){
+	public function __construct($value){
 		parent::__construct('html');
-		$this->name = $name;
 		$this->value = $value;
 	}
 
+	/**
+	 * Este método atribui o valor passado ao texto
+	 * @param string $value
+	 */
+	 public function setText($value){
+	 	$this->value = $value;
+	 }
+	
 	/**
 	 * Este método gera uma string contendo o html referente aos objetos.
 	 * @return string 
 	 */
 	public function toRender() {
-		return "<textarea name='{$this->name}'>{$this->value}</textarea>";
+		return "<p>{$this->value}</p>";
 	}
 
 

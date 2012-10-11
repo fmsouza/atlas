@@ -1,5 +1,17 @@
 <?php
-
+    /**
+     * 
+     * Classe InputSubmit
+     * 
+     * Esta classe representa um elemento html do tipo input text pronta para ser renderizada
+     * 
+     * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
+	 * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
+     * 
+     * @method __construct
+     * @method toRender
+     * 
+     */
 class InputText extends Element {
 
 	public $name;

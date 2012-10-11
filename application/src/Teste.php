@@ -29,6 +29,12 @@
 			$st = new Style("input");
 			$st->createAttribute("color", "#FF0000");
 			$css->addStyle($st);
+			$st->setEvent(new Events("hover"));
 			echo "{$css->generate()}";
+		}
+		
+		public function testeGen(){
+			$texto = new GenericElement("p",array(),TRUE,"Deu bom ein!");
+			echo $texto->toRender();
 		}
     }

@@ -49,7 +49,7 @@ class _HTML extends ElementsComposition {
 	 */
 	public function toRender() {
 		$html = "<html>
-		<head>";
+		<head><link rel='stylesheet' type='text/css' href='?r=teste/genCSS' />";
 		foreach($this->headElements as $headElement) $html .= $headElement->toRender();
 		$html .= "</head>
 		<body>";

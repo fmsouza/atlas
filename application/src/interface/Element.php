@@ -4,7 +4,7 @@
      * 
      * Classe Element
      * 
-     * Está é a classe básica de composição de objetos html para serem carregados em view
+     * Está é a classe básica e abstrata de objetos html para serem carregados em view
      * 
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
 	 * @author Julio Cesar (julio@cisi.coppe.ufrj.br)

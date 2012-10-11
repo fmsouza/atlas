@@ -1,14 +1,35 @@
 <?php
-
+    /**
+     * 
+     * Classe ElementsComposition
+     * 
+     * Esta classe abstrata representa todos os objetos que são composições html
+     * 
+     * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
+	 * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
+     * 
+     * @method __construct
+     * @method add
+     * @method getElements
+     * @method layoutInflater
+     * 
+     */
 abstract class ElementsComposition extends Element {
 
 	private $elements;
 
+	/**
+	 * Este método adiciona um Element na composição
+	 * @param Element $e
+	 */
 	public function add(Element $e) {
 		$this->elements[] = $e;
-		return $this;
 	}
 	
+	/**
+	 * Este método retorna o array contendo os elementos da composição
+	 * @return string
+	 */
 	public function getElements(){
 		return $this->elements;
 	}

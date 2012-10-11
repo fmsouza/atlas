@@ -11,7 +11,7 @@ class Style {
 
     public function __construct($name, $type='tag'){
         $this->name = $name;
-        
+        $this->event = NULL;
         switch($type){
             case "class":
                 $this->type = ".";
@@ -33,7 +33,7 @@ class Style {
 	}
 
 
-	public function setEvent(Event $e) {
+	public function setEvent(Events $e) {
         $this->event = $e;
 	}
 
@@ -43,7 +43,8 @@ class Style {
 	}
     
     public function compose(){
-        $return = "{$this->type}{$this->name}{";
+    	$event = ($this->event==NULL) ? "" : $this->event->getName();
+        $return = "{$this->type}{$this->name}{$event}{";
         foreach($this->attributes as $att) $return .= "{$att->getName()}:{$att->getValue()};";
         $return .= "}";
         return $return; 
