@@ -2,13 +2,12 @@
 
 class _CSS {
 
-	// association with Style class
-	public $styles;
+	private $styles;
     
 	public function generate() {
 		$return = "";
-		foreach($this->styles as $style)
-			$return .= $style->compose();
+		foreach($this->getStyles() as $style)
+			$return .= $style->compose()."\n";
         return $return;
 	}
 
@@ -17,12 +16,9 @@ class _CSS {
         $this->styles[] = $style;
 	}
 
-
-	public function getStyleByName($name) {
-        // TODO
-	}
-
-
+    public function getStyles(){
+        return $this->styles;
+    }
 }
 
 

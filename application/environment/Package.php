@@ -14,8 +14,7 @@
         
         public static function ALL_PACKS(){
             return array(
-                'interface'      => _USER::SRC().'/interface',
-                'style'          => _USER::SRC().'/interface/style'
+                'style'          => '/interface/style'
             );
         }
     }

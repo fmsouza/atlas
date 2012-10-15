@@ -22,7 +22,7 @@ abstract class Element {
 	
 	/**
 	 * Este método deverá gerar uma string contendo o html referente aos objetos.
-	 * 
+	 * @return string
 	 */
 	abstract public function toRender();
 

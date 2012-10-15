@@ -67,7 +67,8 @@
                 'SYS_PATH'  => self::SYS_PATH(),
                 'ENV_PATH'  => self::ENV_PATH(),
                 'CTRL_PATH' => self::CTRL_PATH(),
-                'VIEW_PATH' => self::VIEW_PATH()
+                'VIEW_PATH' => self::VIEW_PATH(),
+                '_HTML'		=> self::VIEW_PATH()."/_HTML"
             );
         }
 	}

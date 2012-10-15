@@ -28,10 +28,18 @@ abstract class ElementsComposition extends Element {
 	
 	/**
 	 * Este método retorna o array contendo os elementos da composição
-	 * @return string
+	 * @return array
 	 */
 	public function getElements(){
 		return $this->elements;
+	}
+	
+	/**
+	 * Este método retorna o elemento do correspondente indice da composição
+	 * @return array
+	 */
+	public function getElement($index){
+		return $this->elements[$index];
 	}
 	
 	/**

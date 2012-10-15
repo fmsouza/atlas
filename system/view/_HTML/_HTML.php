@@ -15,7 +15,7 @@
      * @method layoutInflater
      * 
      */
-class _HTML extends ElementsComposition {
+class _HTML extends GenericElementsComposition {
 	
 	private $headElements;
 	
@@ -23,7 +23,7 @@ class _HTML extends ElementsComposition {
 	 * Método construtor, carrega o construtor de ElementsComposition e inicializa o array com os elementos do header
 	 */
 	public function __construct(){
-		parent::__construct('html');
+		parent::__construct("html",array());
 		$this->headElements = array();
 	}
 	
@@ -49,7 +49,7 @@ class _HTML extends ElementsComposition {
 	 */
 	public function toRender() {
 		$html = "<html>
-		<head><link rel='stylesheet' type='text/css' href='?r=teste/genCSS' />";
+		<head>";
 		foreach($this->headElements as $headElement) $html .= $headElement->toRender();
 		$html .= "</head>
 		<body>";
@@ -59,13 +59,6 @@ class _HTML extends ElementsComposition {
 		
 		return $html;
 	}
-	
-	/**
-	 * Este método infla um arquivo de html criando objetos em seus respectivos tipos.
-	 * @param string $layout
-	 * @param integer $index
-	 */
-	public static function layoutInflater($layout,$index=0){}
 
 
 }
