@@ -17,6 +17,7 @@
 abstract class ElementsComposition extends Element {
 
 	private $elements;
+	private $numElements;
 
 	/**
 	 * Este método adiciona um Element na composição
@@ -24,6 +25,7 @@ abstract class ElementsComposition extends Element {
 	 */
 	public function add(Element $e) {
 		$this->elements[] = $e;
+		$this->numElements++;
 	}
 	
 	/**
@@ -36,11 +38,20 @@ abstract class ElementsComposition extends Element {
 	
 	/**
 	 * Este método retorna o elemento do correspondente indice da composição
-	 * @return array
+	 * @return string
 	 */
 	public function getElement($index){
 		return $this->elements[$index];
 	}
+	
+	/**
+	 * Este método retorna o número elementos da composição
+	 * @return integer
+	 */
+	public function getElementCount(){
+		return $this->numElements;
+	}
+	
 	
 	/**
 	 * Este método infla um arquivo de html criando objetos em seus respectivos tipos.

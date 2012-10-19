@@ -34,7 +34,15 @@
 			$this->close = $close;
 			$this->value=$value;
 		}
-	
+		
+		/**
+		 * Este método retorna o tipo de fechamento do elemento
+		 * @return boolean
+		 */
+		 public function getClose(){
+		 	return $this->close;
+		 }
+		
 		/**
 		 * Este método retorna o nome do elemento
 		 * @return string

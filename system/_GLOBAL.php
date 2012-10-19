@@ -63,12 +63,13 @@
          */
         public static function ALL_PATHS(){
             return array(
-                'BASE'      => self::BASE(),
-                'SYS_PATH'  => self::SYS_PATH(),
-                'ENV_PATH'  => self::ENV_PATH(),
-                'CTRL_PATH' => self::CTRL_PATH(),
-                'VIEW_PATH' => self::VIEW_PATH(),
-                '_HTML'		=> self::VIEW_PATH()."/_HTML"
+                'BASE'      		=> self::BASE(),
+                'SYS_PATH'  		=> self::SYS_PATH(),
+                'ENV_PATH'  		=> self::ENV_PATH(),
+                'CTRL_PATH' 		=> self::CTRL_PATH(),
+                'VIEW_PATH' 		=> self::VIEW_PATH(),
+                '_HTML'				=> self::VIEW_PATH()."/_HTML",
+                'VIEW_TOOLS'		=> self::VIEW_PATH()."/_TOOLS"
             );
         }
 	}
