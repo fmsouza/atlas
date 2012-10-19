@@ -35,7 +35,7 @@
         // varre todos os diretórios de pacotes definidos na classe Package
         foreach (Package::ALL_PACKS() as $value){
             if(file_exists(_USER::SRC()."/{$value}/{$classname}.php")){
-                require_once(_USER::SRC()."{$value}/{$classname}.php");
+                require_once(_USER::SRC()."/{$value}/{$classname}.php");
                 return true;
             }
         }
