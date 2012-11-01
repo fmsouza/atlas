@@ -128,7 +128,7 @@
 			$xml = new SimpleXMLElement($stringXml);
             $GEC = new GenericElementsComposition($xml->getName(),self::getXmlAttributes($xml));
             foreach($xml as $value){
-               if($value->count()==0){
+               if(count($value)==0){
                     $GEC->add(
                         new GenericElement($value->getName(),self::getXmlAttributes($value),(string)$value,!self::isSelfXmlClose($value))
                     );

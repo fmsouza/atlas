@@ -22,6 +22,3 @@ class StyleAttribute {
         $this->value = $value;
     }
 }
-
-
-?>

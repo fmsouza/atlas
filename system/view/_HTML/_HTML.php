@@ -47,7 +47,7 @@ class _HTML extends GenericElementsComposition {
 	 * Este método gera uma string contendo o html referente aos objetos.
 	 * @return string
 	 */
-	public function toRender() {
+	public function toRender(){
 		$html = "<html>
 		<head>";
 		foreach($this->headElements as $headElement) $html .= $headElement->toRender();
@@ -59,9 +59,4 @@ class _HTML extends GenericElementsComposition {
 		
 		return $html;
 	}
-
-
 }
-
-
-?>

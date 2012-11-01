@@ -18,5 +18,3 @@
             );
         }
     }
-
-// Fim do arquivo Package.php
