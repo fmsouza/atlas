@@ -19,75 +19,27 @@
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
      * 
      * @method index
-     * @method pagina
-     * @method array form_fields
      * 
      */
-    class Main{
+    class Main extends _APP{
+        
+        private $html;
+        
+        public function __construct($route){
+            //_USER::$EMAIL_ADMIN="exemplo@email.com";
+            //_GLOBAL::$DEBUG=FALSE;
+            $this->html = new _HTML();
+            
+            parent::__construct($route);
+        }
         
         /**
-         * Método Index
-         * 
-         * Método principal da classe Main definido em Config.
-         * Apenas escreve 'Hello World' na tela quando é carregado.
-         * Apenas um teste.
+         * Método principal da classe Main.
+         * @return void
          */
         public function index(){
-            echo 'Hello World!';
-        }
-        
-        /**
-         * Método Pagina
-         * 
-         * Método que pode ser acessado por http://<hostname>/index.php?r=main/pagina
-         * Instancia a classe View e a classe Form e gera uma página com o que está configurado
-         * na classe view e depois gera e carrega um formulário na página antes de renderizar.
-         */
-        public function pagina(){
-            $view = new View();
-            
-            $form = new Form();
-            
-            $campos = $this->form_fields();
-    
-            $args['content'] = $form->create('teste',$campos,'main/form');
-            $view->render($args);
-        }
-        
-        /**
-         * Método Form_fields
-         * 
-         * Por ser private, só pode ser acessado DENTRO DA PRÓPRIA CLASSE.
-         * Retorna um array com os parâmetros de todos os campos que o
-         * formulário deve ter.
-         */
-        private function form_fields(){
-            return array(
-                'name' => array(
-                    'title' => 'Nome',
-                    'type'  => 'text'
-                ),
-                'telefone' => array(
-                    'title' => 'Telefone',
-                    'type'  => 'text'
-                ),
-                'email' => array(
-                    'title' => 'E-mail',
-                    'type'  => 'text'
-                ),
-                'senha' => array(
-                    'title' => 'Senha',
-                    'type'  => 'pass'
-                ),
-                'mensagem' => array(
-                    'title' => 'Mensagem',
-                    'type'  => 'textarea'
-                ),
-                'botao' => array(
-                    'title' => 'Enviar',
-                    'type'  => 'submit'
-                ));
+            $this->html->addToHeader(new GenericElement('title',array(),'Pagina de Teste'));
+            $this->html->addToBody(new GenericElement('h1',array(),'Hello World!'));
+            Main::display($this->html->toRender());
         }
     }
-
-// Fim do arquivo Main.php

@@ -126,8 +126,8 @@
 		 * @return string
 		 */
 		public function toRender(){
-			return ($this->close) ? "<{$this->getElementName()} {$this->attributesToString()}>{$this->value}</{$this->getElementName()}>" :
-									"<{$this->getElementName()} {$this->attributesToString()}/>" ;
+			return ($this->close) ? "\n\t\t<{$this->getElementName()} {$this->attributesToString()}>{$this->value}</{$this->getElementName()}>" :
+									"\n\t\t<{$this->getElementName()} {$this->attributesToString()}/>" ;
 		}
 		
 	}

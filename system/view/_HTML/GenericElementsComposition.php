@@ -98,7 +98,7 @@
 		 * @return string
 		 */
 		public function toRender(){
-			$return = "<{$this->getCompositionName()} {$this->attributesToString()}>";
+			$return = "\n\t\t<{$this->getCompositionName()} {$this->attributesToString()}>";
             foreach($this->getElements() as $element)
                 $return .= $element->toRender();
             $return .= "</{$this->getCompositionName()}>";
