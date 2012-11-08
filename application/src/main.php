@@ -4,11 +4,11 @@
      * 
      * Classe Main
      * 
-     * Definida na classe Config como a classe principal de entrada no sistema através do
-     * parâmetro $main_controller. Isso quer dizer que quando não for passada nenhuma classe pela URL
-     * através do parâmetro 'r' do método $_GET essa classe será carregada e o método que será executado
-     * será o index() porque também foi definido desta forma através do parâmetro $main_method da classe
-     * Config.
+     * Classe principal controladora da aplicação. Nessa classe que serão escritos todos os métodos principais que
+     * serão executados ao carregar uma página dentro do sistema.
+     * 
+     * SEMPRE DEVE HAVER um método index que será o método de entrada no sistema. Este sempre será chamado caso não
+     * haja nenhum endereço de outro método sendo indicado através do $_GET['r'].
      * 
      * O controlador é a classe responsável pela lógica de toda a aplicação. É o intermédio entre os modelos
      * e as Views. É nos métodos dos controladores que devemos carregar as classes necessárias para a página.
@@ -17,6 +17,9 @@
      * e substituído nas páginas HTML através da classe _HTML e suas aplicações.
      * 
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
+     * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
+     * 
+     * @param $route
      * 
      * @method index
      * 
@@ -29,12 +32,14 @@
             //_USER::$EMAIL_ADMIN="exemplo@email.com";
             //_GLOBAL::$DEBUG=FALSE;
             $this->html = new _HTML();
-            
             parent::__construct($route);
         }
         
         /**
          * Método principal da classe Main.
+         * 
+         * SUA IMPLEMENTAÇÃO É INDISPENSÁVEL
+         * 
          * @return void
          */
         public function index(){

@@ -3,9 +3,9 @@
      * 
      * Classe _APP
      * 
-     * Este arquivo contém o sistema principal da aplicação. A classe _APP é a responsável por
+     * Este arquivo contém a classe principal da aplicação. A classe _APP é a responsável por
      * realizar o tratamento de endereços, carregamento de classes e, após uma requisição, chamar
-     * a classe certa requerida e executar o método correto.
+     * o método certo requerido para executar determinada ação.
      * 
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
@@ -13,6 +13,7 @@
      * @method __construct
      * @method run
      * @method index
+     * @method @static display
      * 
      */
     abstract class _APP{
@@ -53,6 +54,11 @@
             throw new Exception("Ação index não implementada na aplicação.", 666);
         }
 
+        /**
+         * Saída de dados
+         * @param string $value
+         * @return void
+         */
         public static function display($value){
             echo $value;
         }
