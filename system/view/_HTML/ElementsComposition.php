@@ -29,6 +29,33 @@ abstract class ElementsComposition extends Element {
 	}
 	
 	/**
+	 * Este método altera o Element na composição dado o valor do indice
+	 * @param Element $e
+	 * @param integer $index
+	 */
+	public function setElement(Element $e,$index) {
+		$this->elements[$index] = $e;
+	}
+	
+	/**
+	 * Este método é sinônimo de rm
+	 * @param integer $index
+	 */
+	public function rmElement($index) {
+		$this->rm($index);
+	}
+	
+	/**
+	 * Este método remove o Element da composição dado o seu indice
+	 * @param integer $index
+	 */
+	public function rm($index) {
+		unset($this->elements[$index]);
+		$this->elements = array_values($this->elements);
+		$this->numElements--;
+	}
+	
+	/**
 	 * Este método retorna o array contendo os elementos da composição
 	 * @return array
 	 */
