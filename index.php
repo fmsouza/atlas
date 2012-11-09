@@ -15,13 +15,14 @@
  	include(_GLOBAL::SYS_PATH()."/_EXCEPTION_ERROR_HANDLER.php"); // Inclui a captura de erros por exception   
     /* ----------------------------------------------------------------------------------------------
 	 * 
-	 * BLABLABLA 
+	 * Abaixo encontra-se o ciclo de vida da classe  Main, esta está escrita sob o padrão Singleton
+	 * Portanto garantimos uma única instancia de Main durante toda a execução;
 	 * 
 	 * ---------------------------------------------------------------------------------------------- */
-    $APPLICATION = Main::get(); // Constroi a Main
+    $APPLICATION=Main::get(); // Constroi a Main
     
-    $APPLICATION->pre(); // Prepara a Main para ser executada
+    $APPLICATION->pre();// Prepara a Main para ser executada
 	
-	$APPLICATION->execute(); // Executa a aplicação 
+	$APPLICATION->execute();// Executa a aplicação 
 	
 	$APPLICATION->post(); // Prepara a aplicação para ser morta

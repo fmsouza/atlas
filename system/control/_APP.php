@@ -35,7 +35,7 @@
         }
 
 		protected function construct(){
-			self::$mRequest = (isset($_GET['r']) && $_GET['r']!="execute") ? $_GET['r'] : "index";
+			self::$mRequest = (isset($_GET['r']) && $_GET['r']!="execute") ? $_GET['r'] : "";
 			self::$args = isset($_GET['args']) ? explode("/",$_GET['args']) : array();
 		}
 
