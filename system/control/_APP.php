@@ -17,49 +17,56 @@
      * 
      */
     abstract class _APP{
-        
+
+        static private $instance;
+		static public $mRequest;
+		static public $args;
+		static public $db;
+		
+		abstract public function execute();
+
         /**
          * Carrega as classes necessárias e roda a aplicação
          * @param string $route
          * @return void
          */
-        public function __construct($route){
-            try{
-                $this->run($route); //tenta carregar a rota
-            }
-            catch(exception $e){
-                //caso contrário, lança uma excessão
-                if(_GLOBAL::$DEBUG) self::display($e->getMessage());
-                else exit("Ocorreu um erro no sistema! Entre em contato com o administrador através do e-mail: "._USER::$EMAIL_ADMIN);
-            }
+        private function __construct(){
+        	$this->construct();
         }
+
+		protected function construct(){
+			self::$mRequest = (isset($_GET['r']) && $_GET['r']!="execute") ? $_GET['r'] : "index";
+			self::$args = isset($_GET['args']) ? explode("/",$_GET['args']) : array();
+		}
+
+		public function pre(){}
         
-        /**
-         * Faz o tratamento das rotas, instancia a classe e executa seu método
-         * @param string $route
-         * @return Exception
-         */
-        private function run($method){
-            // Faz as verificações de existência da rota e, caso não haja erros, a carrega
-            if(method_exists($this, $method))
-                $this->$method();
-            else throw new Exception("Ação {$method} não existente na aplicação", 1);
-        }
-        
-        /**
-         * Lança uma mensagem de erro caso o usuário não crie um método Index para entrar no sistema
-         * @return Exception
-         */
-        protected function index(){
-            throw new Exception("Ação index não implementada na aplicação.", 666);
-        }
+		public function post(){}
+		
+		protected function destroy(){
+			self::$mRequest = NULL;
+			self::$args = NULL;
+			self::$instance = NULL;
+		}
+		      
+		public function __destruct(){
+			$this->destroy();
+		}
+
+		public function __clone(){}
+
+		static public function get(){
+			if(is_null(self::$instance))
+				self::$instance = new Main();
+			return self::$instance;
+		}
 
         /**
          * Saída de dados
-         * @param string $value
+         * @param Element|string $value
          * @return void
          */
         public static function display($value){
-            echo $value;
+			echo ($value instanceof Element) ? $value->toRender() :  $value;
         }
     }

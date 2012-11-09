@@ -24,27 +24,39 @@
      * @method index
      * 
      */
-    class Main extends _APP{
-        
+	class Main extends _APP{
         private $html;
-        
-        public function __construct($route){
+		
+        public function pre(){
             //_USER::$EMAIL_ADMIN="exemplo@email.com";
             //_GLOBAL::$DEBUG=FALSE;
-            $this->html = new _HTML();
-            parent::__construct($route);
+
+			$this->html = new _HTML();
+			$this->html->addToHeader(new GenericElement("title",array(),"Main Example!"));
         }
-        
-        /**
-         * Método principal da classe Main.
-         * 
-         * SUA IMPLEMENTAÇÃO É INDISPENSÁVEL
-         * 
-         * @return void
-         */
-        public function index(){
-            $this->html->addToHeader(new GenericElement('title',array(),'Pagina de Teste'));
-            $this->html->addToBody(new GenericElement('h1',array(),'Hello World!'));
-            Main::display($this->html->toRender());
-        }
+
+        public function execute(){
+			try{
+				$this->{Main::$mRequest}();
+			}catch(ErrorException $e){
+				Main::display("<script>alert(\"Ocorreu um erro durante a execução na linha {$e->getLine()} do arquivo {$e->getFile()}\");</script>");
+			}
+		}
+
+		public function index(){
+			Main::display("Rodando...<br />");
+			Main::display("Main Request: ".Main::$mRequest."<br/>");
+			Main::display("Args: ");
+			foreach(Main::$args as $arg)
+				Main::display("<p style='margin-left:36px;'>{$arg}</p>");
+		}
+
+		public function olaMundo(){
+			$this->html->addToBody(new GenericElement("h1",array(),"Ola Mundo!"));
+			$this->html->addToBody(new GenericElement("p",array(),Main::$args[0]));
+		}
+
+		public function post(){
+			Main::display($this->html);
+		}
     }

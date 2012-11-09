@@ -53,7 +53,6 @@ class _HTML extends GenericElementsComposition {
 		$html .= "\n\t</head>\n\t<body>";
 		foreach($this->getElements() as $element) $html .= $element->toRender();
 		$html .= "\n\t</body>\n</html>";
-		
 		return $html;
 	}
 }

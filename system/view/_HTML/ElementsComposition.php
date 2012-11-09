@@ -14,10 +14,10 @@
      * @method layoutInflater
      * 
      */
-abstract class ElementsComposition extends Element {
+abstract class ElementsComposition extends Element implements Inflater {
 
-	private $elements;
-	private $numElements;
+	protected $elements;
+	protected $numElements;
 
 	/**
 	 * Este método adiciona um Element na composição
@@ -51,17 +51,4 @@ abstract class ElementsComposition extends Element {
 	public function getElementCount(){
 		return $this->numElements;
 	}
-	
-	
-	/**
-	 * Este método infla um arquivo de html criando objetos em seus respectivos tipos.
-	 * @param string $layout
-	 * @param integer $index
-	 */
-	abstract static public function layoutInflater($layout,$index=0);
-
-
 }
-
-
-?>

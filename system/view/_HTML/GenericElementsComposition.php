@@ -29,6 +29,8 @@
 			parent::__construct('html');
 			$this->compositionName = $compositionName;
 			$this->compositionAttributes = $compositionAttributes;
+			$this->elements = array();
+			$this->numElements = 0;
 		}
 		
 		/**
