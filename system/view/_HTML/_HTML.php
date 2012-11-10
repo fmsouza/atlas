@@ -47,21 +47,12 @@ class _HTML extends GenericElementsComposition {
 	 * Este método gera uma string contendo o html referente aos objetos.
 	 * @return string
 	 */
-	public function toRender() {
-		$html = "<html>
-		<head>";
+	public function toRender(){
+		$html = "<html>\n\t<head>";
 		foreach($this->headElements as $headElement) $html .= $headElement->toRender();
-		$html .= "</head>
-		<body>";
+		$html .= "\n\t</head>\n\t<body>";
 		foreach($this->getElements() as $element) $html .= $element->toRender();
-		$html .= "</body>
-		</html>";
-		
+		$html .= "\n\t</body>\n</html>";
 		return $html;
 	}
-
-
 }
-
-
-?>

@@ -1,5 +1,4 @@
 <?php
-
     /**
      * 
      * Sistema de MVC do CISI
@@ -12,7 +11,18 @@
      */
     require_once("system/_GLOBAL.php"); // Chama a classe que com os endereços globais da aplicação
     require(_GLOBAL::CTRL_PATH().'/_APP.php'); // Inclui o core da aplicação
-    //_GLOBAL::$DEBUG = false; // Muda as respostas de erro do sistema
-    new _APP($_GET['r']); // Monta a aplicação carregada no arquivo _APP.php
+    include(_GLOBAL::SYS_PATH()."/_AUTOLOAD.php"); // Inclui o autoload
+ 	include(_GLOBAL::SYS_PATH()."/_EXCEPTION_ERROR_HANDLER.php"); // Inclui a captura de erros por exception   
+    /* ----------------------------------------------------------------------------------------------
+	 * 
+	 * Abaixo encontra-se o ciclo de vida da classe  Main, esta está escrita sob o padrão Singleton
+	 * Portanto garantimos uma única instancia de Main durante toda a execução;
+	 * 
+	 * ---------------------------------------------------------------------------------------------- */
+    $APPLICATION=Main::get(); // Constroi a Main
     
-// Fim do arquivo index.php
+    $APPLICATION->pre();// Prepara a Main para ser executada
+	
+	$APPLICATION->execute();// Executa a aplicação 
+	
+	$APPLICATION->post(); // Prepara a aplicação para ser morta

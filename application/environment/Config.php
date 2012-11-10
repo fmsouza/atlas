@@ -7,14 +7,14 @@
      * 
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
      * 
-     * @static @param string $main_controller
      * @static @param string $main_method
+     * 
+     * @method @static base_url
      * 
      */
     
     class Config{
-        public static $main_controller = 'Main';
-        public static $main_method = 'index';
+        public static function base_url(){
+            return "http://{$_SERVER['SERVER_NAME']}/cisimvc/";
+        }
     }
-
-// Fim do arquivo Config.php

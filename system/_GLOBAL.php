@@ -73,5 +73,3 @@
             );
         }
 	}
-
-// Fim do arquivo _GLOBAL.php

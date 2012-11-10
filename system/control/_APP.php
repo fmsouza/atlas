@@ -3,63 +3,70 @@
      * 
      * Classe _APP
      * 
-     * Este arquivo contém o sistema principal da aplicação. A classe _APP é a responsável por
+     * Este arquivo contém a classe principal da aplicação. A classe _APP é a responsável por
      * realizar o tratamento de endereços, carregamento de classes e, após uma requisição, chamar
-     * a classe certa requerida e executar o método correto.
+     * o método certo requerido para executar determinada ação.
      * 
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
      * 
      * @method __construct
      * @method run
+     * @method index
+     * @method @static display
      * 
      */
-    class _APP{
-        
+    abstract class _APP{
+
+        static private $instance;
+		static public $mRequest;
+		static public $args;
+		static public $db;
+		
+		abstract public function execute();
+
         /**
          * Carrega as classes necessárias e roda a aplicação
          * @param string $route
+         * @return void
          */
-        function __construct($route){
-            //inclui a função autoload()
-            include(_GLOBAL::SYS_PATH()."/_AUTOLOAD.php");
-            spl_autoload_register('autoload'); //carrega o __autoload com a função autoload()
-            
-            try{
-                $this->run($route); //tenta carregar a rota
-            }
-            catch(exception $e){
-                //caso contrário, lança uma excessão
-                if(_GLOBAL::$DEBUG) echo "Ops! {$e->getMessage()} na linha {$e->getLine()} do arquivo {$e->getFile()}";
-                else echo "Ocorreu um erro no sistema! Entre em contato com o administrador através do e-mail: "._USER::$EMAIL_ADMIN;
-            }
+        private function __construct(){
+        	$this->construct();
         }
-        
-        /**
-         * Faz o tratamento das rotas, instancia a classe e executa seu método
-         * @param string $route
-         */
-        public function run($route=NULL){
-            $controller = Config::$main_controller; //Define a classe acessada como a definida em Config (controlador default)
-            $method = Config::$main_method; //Define o método acessado como o definido em Config
-            if(!is_null($route)){
-                //Caso uma rota tenha sido passada pelo endereço através do elemento 'r' do $_GET, a rota será tratada e redefinida
-                $route = explode('/',$route);
-                $controller = ucfirst($route[0]);
-                if(sizeof($route)>1) $method = $route[1];
-            }
-            
-            // Faz as verificações de existência da rota e, caso não haja erros, a carrega
-            if(class_exists($controller)){
-                $app = new $controller();
-                if(method_exists($app, $method))
-                    $app->$method();
-                else throw new Exception("Endereço inexistente", 1);
-                
-            }
-            else throw new Exception("Endereço inexistente", 2);
-        }
-        
-    }
 
-// Fim do arquivo _APP.php
+		protected function construct(){
+			self::$mRequest = (isset($_GET['r']) && $_GET['r']!="execute") ? $_GET['r'] : "";
+			self::$args = isset($_GET['args']) ? explode("/",$_GET['args']) : array();
+		}
+
+		public function pre(){}
+        
+		public function post(){}
+		
+		protected function destroy(){
+			self::$mRequest = NULL;
+			self::$args = NULL;
+			self::$instance = NULL;
+		}
+		      
+		public function __destruct(){
+			$this->destroy();
+		}
+
+		public function __clone(){}
+
+		static public function get(){
+			if(is_null(self::$instance))
+				self::$instance = new Main();
+			return self::$instance;
+		}
+
+        /**
+         * Saída de dados
+         * @param Element|string $value
+         * @return void
+         */
+        public static function display($value){
+			echo ($value instanceof Element) ? $value->toRender() :  $value;
+        }
+    }

@@ -29,6 +29,8 @@
 			parent::__construct('html');
 			$this->compositionName = $compositionName;
 			$this->compositionAttributes = $compositionAttributes;
+			$this->elements = array();
+			$this->numElements = 0;
 		}
 		
 		/**
@@ -98,7 +100,7 @@
 		 * @return string
 		 */
 		public function toRender(){
-			$return = "<{$this->getCompositionName()} {$this->attributesToString()}>";
+			$return = "\n\t\t<{$this->getCompositionName()} {$this->attributesToString()}>";
             foreach($this->getElements() as $element)
                 $return .= $element->toRender();
             $return .= "</{$this->getCompositionName()}>";
@@ -128,7 +130,7 @@
 			$xml = new SimpleXMLElement($stringXml);
             $GEC = new GenericElementsComposition($xml->getName(),self::getXmlAttributes($xml));
             foreach($xml as $value){
-               if($value->count()==0){
+               if(count($value)==0){
                     $GEC->add(
                         new GenericElement($value->getName(),self::getXmlAttributes($value),(string)$value,!self::isSelfXmlClose($value))
                     );

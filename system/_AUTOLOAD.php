@@ -1,5 +1,4 @@
-<?php if(!function_exists('autoload')):
-
+<?php
     /**
      * 
      * Função autoload
@@ -43,6 +42,4 @@
         return false;
     }
 
-endif;
-
-// Fim do arquivo _AUTOLOAD.php
+    spl_autoload_register('autoload'); //carrega o __autoload com a função autoload()

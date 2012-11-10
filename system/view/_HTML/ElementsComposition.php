@@ -85,10 +85,7 @@ abstract class ElementsComposition extends Element {
 	 * @param string $layout
 	 * @param integer $index
 	 */
-	abstract static public function layoutInflater($layout,$index);
+	abstract static public function layoutInflater($layout,$index=0);
 
 
 }
-
-
-?>
