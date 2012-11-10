@@ -21,7 +21,6 @@
      * 
      */
 	class Main extends _APP{
-		
         public function pre(){
             //_USER::$EMAIL_ADMIN="exemplo@email.com";
             //_GLOBAL::$DEBUG=FALSE;
@@ -32,6 +31,5 @@
 		}
 
 		public function post(){
-			Main::display($this->html);
 		}
     }
