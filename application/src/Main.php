@@ -24,12 +24,23 @@
         public function pre(){
             //_USER::$EMAIL_ADMIN="exemplo@email.com";
             //_GLOBAL::$DEBUG=FALSE;
-        }
+			Database::$selectDriver = "Mysql";
+			Database::$connInf = array("host"=>"localhost","user"=>"root","password"=>"112233");
+			Main::$db = Database::getInstance();
+		}
 
         public function execute(){
-			
+			Main::$db->selectDatabase("T");
+			try{
+				$tmp = Main::$db->query("SELECT * FROM teste WHERE hora LIKE '%6' ");
+				while($a = $tmp->getRow()) Main::display("Data: ".$a->data."<br />Hora: ".$a->hora."<br />");
+			}catch(DatabaseError $e){
+				echo "Ocorreu um erro!",$e->getMessage(),$e->getCode();
+			}
+			echo "<br />","Linhas afetadas: ",Main::$db->affectedRows(),"<hr/>";
 		}
 
 		public function post(){
+
 		}
     }

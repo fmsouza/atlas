@@ -16,7 +16,7 @@
      * @method @static display
      * 
      */
-    abstract class _APP{
+    abstract class _APP implements Singleton{
 
         static private $instance;
 		static public $mRequest;
@@ -30,7 +30,7 @@
          * @param string $route
          * @return void
          */
-        private function __construct(){
+        protected function __construct(){
         	$this->construct();
         }
 
@@ -52,15 +52,17 @@
 		public function __destruct(){
 			$this->destroy();
 		}
-
-		public function __clone(){}
-
-		static public function get(){
+		
+		static public function getInstance(){
+			$className = get_called_class();
 			if(is_null(self::$instance))
-				self::$instance = new Main();
+				self::$instance = new $className();
 			return self::$instance;
 		}
 
+
+		public function __clone(){}
+		
         /**
          * Saída de dados
          * @param Element|string $value

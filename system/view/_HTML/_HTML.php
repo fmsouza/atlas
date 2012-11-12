@@ -48,11 +48,11 @@ class _HTML extends GenericElementsComposition {
 	 * @return string
 	 */
 	public function toRender(){
-		$html = "<html>\n\t<head>";
+		$html = "<html><head>";
 		foreach($this->headElements as $headElement) $html .= $headElement->toRender();
-		$html .= "\n\t</head>\n\t<body>";
+		$html .= "</head><body>";
 		foreach($this->getElements() as $element) $html .= $element->toRender();
-		$html .= "\n\t</body>\n</html>";
+		$html .= "</body></html>";
 		return $html;
 	}
 }

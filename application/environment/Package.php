@@ -14,7 +14,7 @@
         
         public static function ALL_PACKS(){
             return array(
-                'style'          => 'interface/style'
+                'Database'          => 'database'
             );
         }
     }

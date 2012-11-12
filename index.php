@@ -10,8 +10,8 @@
      * 
      */
     require_once("system/_GLOBAL.php"); // Chama a classe que com os endereços globais da aplicação
-    require(_GLOBAL::CTRL_PATH().'/_APP.php'); // Inclui o core da aplicação
     include(_GLOBAL::SYS_PATH()."/_AUTOLOAD.php"); // Inclui o autoload
+    //require(_GLOBAL::CTRL_PATH().'/_APP.php'); // Inclui o core da aplicação
  	include(_GLOBAL::SYS_PATH()."/_EXCEPTION_ERROR_HANDLER.php"); // Inclui a captura de erros por exception   
     /* ----------------------------------------------------------------------------------------------
 	 * 
@@ -19,7 +19,7 @@
 	 * Portanto garantimos uma única instancia de Main durante toda a execução;
 	 * 
 	 * ---------------------------------------------------------------------------------------------- */
-    $APPLICATION=Main::get(); // Constroi a Main
+    $APPLICATION=Main::getInstance(); // Constroi a Main
     
     $APPLICATION->pre();// Prepara a Main para ser executada
 	
