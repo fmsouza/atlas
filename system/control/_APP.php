@@ -34,6 +34,10 @@
         	$this->construct();
         }
 
+        /**
+         * Constrói a aplicação
+         * @return void
+         */
 		protected function construct(){
 			self::$mRequest = (isset($_GET['r']) && $_GET['r']!="execute") ? $_GET['r'] : "";
 			self::$args = isset($_GET['args']) ? explode("/",$_GET['args']) : array();
@@ -43,16 +47,28 @@
         
 		public function post(){}
 		
+        /**
+         * Destrói as referências dos objetos da aplicação.
+         * @return void
+         */
 		protected function destroy(){
 			self::$mRequest = NULL;
 			self::$args = NULL;
 			self::$instance = NULL;
 		}
-		      
+		
+        /**
+         * Destrói a aplicação
+         * @return void
+         */
 		public function __destruct(){
 			$this->destroy();
 		}
 		
+        /**
+         * Retorna a instância do objeto Main
+         * @return Main
+         */
 		static public function getInstance(){
 			$className = get_called_class();
 			if(is_null(self::$instance))
