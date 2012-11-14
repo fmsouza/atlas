@@ -17,10 +17,17 @@
      * 
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-     * @method index
+     * @method pre
+     * @method execute
+     * @method post
      * 
      */
 	class Main extends _APP{
+	    
+        /**
+         * Pré-carregamento do sistema. Prepara o ambiente.
+         * @return void
+         */
         public function pre(){
             //_USER::$EMAIL_ADMIN="exemplo@email.com";
             //_GLOBAL::$DEBUG=FALSE;
@@ -29,6 +36,10 @@
 			Main::$db = Database::getInstance();
 		}
 
+        /**
+         * Define a lógica de execução da aplicação
+         * @return void
+         */
         public function execute(){
 			Main::$db->selectDatabase("T");
 			try{
@@ -40,6 +51,10 @@
 			echo "<br />","Linhas afetadas: ",Main::$db->affectedRows(),"<hr/>";
 		}
 
+        /**
+         * Instruções para encerramento do ciclo de vida do sistema.
+         * @return void
+         */
 		public function post(){
 
 		}
