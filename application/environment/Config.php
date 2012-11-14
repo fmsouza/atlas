@@ -17,4 +17,16 @@
         public static function base_url(){
             return "http://{$_SERVER['SERVER_NAME']}/cisimvc/";
         }
+        
+        public static function db_config(){ // Configurações de acesso ao banco de dados
+            return array(
+                'host'       => '146.164.63.23',
+                'user'       => 'usuario_sbdi',
+                'password'   => 'cisi2012',
+                'db_name'    => 'coppe11',
+                'tbl_prefix' => 'sbdi_',
+                'charset'    => 'utf8',
+                'driver'     => 'mysqli',
+            );
+        }
     }

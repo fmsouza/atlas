@@ -16,7 +16,7 @@
      * @method @static display
      * 
      */
-    abstract class _APP implements Singleton{
+    abstract class _APP implements _SINGLETON{
 
         static private $instance;
 		static public $mRequest;
