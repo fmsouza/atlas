@@ -14,7 +14,7 @@
         
         public static function ALL_PACKS(){
             return array(
-                'Database'          => 'database'
+                'Database' => 'database'
             );
         }
     }

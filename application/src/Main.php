@@ -31,10 +31,6 @@
         public function pre(){
             //_USER::$EMAIL_ADMIN="exemplo@email.com";
             //_GLOBAL::$DEBUG=FALSE;
-			Database::$selectDriver = "Mysql";
-			Database::$connInf = Config::db_config();
-			Main::$db = Database::getInstance();
-            Main::$db->selectDatabase("coppe11");
 		}
 
         /**
@@ -42,13 +38,7 @@
          * @return void
          */
         public function execute(){
-			try{
-				$tmp = Main::$db->query("SELECT * FROM grh_pessoal");
-				while($a = $tmp->getRow()) Main::display("Nome: ".$a->stv_nome."<br />CPF: ".$a->stc_cpf."<br />");
-			}catch(DatabaseError $e){
-				echo "Ocorreu um erro!",$e->getMessage(),$e->getCode();
-			}
-			echo "<br />","Linhas afetadas: ",Main::$db->affectedRows(),"<hr/>";
+			
 		}
 
         /**
