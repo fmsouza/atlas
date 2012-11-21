@@ -8,13 +8,13 @@
      * 
      * @param DatabaseDriver
      * 
-     * @method selectDatabase
-     * @method @static getInstance
-     * @method query
-     * @method startTransacion
-     * @method commit
-     * @method rollback
-     * @method affectedRows
+     * @FUNCTION selectDatabase
+     * @FUNCTION @static getInstance
+     * @FUNCTION query
+     * @FUNCTION startTransacion
+     * @FUNCTION commit
+     * @FUNCTION rollback
+     * @FUNCTION affectedRows
      */
 	class Database implements _SINGLETON{
 	    
@@ -39,7 +39,7 @@
          * @throws DatabaseError
          */
         public function selectDatabase($dbName){
-			return $this->driver->selectDatabase($dbName);
+			return $this->driver->__FUNCTION__($dbName);
 		}
 
         /**
@@ -59,7 +59,7 @@
          * @throws DatabaseError
          */
 		public function query($sql){
-			return $this->driver->query($sql);
+			return $this->driver->__FUNCTION__($sql);
 		}
         
         /**
@@ -67,7 +67,7 @@
          * @return void
          */
 		public function startTransaction(){
-			$this->driver->startTransaction(); 
+			$this->driver->__FUNCTION__(); 
 		}
         
         /**
@@ -75,7 +75,7 @@
          * @return bool
          */
 		public function commit(){
-			return $this->driver->commit();
+			return $this->driver->__FUNCTION__();
 		}
         
         /**
@@ -83,7 +83,7 @@
          * @return bool
          */
 		public function rollback(){
-			return $this->driver->rollback();
+			return $this->driver->__FUNCTION__();
 		}
         
         /**
@@ -91,6 +91,6 @@
          * @return int
          */
 		public function affectedRows(){
-			return $this->driver->affectedRows();
+			return $this->driver->__FUNCTION__();
 		}
 	}

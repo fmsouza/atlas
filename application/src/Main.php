@@ -34,7 +34,12 @@
 			Database::$selectDriver = "Mysql";
 			Database::$connInf = Config::db_config();
 			Main::$db = Database::getInstance();
-            Main::$db->selectDatabase("coppe11");
+            try{
+                Main::$db->selectDatabase("coppe11");
+            }
+            catch(DatabaseError $e){
+                echo "Não foi possível encontrar o banco de dados. ";
+            }
 		}
 
         /**
@@ -46,7 +51,7 @@
 				$tmp = Main::$db->query("SELECT * FROM grh_pessoal");
 				while($a = $tmp->getRow()) Main::display("Nome: ".$a->stv_nome."<br />CPF: ".$a->stc_cpf."<br />");
 			}catch(DatabaseError $e){
-				echo "Ocorreu um erro!",$e->getMessage(),$e->getCode();
+				echo "Ocorreu um erro! ",$e->getMessage(),$e->getCode();
 			}
 			echo "<br />","Linhas afetadas: ",Main::$db->affectedRows(),"<hr/>";
 		}
