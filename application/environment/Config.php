@@ -26,7 +26,7 @@
                 'db_name'    => 'coppe11',
                 'tbl_prefix' => 'sbdi_',
                 'charset'    => 'utf8',
-                'driver'     => 'mysqli',
+                'driver'     => 'Mysql',
             );
         }
     }

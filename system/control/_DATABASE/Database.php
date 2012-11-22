@@ -8,13 +8,13 @@
      * 
      * @param DatabaseDriver
      * 
-     * @FUNCTION selectDatabase
-     * @FUNCTION @static getInstance
-     * @FUNCTION query
-     * @FUNCTION startTransacion
-     * @FUNCTION commit
-     * @FUNCTION rollback
-     * @FUNCTION affectedRows
+     * @method selectDatabase
+     * @method @static getInstance
+     * @method query
+     * @method startTransacion
+     * @method commit
+     * @method rollback
+     * @method affectedRows
      */
 	class Database implements _SINGLETON{
 	    
@@ -47,6 +47,7 @@
          * @return Database
          */
 		static public function getInstance(){
+		    if(empty(self::$selectDriver)) self::$selectDriver = self::$connInf['driver'];
 			if(is_null(self::$instance))
 				self::$instance = new self::$selectDriver(self::$connInf);
 			return self::$instance;

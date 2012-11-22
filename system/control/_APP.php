@@ -23,7 +23,7 @@
 		static public $args;
 		static public $db;
 		
-		abstract public function execute();
+		abstract public function onExecute();
 
         /**
          * Carrega as classes necessárias e roda a aplicação
@@ -43,9 +43,9 @@
 			self::$args = isset($_GET['args']) ? explode("/",$_GET['args']) : array();
 		}
 
-		public function pre(){}
+		public function onStart(){}
         
-		public function post(){}
+		public function onFinish(){}
 		
         /**
          * Destrói as referências dos objetos da aplicação.
