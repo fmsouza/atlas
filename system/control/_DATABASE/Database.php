@@ -39,7 +39,7 @@
          * @throws DatabaseError
          */
         public function selectDatabase($dbName){
-			return $this->driver->selectDatabase($dbName);
+			return $this->driver->__FUNCTION__($dbName);
 		}
 
         /**
@@ -47,6 +47,7 @@
          * @return Database
          */
 		static public function getInstance(){
+		    if(empty(self::$selectDriver)) self::$selectDriver = self::$connInf['driver'];
 			if(is_null(self::$instance))
 				self::$instance = new self::$selectDriver(self::$connInf);
 			return self::$instance;
@@ -59,7 +60,7 @@
          * @throws DatabaseError
          */
 		public function query($sql){
-			return $this->driver->query($sql);
+			return $this->driver->__FUNCTION__($sql);
 		}
         
         /**
@@ -67,7 +68,7 @@
          * @return void
          */
 		public function startTransaction(){
-			$this->driver->startTransaction(); 
+			$this->driver->__FUNCTION__(); 
 		}
         
         /**
@@ -75,7 +76,7 @@
          * @return bool
          */
 		public function commit(){
-			return $this->driver->commit();
+			return $this->driver->__FUNCTION__();
 		}
         
         /**
@@ -83,7 +84,7 @@
          * @return bool
          */
 		public function rollback(){
-			return $this->driver->rollback();
+			return $this->driver->__FUNCTION__();
 		}
         
         /**
@@ -91,6 +92,6 @@
          * @return int
          */
 		public function affectedRows(){
-			return $this->driver->affectedRows();
+			return $this->driver->__FUNCTION__();
 		}
 	}

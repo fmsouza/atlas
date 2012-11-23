@@ -17,9 +17,9 @@
      * 
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-     * @method pre
-     * @method execute
-     * @method post
+     * @method onStart
+     * @method onExecute
+     * @method onFinish
      * 
      */
 	class Main extends _APP{
@@ -28,7 +28,7 @@
          * Pré-carregamento do sistema. Prepara o ambiente.
          * @return void
          */
-        public function pre(){
+        public function onStart(){
             //_USER::$EMAIL_ADMIN="exemplo@email.com";
             //_GLOBAL::$DEBUG=FALSE;
 		}
@@ -37,7 +37,7 @@
          * Define a lógica de execução da aplicação
          * @return void
          */
-        public function execute(){
+        public function onExecute(){
 			
 		}
 
@@ -45,7 +45,7 @@
          * Instruções para encerramento do ciclo de vida do sistema.
          * @return void
          */
-		public function post(){
+		public function onFinish(){
 
 		}
     }
