@@ -6,13 +6,13 @@
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
      * 
-     * @method query
-     * @method selectDatabase
-     * @method startTransaction
-     * @method commit
-     * @method rollback
-     * @method affectedRows
-     * @method triggerError
+     * @FUNCTION query
+     * @FUNCTION selectDatabase
+     * @FUNCTION startTransaction
+     * @FUNCTION commit
+     * @FUNCTION rollback
+     * @FUNCTION affectedRows
+     * @FUNCTION triggerError
      */
 	class Mysql implements DatabaseDriver{
 	    
@@ -56,7 +56,7 @@
          * @throws DatabaseError
          */
 		public function query($sql){
-			$r = $this->db->query($sql);
+			$r = $this->db->{__FUNCTION__}($sql);
 			$this->triggerError();
 			if($r instanceof mysqli_result){
 				$tmp = new DatabaseResult();
@@ -80,7 +80,7 @@
          * @return bool
          */
 		public function commit(){
-			$this->db->commit();
+			$this->db->__FUNCTION__();
 		}
         
         /**
@@ -88,7 +88,7 @@
          * @return bool
          */
 		public function rollback(){
-			$this->db->rollback();
+			$this->db->__FUNCTION__();
 		}
         
         /**
