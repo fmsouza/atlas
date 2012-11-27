@@ -14,7 +14,7 @@
      * @method layoutInflater
      * 
      */
-abstract class ElementsComposition extends Element {
+abstract class ElementsComposition extends Element implements Inflater{
 
 	private $elements;
 	private $numElements;
@@ -85,7 +85,7 @@ abstract class ElementsComposition extends Element {
 	 * @param string $layout
 	 * @param integer $index
 	 */
-	abstract static public function layoutInflater($layout,$index=0);
+	static public function layoutInflater($layout,$index=0);
 
 
 }
