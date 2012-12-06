@@ -17,7 +17,9 @@
      * 
      */
     abstract class _APP implements _SINGLETON{
-
+		
+		protected $sessionStatus;
+		protected $sessionData;
         static private $instance;
 		static public $mRequest;
 		static public $args;
@@ -30,7 +32,8 @@
          * @param string $route
          * @return void
          */
-        protected function __construct(){
+        private function __construct(){
+        	$this->recoverSession();
         	$this->construct();
         }
 
@@ -39,7 +42,7 @@
          * @return void
          */
 		protected function construct(){
-			self::$mRequest = (isset($_GET['r']) && $_GET['r']!="execute") ? $_GET['r'] : "";
+			self::$mRequest = (isset($_GET['r']) && $_GET['r']!="onExecute") ? $_GET['r'] : "";
 			self::$args = isset($_GET['args']) ? explode("/",$_GET['args']) : array();
 		}
 
@@ -63,6 +66,7 @@
          */
 		public function __destruct(){
 			$this->destroy();
+			$this->writeSessionData();
 		}
 		
         /**
@@ -79,6 +83,60 @@
 
 		public function __clone(){}
 		
+		/**
+		 * Retorna o status da sessão, caso o valor retornado seja 1 ela está aberta caso seja 0 ela está fechada
+		 * @return boolean
+		 */
+		 public function getSessionStatus(){
+		 	return $this->sessionStatus;
+		 }
+		 
+		 public function openSession(){
+		 	if(!$this->getSessionStatus()){
+				$this->sessionStatus = 1;
+				$_SESSION['_APP']['sessionStatus'] = 1;
+		 	}
+		 }
+		 
+		 public function closeSession(){
+		 	if($this->getSessionStatus()){
+		 		session_destroy();
+				$this->sessionStatus = 0;
+				unset($this->sessionData);
+			}
+		 }
+		 
+		 public function getSessionData($key){
+		 	if($this->getSessionStatus()){
+		 		return $this->sessionData[$key];
+			}
+		 }
+		 
+		 private function fillSessionData(){
+		 	if($this->getSessionStatus() && isset($_SESSION['_APP']['data'])){
+		 		$this->sessionData = $_SESSION['_APP']['data'];
+			}
+		 }
+		 
+		 public function addToSessionData($key,$value){
+		 	if($this->getSessionStatus()){
+				$this->sessionData[$key] = $value;
+			}
+		 }
+		 
+		 private function recoverSession(){
+		 	if(isset($_SESSION['_APP'])){
+		 		$this->sessionStatus = 1;
+				$this->fillSessionData();
+			}
+		 }
+		 
+		 private function writeSessionData(){
+		 	if($this->getSessionStatus()){
+		 		$_SESSION['_APP']['data'] = $this->sessionData;
+			}
+		 }
+		 	
         /**
          * Saída de dados
          * @param Element|string $value

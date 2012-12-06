@@ -22,15 +22,20 @@
      * @method onFinish
      * 
      */
+
 	class Main extends _APP{
-	    
+	   	public $LAYOUT;
+		
         /**
          * Pré-carregamento do sistema. Prepara o ambiente.
          * @return void
          */
         public function onStart(){
-            //_USER::$EMAIL_ADMIN="exemplo@email.com";
+           	//_USER::$EMAIL_ADMIN="exemplo@email.com";
             //_GLOBAL::$DEBUG=FALSE;
+            header("Content-Type: text/html; charset=utf-8");
+            $this->LAYOUT = GenericElementsComposition::layoutInflater("helloCISI.html");
+			
 		}
 
         /**
@@ -38,7 +43,7 @@
          * @return void
          */
         public function onExecute(){
-			
+        	$this->LAYOUT->getElement(1)->getElement(1)->setValue($this->LAYOUT->getElement(1)->getElement(1)->getValue()." Se você Estiver vendo esta mensagem a instalação foi um sucesso.");
 		}
 
         /**
@@ -46,6 +51,6 @@
          * @return void
          */
 		public function onFinish(){
-
+			Main::display($this->LAYOUT);
 		}
     }

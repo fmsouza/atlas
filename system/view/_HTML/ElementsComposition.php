@@ -65,7 +65,7 @@ abstract class ElementsComposition extends Element implements Inflater{
 	
 	/**
 	 * Este método retorna o elemento do correspondente indice da composição
-	 * @return string
+	 * @return Element
 	 */
 	public function getElement($index){
 		return $this->elements[$index];
@@ -78,14 +78,5 @@ abstract class ElementsComposition extends Element implements Inflater{
 	public function getElementCount(){
 		return $this->numElements;
 	}
-	
-	
-	/**
-	 * Este método infla um arquivo de html criando objetos em seus respectivos tipos.
-	 * @param string $layout
-	 * @param integer $index
-	 */
-	static public function layoutInflater($layout,$index=0);
-
 
 }
