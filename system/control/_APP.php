@@ -128,7 +128,8 @@
 		 	if(isset($_SESSION['_APP'])){
 		 		$this->sessionStatus = 1;
 				$this->fillSessionData();
-			}
+			}else
+				$this->sessionStatus = 0;
 		 }
 		 
 		 private function writeSessionData(){
