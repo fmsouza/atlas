@@ -88,7 +88,7 @@
 		 * @return boolean
 		 */
 		 public function getSessionStatus(){
-		 	return $this->sessionStatus;
+		 	return (bool)$this->sessionStatus;
 		 }
 		 
 		 public function openSession(){
@@ -108,7 +108,7 @@
 		 
 		 public function getSessionData($key){
 		 	if($this->getSessionStatus()){
-		 		return $this->sessionData[$key];
+		 		return base64_decode($this->sessionData[$key]);
 			}
 		 }
 		 
@@ -120,7 +120,7 @@
 		 
 		 public function addToSessionData($key,$value){
 		 	if($this->getSessionStatus()){
-				$this->sessionData[$key] = $value;
+				$this->sessionData[$key] = base64_encode($value);
 			}
 		 }
 		 

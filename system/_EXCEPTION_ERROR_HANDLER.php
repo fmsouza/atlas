@@ -24,7 +24,7 @@
 	function CatchFatalError() {
 		$E = error_get_last();
 		$error =  base64_encode(serialize((object)$E));
-		if ($E['type'] != 0){ $_SESSION['_ERROR']=$error; header("location: #");}
+		if ($E['type'] != 0){ $_SESSION['_ERROR']=$error; header("location: .");}
 	}
 	
 	function FATAL_ERROR_CALL(){

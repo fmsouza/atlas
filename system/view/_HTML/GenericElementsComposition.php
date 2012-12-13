@@ -122,25 +122,35 @@
 		 * @param integer $index
 		 */
         static public function layoutInflater($layout,$index=0){
-            $layout = file_get_contents(_USER::VIEW()."/{$layout}");
-            return self::Inflater($layout);
+        	try{
+            	$layout = file_get_contents(_USER::VIEW()."/{$layout}");
+			}catch(ErrorException $e){
+				$db = debug_backtrace();
+				throw new ErrorException("failed to open stream("._USER::VIEW()."/{$layout}): No such file or directory",$e->getCode(),0,$db[0]['file'],$db[0]['line']);
+			}
+			return self::Inflater($layout);
         }
 		
 		static private function Inflater($stringXml){
-			$xml = new SimpleXMLElement($stringXml);
-            $GEC = new GenericElementsComposition($xml->getName(),self::getXmlAttributes($xml));
-            foreach($xml as $value){
-               if(count($value)==0){
-                    $GEC->add(
-                        new GenericElement($value->getName(),self::getXmlAttributes($value),(string)$value,!self::isSelfXmlClose($value))
-                    );
-               }else{
-               		$GEC->add(
-               			self::Inflater($value->asXml())
-					);
-               }
-            }
-            return $GEC;
+			try{
+				$xml = new SimpleXMLElement($stringXml);
+	            $GEC = new GenericElementsComposition($xml->getName(),self::getXmlAttributes($xml));
+	            foreach($xml as $value){
+	               if(count($value)==0){
+	                    $GEC->add(
+	                        new GenericElement($value->getName(),self::getXmlAttributes($value),(string)$value,!self::isSelfXmlClose($value))
+	                    );
+	               }else{
+	               		$GEC->add(
+	               			self::Inflater($value->asXml())
+						);
+	               }
+	            }
+	            return $GEC;
+			}catch(Exception $e){
+				$db = debug_backtrace();
+				throw new ErrorException($e->getMessage(),$e->getCode(),0,$db[1]['file'],$db[1]['line']);
+			}
 		}
 		
 	}
