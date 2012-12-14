@@ -72,6 +72,21 @@ abstract class ElementsComposition extends Element implements Inflater{
 	}
 	
 	/**
+	 * Este método retorna o elemento com o correspondente id na composição
+	 * @return Element
+	 */
+	public function getElementById($id){
+		$return = NULL;
+		if($this->getElementCount()>0){
+			foreach($this->getElements() as $element){
+				if($element->getAttribute("id")==$id) { $return = $element; break; }
+				if($element instanceof GenericElementsComposition) $return = $element->getElementById($id);
+			}
+		}
+		return $return;
+	}
+	
+	/**
 	 * Este método retorna o número elementos da composição
 	 * @return integer
 	 */

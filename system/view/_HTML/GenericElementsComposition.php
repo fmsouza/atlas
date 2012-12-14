@@ -55,7 +55,7 @@
 		 * @return string
 		 */
 		public function getAttribute($key){
-			return $this->compositionAttributes[$key];
+			return (array_key_exists($key, $this->getAttributes()))? $this->compositionAttributes[$key]:"";
 		}
 		
 		/**
@@ -101,8 +101,10 @@
 		 */
 		public function toRender(){
 			$return = "<{$this->getCompositionName()} {$this->attributesToString()}>";
-            foreach($this->getElements() as $element)
+            if($this->getElementCount()>0){
+            	foreach($this->getElements() as $element)
                 $return .= $element->toRender();
+			}
             $return .= "</{$this->getCompositionName()}>";
             return $return;
         }
