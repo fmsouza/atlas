@@ -22,7 +22,6 @@
      * @method onFinish
      * 
      */
-
 	class Main extends _APP{
 	   	public $LAYOUT;
 		
@@ -35,7 +34,6 @@
             //_GLOBAL::$DEBUG=FALSE;
             header("Content-Type: text/html; charset=utf-8");
             $this->LAYOUT = GenericElementsComposition::layoutInflater("helloCISI.html");
-			
 		}
 
         /**
@@ -43,7 +41,8 @@
          * @return void
          */
         public function onExecute(){
-        	$this->LAYOUT->getElement(1)->getElement(1)->setValue($this->LAYOUT->getElement(1)->getElement(1)->getValue()." Se você Estiver vendo esta mensagem a instalação foi um sucesso.");
+        	$texto = $this->LAYOUT->getElementById("texto");
+			$texto->setValue($texto->getValue()." Se você Estiver vendo esta mensagem a instalação foi um sucesso.");
 		}
 
         /**
@@ -52,5 +51,6 @@
          */
 		public function onFinish(){
 			Main::display($this->LAYOUT);
+			unset($this->LAYOUT);
 		}
     }
