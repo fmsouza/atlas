@@ -6,13 +6,8 @@
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
      * 
-     * @method query
-     * @method selectDatabase
-     * @method startTransaction
-     * @method commit
-     * @method rollback
-     * @method affectedRows
-     * @method triggerError
+     * @package system
+	 * @subpackage control_DATABASE
      */
 	interface DatabaseDriver{
 	    

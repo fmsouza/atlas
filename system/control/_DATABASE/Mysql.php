@@ -6,18 +6,21 @@
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
      * 
-     * @FUNCTION query
-     * @FUNCTION selectDatabase
-     * @FUNCTION startTransaction
-     * @FUNCTION commit
-     * @FUNCTION rollback
-     * @FUNCTION affectedRows
-     * @FUNCTION triggerError
+     * @package system
+	 * @subpackage control_DATABASE
      */
 	class Mysql implements DatabaseDriver{
 	    
+		/**
+		 * @var mysqli Instância de mysqli
+		 */
 		public $db;
         
+		/**
+		 * Construtor do driver Mysql
+		 * @param array Array de configurações de acesso ao banco MySQL
+		 * @throws DatabaseError
+		 */
 		public function __construct(array $connInf){
 			try{
 				$this->db = new mysqli($connInf["host"],$connInf["user"],$connInf["password"]);

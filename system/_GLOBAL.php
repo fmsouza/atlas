@@ -1,30 +1,22 @@
 <?php
-
 	/**
-     * 
-     * Classe _GLOBAL
-     * 
 	 * Este arquivo contém as configurações globais do sistema
-     * 
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
-     * 
-     * @static @param bool $DEBUG
-     * 
-     * @static @method string BASE
-     * @static @method string SYS_PATH
-     * @static @method string ENV_PATH
-     * @static @method string CTRL_PATH
-     * @static @method string VIEW_PATH
-     * @static @method string[] ALL_PATHS 
-     * 
+     * @package system
 	 */
+	 /**
+	  * Este arquivo contém as configurações globais do sistema
+	  */
 	class _GLOBAL{
-	    
+	    /**
+		 * @var bool $DEBUG Estado do modo de depuração. Caso esteja true os erros serão exibidos na tela do programador.
+		 */
         public static $DEBUG = TRUE;
         
         /**
          * Retorna o endereço base da aplicação
+		 * @return string
          */
 		public static function BASE(){
 			return getcwd();
@@ -32,6 +24,7 @@
         
         /**
          * Caminho do diretório system
+		 * @return string
          */
 		public static function SYS_PATH(){
 			return self::BASE()."/system";
@@ -39,6 +32,7 @@
         
         /**
          * Caminho das classes do ambiente
+		 * @return string
          */
 		public static function ENV_PATH(){
 			return self::SYS_PATH()."/environment";
@@ -46,6 +40,7 @@
         
         /**
          * Caminho das classes de controle
+		 * @return string
          */
 		public static function CTRL_PATH(){
 			return self::SYS_PATH()."/control";
@@ -53,6 +48,7 @@
         
         /**
          * Caminho das classes de views
+		 * @return string
          */
 		public static function VIEW_PATH(){
 			return self::SYS_PATH()."/view";
@@ -60,6 +56,7 @@
         
         /**
          * Array com os caminhos de todas as classes globais
+		 * @return array
          */
         public static function ALL_PATHS(){
             return array(

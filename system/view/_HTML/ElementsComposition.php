@@ -1,17 +1,12 @@
 <?php
     /**
-     * 
-     * Classe ElementsComposition
-     * 
      * Esta classe abstrata representa todos os objetos que são composições html
      * 
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
 	 * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
      * 
-     * @method __construct
-     * @method add
-     * @method getElements
-     * @method layoutInflater
+	 * @package system
+	 * @subpackage view_HTML
      * 
      */
 abstract class ElementsComposition extends Element implements Inflater{

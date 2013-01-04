@@ -7,7 +7,8 @@
      * MVC. Esse arquivo é conhecido como Controlador Principal, ele funciona como um ponto 
      * de entrada no sistema e gerencia todas as requisições. Portanto, todas os endereços passados
      * devem apontá-lo.
-     * 
+	 * 
+	 * @ignore
      */
     session_start(); //Inicializa o serviço de sessão
     require_once("system/_GLOBAL.php"); // Chama a classe que com os endereços globais da aplicação
@@ -23,7 +24,6 @@
 	try{
 		$typeError=0;
 		if(isset($_SESSION["_ERROR"])) { $typeError=1; FATAL_ERROR_CALL(); }
-	    
 	    $APPLICATION=Main::getInstance(); // Constrói a Main
 	    $APPLICATION->onStart();// Prepara a Main para ser executada
 		$APPLICATION->onExecute();// Executa a aplicação 

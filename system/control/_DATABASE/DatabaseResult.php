@@ -6,16 +6,22 @@
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
      * 
-     * @method setRow
-     * @method getRow
-     * @method getHeader
-     * @method getNumRows
-     * @method seek
+     * @package system
+	 * @subpackage control_DATABASE
      */
 	class DatabaseResult{
 	    
+		/**
+		 * @var array Array contendo todas as linhas do resultado de uma consulta
+		 */
 		private $rows;
+		/**
+		 * @var int Posição atual da linha
+		 */
 		private $cursor = -1;
+		/**
+		 * @var int Número de linhas
+		 */
 		private $numRows;
 
         /**

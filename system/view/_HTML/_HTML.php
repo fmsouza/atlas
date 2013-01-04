@@ -1,18 +1,13 @@
 <?php
     /**
      * 
-     * Classe _HTML
-     * 
      * Este arquivo contém ocontrolador de template HTML
      * 
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
 	 * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
      * 
-     * @method __construct
-     * @method addToHeader
-     * @method addToBody
-     * @method toRender
-     * @method layoutInflater
+	 * @package system
+	 * @subpackage view_HTML
      * 
      */
 class _HTML extends GenericElementsComposition {

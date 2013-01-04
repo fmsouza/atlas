@@ -1,32 +1,37 @@
 <?php
-	
 	/**
      * Configura uma interação com banco de dados implementando a Design Pattern Singleton.
-     * 
      * @author Frederico Souza (fmsouza@cisi.cppe.ufrj.br)
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-     * 
-     * @param DatabaseDriver
-     * 
-     * @method selectDatabase
-     * @method @static getInstance
-     * @method query
-     * @method startTransacion
-     * @method commit
-     * @method rollback
-     * @method affectedRows
-     */
+     * @package system
+	 * @subpackage control_DATABASE
+	 */
+	 /**
+	  * Configura uma interação com banco de dados implementando a Design Pattern Singleton.
+	  */
 	class Database implements _SINGLETON{
-	    
+		
+	   /** 
+	 	* @var string Nome do driver selecionado
+	    */ 
 		static public $selectDriver;
+		/**
+	 	 * @var array Array com os dados de conexão
+		 */
 		static public $connInf;
+		/**
+		 * @var Database Instância do objeto Database
+		 */
 		static private $instance;
+		/**
+		 * @var mixed Instância do driver utilizado
+		 */
 		private $driver;
         
         /**
          * Recebe as configurações de acesso ao banco e conecta.
-         * @param array
-         * @return DatabaseDriver
+         * @param DatabaseDriver $d Instancia de conexão com o banco de dados
+         * @return void
          */
 		protected function __construct(DatabaseDriver $d){
 			$this->driver = $d;
@@ -34,7 +39,7 @@
         
         /**
          * Escolhe um banco no servidor
-         * @param $dbName
+         * @param string $dbName Nome do banco de dados
          * @return bool
          * @throws DatabaseError
          */
@@ -48,14 +53,16 @@
          */
 		static public function getInstance(){
 		    if(empty(self::$selectDriver)) self::$selectDriver = self::$connInf['driver'];
-			if(is_null(self::$instance))
-				self::$instance = new self::$selectDriver(self::$connInf);
+			if(is_null(self::$instance)){
+				self::$instance = new Database(new self::$selectDriver(self::$connInf));
+				self::$instance->selectDatabase(self::$connInf['db_name']);
+			}
 			return self::$instance;
 		}
 		
 		/**
-         * Executa uma instrução.
-         * @param string
+         * Executa uma instrução sql.
+         * @param string $sql String de consulta da query
          * @return bool|DatabaseResult
          * @throws DatabaseError
          */

@@ -1,28 +1,23 @@
 <?php
 	/**
-     * 
-     * Classe GenericElement
-     * 
      * Esta classe gera um elemento generico html pronto para ser renderizado no browser
      * 
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
 	 * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-     * 
-     * @method __construct
-	 * @method getElementName
-	 * @method getAttribute
-	 * @method getAttributes
-	 * @method getValue
-	 * @method setElementName
-	 * @method setAttributes
-	 * @method setAttribute
-	 * @method attributesToString
-	 * @method toRender
+	 * 
+	 * @package system
+	 * @subpackage view_HTML
      * 
      */
 	class GenericElementsComposition extends ElementsComposition{
-		
+		/**
+		 * @var string Nome da composição
+		 */
 		private $compositionName;
+		
+		/**
+		 * @var 
+		 */
 		private $compositionAttributes;
 		
 		public function __construct($compositionName,$compositionAttributes){

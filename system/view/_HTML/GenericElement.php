@@ -1,23 +1,12 @@
 <?php
 	/**
-     * 
-     * Classe GenericElement
-     * 
      * Esta classe gera um elemento generico html pronto para ser renderizado no browser
      * 
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
 	 * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
      * 
-     * @method __construct
-	 * @method getElementName
-	 * @method getAttribute
-	 * @method getAttributes
-	 * @method getValue
-	 * @method setElementName
-	 * @method setAttributes
-	 * @method setAttribute
-	 * @method attributesToString
-	 * @method toRender
+	 * @package system
+	 * @subpackage view_HTML
      * 
      */
 	class GenericElement extends Element{

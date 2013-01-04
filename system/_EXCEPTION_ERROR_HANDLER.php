@@ -12,6 +12,7 @@
      * @param $errline
      * 
      * @throws ErrorException
+     * @package system
      */
 	function exception_error_handler($errno, $errstr, $errfile, $errline ) {
 	    throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
