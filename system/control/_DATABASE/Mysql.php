@@ -1,14 +1,14 @@
-<?php
-	
+<?php	
 	/**
-     * Driver de conexão com bancos de dados MySQL.
-     * 
+     * Driver de conexão com bancos de dados MySQL. 
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-     * 
+     */
+    /**
+	 * Driver de conexão com bancos de dados MySQL.
      * @package system
 	 * @subpackage control_DATABASE
-     */
+	 */
 	class Mysql implements DatabaseDriver{
 	    
 		/**

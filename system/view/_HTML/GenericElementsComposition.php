@@ -1,31 +1,29 @@
 <?php
 	/**
      * Esta classe gera um elemento generico html pronto para ser renderizado no browser
-     * 
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
 	 * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-	 * 
+     */
+    /**
+	 * Esta classe gera um elemento generico html pronto para ser renderizado no browser
 	 * @package system
 	 * @subpackage view_HTML
-     * 
-     */
+	 */
 	class GenericElementsComposition extends ElementsComposition{
-		/**
-		 * @var string Nome da composição
-		 */
-		private $compositionName;
 		
 		/**
-		 * @var 
+		 * Constrói uma composição de elementos genéricos.
+		 * @param string $compositionName
+		 * @param array $compositionAttributes
+		 * @return void
 		 */
-		private $compositionAttributes;
-		
-		public function __construct($compositionName,$compositionAttributes){
+		public function __construct($compositionName,$compositionAttributes=array()){
 			parent::__construct('html');
-			$this->compositionName = $compositionName;
-			$this->compositionAttributes = $compositionAttributes;
+			$this->elementName = $compositionName;
+			$this->elementAttributes = $compositionAttributes;
 			$this->elements = array();
 			$this->numElements = 0;
+			
 		}
 		
 		/**
@@ -33,15 +31,7 @@
 		 * @return string
 		 */
 		public function getCompositionName(){
-			return $this->compositionName;
-		}
-        
-		/**
-		 * Este método retorna um array contendo os atributos da composição
-		 * @return array
-		 */
-		public function getAttributes(){
-			return $this->compositionAttributes;
+			return $this->getElementName();
 		}
 		
 		/**
@@ -50,7 +40,7 @@
 		 * @return string
 		 */
 		public function getAttribute($key){
-			return (array_key_exists($key, $this->getAttributes()))? $this->compositionAttributes[$key]:"";
+			return (array_key_exists($key, $this->getAttributes()))?$this->elementAttributes[$key]:"";
 		}
 		
 		/**
@@ -58,7 +48,7 @@
 		 * @param string $name Novo nome para a composição
 		 */
 		public function setCompositionName($name){
-			$this->compositionName = $name;
+			$this->elementName = $name;
 		}
 		
 		/**
@@ -67,7 +57,7 @@
 		 * @param array $attributes Novo array de atributos para o elemento
 		 */
 		public function setAttributes($attributes){
-			$this->compositionAttributes = $attributes;
+			$this->elementAttributes = $attributes;
 		}
 		
 		/**
@@ -76,18 +66,7 @@
 		 * @param string $value Valor do atributo
 		 */
 		public function setAttribute($key,$value){
-			$this->compositionAttributes[$key] = $value;
-		}
-		
-		/**
-		 * Método auxiliar da classe, utilizada durante a renderização do elemento, gera uma string dos atributos para ser renderizado
-		 * @return string
-		 */		
-		private function attributesToString(){
-			$return = "";
-			foreach($this->getAttributes() as $attributeName => $attribute)
-				$return .= "{$attributeName}=\"{$attribute}\" ";
-			return $return;
+			$this->elementAttributes[$key] = $value;
 		}
 
 		/**
@@ -104,11 +83,17 @@
             return $return;
         }
 		
+		/**
+		 * @ignore
+		 */
         static private function getXmlAttributes(SimpleXmlElement $e){
             $return = (array)$e->attributes();
             return !array_key_exists("@attributes",$return) ? array() : $return["@attributes"];
         }
 		
+		/**
+		 * @ignore
+		 */
         static private function isSelfXmlClose(SimpleXmlElement $e){
             return count((array)$e)==0 ? true : false;
         }
@@ -128,6 +113,9 @@
 			return self::Inflater($layout);
         }
 		
+		/**
+		 * @ignore
+		 */
 		static private function Inflater($stringXml){
 			try{
 				$xml = new SimpleXMLElement($stringXml);
@@ -135,7 +123,7 @@
 	            foreach($xml as $value){
 	               if(count($value)==0){
 	                    $GEC->add(
-	                        new GenericElement($value->getName(),self::getXmlAttributes($value),(string)$value,!self::isSelfXmlClose($value))
+	                        new GenericElement($value->getName(),(string)$value,self::getXmlAttributes($value),!self::isSelfXmlClose($value))
 	                    );
 	               }else{
 	               		$GEC->add(

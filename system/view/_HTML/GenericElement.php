@@ -1,22 +1,33 @@
 <?php
 	/**
-     * Esta classe gera um elemento generico html pronto para ser renderizado no browser
-     * 
+     * Este arquivo contém uma classe que gera um elemento generico html pronto para ser renderizado no browser
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
 	 * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-     * 
+     */
+    /**
+	 * Esta classe gera um elemento generico html pronto para ser renderizado no browser
 	 * @package system
 	 * @subpackage view_HTML
-     * 
-     */
+	 */
 	class GenericElement extends Element{
-		
-		private $elementName;
-		private $elementAttributes;
+
+		/**
+		 * @var bool $close Expõe se o elemento possui fechamento ou não 
+		 */
 		private $close;
+		/**
+		 * @var $value Valor do elemento
+		 */
 		private $value;
 		
-		public function __construct($elementName,$elementAttributes,$value='',$close=TRUE){
+		/**
+		 * Constrói um novo elemento genérico
+		 * @param string $elementName Nome do elemento
+		 * @param string $value Valor do elemento
+		 * @param array $elementAttributes Atributos do elemento
+		 * @param bool $close Define se o elemento possui fechamento ou não
+		 */
+		public function __construct($elementName,$value='',$elementAttributes=array(),$close=TRUE){
 			parent::__construct('html');
 			$this->elementName = $elementName;
 			$this->elementAttributes = $elementAttributes;
@@ -31,22 +42,6 @@
 		 public function getClose(){
 		 	return $this->close;
 		 }
-		
-		/**
-		 * Este método retorna o nome do elemento
-		 * @return string
-		 */
-		public function getElementName(){
-			return $this->elementName;
-		}
-		
-		/**
-		 * Este método retorna um array contendo os atributos do elemento
-		 * @return array
-		 */
-		public function getAttributes(){
-			return $this->elementAttributes;
-		}
 		
 		/**
 		 * Este método retorna o valor do atributo dado por parâmetro
@@ -97,17 +92,6 @@
 		 */
 		public function setAttribute($key,$value){
 			$this->elementAttributes[$key] = $value;
-		}
-		
-		/**
-		 * Método auxiliar da classe, utilizada durante a renderização do elemento, gera uma string dos atributos para ser renderizado
-		 * @return string
-		 */		
-		private function attributesToString(){
-			$return = "";
-			foreach($this->getAttributes() as $attributeName => $attribute)
-				$return .= "{$attributeName}=\"{$attribute}\" ";
-			return $return;
 		}
 		
 		/**

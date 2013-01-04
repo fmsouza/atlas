@@ -3,10 +3,10 @@
 	 * Este arquivo contém as configurações globais do sistema
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
-     * @package system
 	 */
 	 /**
-	  * Este arquivo contém as configurações globais do sistema
+	  * Esta classe contém as configurações globais do sistema
+     * @package system
 	  */
 	class _GLOBAL{
 	    /**
