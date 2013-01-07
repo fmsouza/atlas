@@ -98,7 +98,8 @@
          * @return Main
          */
 		static public function getInstance(){
-			$className = get_called_class();
+			
+			$className = (function_exists('get_called_class'))?get_called_class():"Main";
 			if(is_null(self::$instance))
 				self::$instance = new $className();
 			return self::$instance;

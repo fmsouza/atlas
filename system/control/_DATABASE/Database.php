@@ -67,7 +67,7 @@
          * @throws DatabaseError
          */
 		public function query($sql){
-			return $this->driver->__FUNCTION__($sql);
+			return $this->driver->query($sql);
 		}
         
         /**
@@ -75,7 +75,7 @@
          * @return void
          */
 		public function startTransaction(){
-			$this->driver->__FUNCTION__(); 
+			$this->driver->startTransaction(); 
 		}
         
         /**
@@ -83,7 +83,7 @@
          * @return bool
          */
 		public function commit(){
-			return $this->driver->__FUNCTION__();
+			return $this->driver->commit();
 		}
         
         /**
@@ -91,7 +91,7 @@
          * @return bool
          */
 		public function rollback(){
-			return $this->driver->__FUNCTION__();
+			return $this->driver->rollback();
 		}
         
         /**
@@ -99,6 +99,6 @@
          * @return int
          */
 		public function affectedRows(){
-			return $this->driver->__FUNCTION__();
+			return $this->driver->affectedRows();
 		}
 	}
