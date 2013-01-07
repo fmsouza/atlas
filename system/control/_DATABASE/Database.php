@@ -44,7 +44,7 @@
          * @throws DatabaseError
          */
         public function selectDatabase($dbName){
-			return $this->driver->__FUNCTION__($dbName);
+			return $this->driver->selectDatabase($dbName);
 		}
 
         /**
