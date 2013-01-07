@@ -1,14 +1,14 @@
-<?php
-	
+<?php	
 	/**
-     * Interface de Driver do Banco de Dados
-     * 
+     * Interface de Driver do Banco de Dados 
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-     * 
+     */
+    /**
+	 * Interface de Driver do Banco de Dados
      * @package system
 	 * @subpackage control_DATABASE
-     */
+	 */
 	interface DatabaseDriver{
 	    
         /**

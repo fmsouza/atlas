@@ -22,7 +22,7 @@
 		/**
 		 * @var array $elementAttributes atributos do elemento
 		 */
-		protected $elementAttributes;
+		public $elementAttributes;
 		
 		/**
 		 * Constrói um elemento
@@ -45,7 +45,7 @@
 		 * Este método retorna um array contendo os atributos do elemento
 		 * @return array
 		 */
-		public function getAttributes(){
+		protected function getAttributes(){
 			return $this->elementAttributes;
 		}
 		
@@ -55,8 +55,10 @@
 		 */		
 		protected function attributesToString(){
 			$return = "";
-			foreach($this->getAttributes() as $attributeName => $attribute)
-				$return .= "{$attributeName}=\"{$attribute}\" ";
+			if(count($this->getAttributes())>0){
+				foreach($this->getAttributes() as $attributeName => $attribute)
+					$return .= "{$attributeName}=\"{$attribute}\" ";
+			}
 			return $return;
 		}
 		

@@ -1,10 +1,11 @@
 <?php
 	/**
-	 * Interface que permite o padrão inflater nos objetos 
-	 *
+	 * Interface que permite o padrão inflater nos objetos
 	 * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
 	 * @author Julio Cesar da Silva Pereira (julio@cisi.coppe.ufrj.br)
-	 *
+	 */
+	/**
+	 * Interface que permite o padrão inflater nos objetos
 	 * @package system
 	 * @subpackage view_HTML
 	 */

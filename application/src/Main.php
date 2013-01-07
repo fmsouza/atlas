@@ -5,12 +5,17 @@
      * Um dos pilares do MVC é a ideia de manter o HTML e o PHP bem separados, ou seja, não misturar o
      * conteúdo estático e o dinâmico. Portanto, todo o conteúdo lógico deve ser escrito nas classes controladoras
      * e substituído nas páginas HTML através da classe _HTML e suas aplicações.
-     * 
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-     * 
+	 */
+	/**
+	 * Classe principal controladora da aplicação.<br />
+     * <em>SEMPRE DEVE HAVER</em> um método onExecute(). Este sempre será chamado.<br /><br />
+     * Um dos pilares do MVC é a ideia de manter o HTML e o PHP bem separados, ou seja, não misturar o
+     * conteúdo estático e o dinâmico. Portanto, todo o conteúdo lógico deve ser escrito nas classes controladoras
+     * e substituído nas páginas HTML através da classe _HTML e suas aplicações.
      * @package application
-	 * @subpackage src     
+	 * @subpackage src
 	 */
 	class Main extends _APP{
 		/**

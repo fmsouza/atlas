@@ -1,9 +1,10 @@
 <?php
 	/**
 	 * Classe de sistema responsável pelas funções de exibição de erros do sistema.
-	 * 
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-     * 
+	 */
+	/**
+	 * Classe de sistema responsável pelas funções de exibição de erros do sistema.
      * @package system
      * @subpackage control
 	 */
@@ -34,19 +35,20 @@
 				$end_msg = "Um erro muito grave ocorreu no sistema, verifique-o.";
 			else
 				$end_msg = "Um erro ocorreu no sistema, verifique-o ou realize o tratamento do mesmo.";
-			$layout->getElement(1)->add(new GenericElement("h1",array(),$end_msg,TRUE));
+			$layout->getElement(1)->add(new GenericElement("h1",$end_msg));
 			
-			$layout->getElement(1)->add(new GenericElement("h4",array(),"ERRO ".$e->getCode().": ".$e->getMessage(),TRUE));
-			$layout->getElement(1)->add(new GenericElement("h4",array(),"Este erro ocoreu na linha ".$e->getLine()." do arquivo ".$e->getFile(),TRUE));
+			$layout->getElement(1)->add(new GenericElement("h4","ERRO ".$e->getCode().": ".$e->getMessage()));
+			$layout->getElement(1)->add(new GenericElement("h4","Este erro ocoreu na linha ".$e->getLine()." do arquivo ".$e->getFile()));
 			
 			$table = new GenericElementsComposition("div",array("id"=>"stackTrace"));
-			$table->add(new GenericElement("h3",array(),"Stack Trace",TRUE));
+			$table->add(new GenericElement("h3","Stack Trace"));
 			foreach(self::getStack($e) as $stackline)
-				$table->add(new GenericElement("p",array(),$stackline,TRUE));
+				$table->add(new GenericElement("p",$stackline));
 			$layout->getElement(1)->add($table);
 			
-			$layout->getElement(1)->add(new GenericElement("hr",array(),"",FALSE));
+			$layout->getElement(1)->add(new GenericElement("hr"));
 			_APP::display($layout);
+			unset($_SESSION["_ERROR"]);
 			return $layout->toRender();
 		}
 	}

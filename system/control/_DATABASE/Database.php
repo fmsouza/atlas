@@ -3,11 +3,11 @@
      * Configura uma interação com banco de dados implementando a Design Pattern Singleton.
      * @author Frederico Souza (fmsouza@cisi.cppe.ufrj.br)
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-     * @package system
-	 * @subpackage control_DATABASE
 	 */
 	 /**
 	  * Configura uma interação com banco de dados implementando a Design Pattern Singleton.
+     * @package system
+	 * @subpackage control_DATABASE
 	  */
 	class Database implements _SINGLETON{
 		

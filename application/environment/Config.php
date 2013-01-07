@@ -2,12 +2,14 @@
 	/**
      * Classe que armazena as configurações do ambiente <br />
 	 * Adicione nesta classe métodos que possam ajudar na parametrização da sua aplicação
-	 * 
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
+     */
+    /**
+	 * Classe que armazena as configurações do ambiente <br />
+	 * Adicione nesta classe métodos que possam ajudar na parametrização da sua aplicação
      * @package application
 	 * @subpackage environment
-     */
-    
+	 */
     class Config{
     	/**
 		 * Retorna o endereço base da aplicação na web

@@ -1,14 +1,14 @@
 <?php
-
     /**
      * Classe que representa um resultado de uma consulta realizada por um DatabaseDriver.
-     * 
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-     * 
+     */
+    /**
+	 * Classe que representa um resultado de uma consulta realizada por um DatabaseDriver.
      * @package system
 	 * @subpackage control_DATABASE
-     */
+	 */
 	class DatabaseResult{
 	    
 		/**

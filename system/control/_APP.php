@@ -3,14 +3,17 @@
      * Este arquivo contém a classe principal da aplicação. A classe _APP é a responsável por
      * realizar o tratamento de endereços, carregamento de classes e, após uma requisição, chamar
      * o método certo requerido para executar determinada ação.
-     * 
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
-     * 
+     */
+    /**
+	 * Este arquivo contém a classe principal da aplicação. A classe _APP é a responsável por
+     * realizar o tratamento de endereços, carregamento de classes e, após uma requisição, chamar
+     * o método certo requerido para executar determinada ação.
      * @package system
      * @subpackage control
 	 * @abstract
-     */
+	 */
     abstract class _APP implements _SINGLETON{
 		
 		/**

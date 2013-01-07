@@ -1,13 +1,13 @@
 <?php
 	/** 
      * Este arquivo contém as variáveis de caminho para aplications
-     * 
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
-     * 
+	 */
+	/**
+	 * Este arquivo contém as variáveis de caminho para aplications
      * @package system
      * @subpackage environment
-     * 
 	 */
 	class _USER{
 	    
