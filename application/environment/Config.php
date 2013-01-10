@@ -16,7 +16,7 @@
 		 * @return string
 		 */
         public static function base_url(){
-            return "http://{$_SERVER['SERVER_NAME']}/cisimvc/";
+            return "http://{$_SERVER['SERVER_NAME']}/~fmsouza/cisimvc/";
         }
         
 		/**
