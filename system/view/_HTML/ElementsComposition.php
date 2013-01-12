@@ -10,23 +10,28 @@
 	 * @subpackage view_HTML
 	 */
 	abstract class ElementsComposition extends Element implements Inflater{
-	
 		/**
-		 * @var array $elements Array de elementos
-		 */
-		private $elements;
+		 * @var array $elements Array contendo todos os elementos contidos na composição
+		 */	
+		protected $elements;
+		
 		/**
-		 * @var int $numElements Número de elementos 
+		 * Constrói uma composição de elementos genéricos.
+		 * @param string $compositionName
+		 * @param array $compositionAttributes
+		 * @return void
 		 */
-		private $numElements;
-	
+		public function __construct($compositionName,$compositionAttributes=array()){
+			parent::__construct($compositionName,'',$compositionAttributes);
+		}
+		
 		/**
 		 * Este método adiciona um Element na composição
 		 * @param Element $e
 		 */
 		public function add(Element $e) {
 			$this->elements[] = $e;
-			$this->numElements++;
+			$this->domNode->appendChild($e->domNode);
 		}
 		
 		/**
@@ -35,6 +40,8 @@
 		 * @param integer $index
 		 */
 		public function setElement(Element $e,$index) {
+			$this->domNode->replaceChild($e->domNode,$this->getElement($index)->domNode);
+			unset($this->elements[$index]);
 			$this->elements[$index] = $e;
 		}
 		
@@ -51,9 +58,9 @@
 		 * @param integer $index
 		 */
 		public function rm($index) {
+			$this->elements[$index]->domNode->parentNode->removeChild($this->elements[$index]->domNode);
 			unset($this->elements[$index]);
 			$this->elements = array_values($this->elements);
-			$this->numElements--;
 		}
 		
 		/**
@@ -79,12 +86,14 @@
 		 * @return Element
 		 */
 		public function getElementById($id){
-			$return = NULL;
-			if($this->getElementCount()>0){
-				foreach($this->getElements() as $element){
-					if($element->getAttribute("id")==$id) { $return = $element; break; }
-					if($element instanceof GenericElementsComposition) $return = $element->getElementById($id);
+			$return = NULL;	
+			foreach($this->elements as $element){
+				if($element->domNode->getAttribute("id")==$id){
+					$return = $element;
+					break;
 				}
+				if($element instanceof GenericElementsComposition) 
+					$return = $element->getElementById($id);
 			}
 			return $return;
 		}
@@ -94,7 +103,7 @@
 		 * @return integer
 		 */
 		public function getElementCount(){
-			return $this->numElements;
+			return count($this->elements);
 		}
 	
 	}
