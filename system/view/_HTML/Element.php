@@ -56,6 +56,6 @@
 		 * @return string
 		 */
 		public function toRender(){
-			return self::$DOC->saveHTML($this->domNode);
+			return self::$DOC->saveXML($this->domNode);
 		}
 	}
