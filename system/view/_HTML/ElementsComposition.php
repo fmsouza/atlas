@@ -16,16 +16,6 @@
 		protected $elements;
 		
 		/**
-		 * Constrói uma composição de elementos genéricos.
-		 * @param string $compositionName
-		 * @param array $compositionAttributes
-		 * @return void
-		 */
-		public function __construct($compositionName,$compositionAttributes=array()){
-			parent::__construct($compositionName,'',$compositionAttributes);
-		}
-		
-		/**
 		 * Este método adiciona um Element na composição
 		 * @param Element $e
 		 */
@@ -33,6 +23,13 @@
 			$this->elements[] = $e;
 			$this->domNode->appendChild($e->domNode);
 		}
+        
+        /**
+         * @ignore
+         */
+        protected function fill(Element $e){
+            $this->elements[] = $e;
+        }
 		
 		/**
 		 * Este método altera o Element na composição dado o valor do indice
@@ -83,17 +80,18 @@
 		/**
 		 * Este método retorna o elemento com o correspondente id na composição
 		 * @param int $id identificador do elemento
-		 * @return Element
+		 * @return GenericElement
 		 */
 		public function getElementById($id){
 			$return = NULL;	
 			foreach($this->elements as $element){
-				if($element->domNode->getAttribute("id")==$id){
-					$return = $element;
-					break;
-				}
-				if($element instanceof GenericElementsComposition) 
-					$return = $element->getElementById($id);
+				if($element instanceof GenericElement){
+    				if($element->domNode->getAttribute("id")==$id){
+    					$return = $element;
+    					break;
+    				}
+    				$return = $element->getElementById($id);
+                }
 			}
 			return $return;
 		}

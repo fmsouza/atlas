@@ -31,7 +31,7 @@
            	//_USER::$EMAIL_ADMIN="exemplo@email.com";
             //_GLOBAL::$DEBUG=FALSE;
             header("Content-Type: text/html; charset=utf-8");
-            $this->LAYOUT = GenericElementsComposition::layoutInflater("helloCISI.html");
+            $this->LAYOUT = GenericElement::layoutInflater("helloCISI.html");
 		}
 
         /**
@@ -39,8 +39,8 @@
          * @return void
          */
         public function onExecute(){
-        	$texto = $this->LAYOUT->getElementById("texto");
-			$texto->setValue($texto->getValue()." Se você Estiver vendo esta mensagem a instalação foi um sucesso.");
+        	$texto = $this->LAYOUT->getElementById("texto")->getElement(0);
+			$texto->setText($texto->getText()." Se você Estiver vendo esta mensagem a instalação foi um sucesso.");
 		}
 
         /**

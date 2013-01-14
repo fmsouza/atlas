@@ -204,6 +204,6 @@
          * @return void
          */
         public static function display($value){
-			echo ($value instanceof Element) ? $value->toRender() :  $value;
+			file_put_contents("php://output", ($value instanceof Element) ? $value->toRender() :  $value);
         }
     }

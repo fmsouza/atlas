@@ -28,27 +28,22 @@
 		 * @return string
 		 */
 		public static function display(exception $e, $fatal=0){
-			$layout = GenericElementsComposition::layoutInflater("../../system/view/_ERROR_VIEW.html");
-			
+			$layout = GenericElement::layoutInflater("../../system/view/_ERROR_VIEW.html");
 			
 			if($fatal)
 				$end_msg = "Um erro muito grave ocorreu no sistema, verifique-o.";
 			else
 				$end_msg = "Um erro ocorreu no sistema, verifique-o ou realize o tratamento do mesmo.";
-			$layout->getElement(1)->add(new GenericElement("h1",$end_msg));
 			
-			$layout->getElement(1)->add(new GenericElement("h4","ERRO ".$e->getCode().": ".$e->getMessage()));
-			$layout->getElement(1)->add(new GenericElement("h4","Este erro ocoreu na linha ".$e->getLine()." do arquivo ".$e->getFile()));
+			$layout->getElementById("ERROR_TYPE")->getElement(0)->add(new TextElement($end_msg));
+			$layout->getElementById("ERROR_MENSSAGE")->add(GenericElement::stringInflater("<p>ERRO ".$e->getCode().": ".$e->getMessage()."</p>"));
+			$layout->getElementById("ERROR_MENSSAGE")->add(GenericElement::stringInflater("<p>Este erro ocoreu na <strong>linha ".$e->getLine()."</strong> do arquivo <strong>".$e->getFile()."</strong></p>"));
 			
-			$table = new GenericElementsComposition("div",array("id"=>"stackTrace"));
-			$table->add(new GenericElement("h3","Stack Trace"));
 			foreach(self::getStack($e) as $stackline)
-				$table->add(new GenericElement("p",$stackline));
-			$layout->getElement(1)->add($table);
-			
-			$layout->getElement(1)->add(new GenericElement("hr"));
-			_APP::display($layout);
+				$layout->getElementById("stackTrace")->add(
+					GenericElement::stringInflater("<p>{$stackline}</p>")
+				);
 			unset($_SESSION["_ERROR"]);
-			return $layout->toRender();
+			file_put_contents("php://output", $layout->toRender());
 		}
 	}

@@ -22,11 +22,14 @@
 	/*                                                                                                */
 	/* ---------------------------------------------------------------------------------------------- */
 	try{
+		ob_start();
 		$typeError=0;
 		if(isset($_SESSION["_ERROR"])) { $typeError=1; FATAL_ERROR_CALL(); }
 	    $APPLICATION=Main::getInstance(); // Constrói a Main
 	    $APPLICATION->onStart();// Prepara a Main para ser executada
 		$APPLICATION->onExecute();// Executa a aplicação 
 		$APPLICATION->onFinish(); // Prepara a aplicação para ser morta	}catch(exception $e){
+		ob_end_clean();
+		ob_start();
 		_ERROR::display($e,$typeError);
 	}
