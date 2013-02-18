@@ -1,18 +1,19 @@
 <?php
+	/**
+	 * Rotinas e execuções para carregamento automático das classes
+	 * 
+	 * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
+     * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
+     * @package system
+     * 
+     */
     /**
-     * 
-     * Função autoload
-     * 
      * É carregada dentro da classe _APP para ser executada como parâmetro da função
      * spl_autoload_register(), que varre todos os endereços passados a procura de um arquivo
      * com o nome igual a {$classname} cujo conteúdo seja uma classe também chamada de {$classname}
-     * 
-     * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
-     * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-     * 
      * @param string $classname nome da classe
-     * 
-     */
+	 * @return bool
+	 */
     function autoload($classname){
         
         // varre todos os diretórios globais definidos na classe _GLOBAL

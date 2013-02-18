@@ -1,29 +1,18 @@
 <?php
-
-	/**
-	 * 
-     * Classe _USER
-     * 
+	/** 
      * Este arquivo contém as variáveis de caminho para aplications
-     * 
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
      * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
-     * 
-     * @static @param string $EMAIL_ADMIN
-     * 
-     * @static @method string BASE
-     * @static @method string HOME
-     * @static @method string ENV
-     * @static @method string VIEW
-     * @static @method string SRC
-     * @static @method string[] ALL_PATHS 
-     * 
+	 */
+	/**
+	 * Este arquivo contém as variáveis de caminho para aplications
+     * @package system
+     * @subpackage environment
 	 */
 	class _USER{
 	    
         /**
-         * Endereço de e-mail do administrador do sistema: a quem serão enviados
-         * os e-mails em caso de erro.
+         * @var string Endereço de e-mail do administrador do sistema: a quem serão enviados os e-mails em caso de erro.
          */
         public static $EMAIL_ADMIN = 'admin@cisi.coppe.ufrj.br';
         
