@@ -1,32 +1,37 @@
 <?php
-	
 	/**
      * Configura uma interação com banco de dados implementando a Design Pattern Singleton.
-     * 
      * @author Frederico Souza (fmsouza@cisi.cppe.ufrj.br)
      * @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-     * 
-     * @param DatabaseDriver
-     * 
-     * @method selectDatabase
-     * @method @static getInstance
-     * @method query
-     * @method startTransacion
-     * @method commit
-     * @method rollback
-     * @method affectedRows
-     */
+	 */
+	 /**
+	  * Configura uma interação com banco de dados implementando a Design Pattern Singleton.
+     * @package system
+	 * @subpackage control_DATABASE
+	  */
 	class Database implements _SINGLETON{
-	    
+		
+	   /** 
+	 	* @var string Nome do driver selecionado
+	    */ 
 		static public $selectDriver;
+		/**
+	 	 * @var array Array com os dados de conexão
+		 */
 		static public $connInf;
+		/**
+		 * @var Database Instância do objeto Database
+		 */
 		static private $instance;
+		/**
+		 * @var mixed Instância do driver utilizado
+		 */
 		private $driver;
         
         /**
          * Recebe as configurações de acesso ao banco e conecta.
-         * @param array
-         * @return DatabaseDriver
+         * @param DatabaseDriver $d Instancia de conexão com o banco de dados
+         * @return void
          */
 		protected function __construct(DatabaseDriver $d){
 			$this->driver = $d;
@@ -34,12 +39,12 @@
         
         /**
          * Escolhe um banco no servidor
-         * @param $dbName
+         * @param string $dbName Nome do banco de dados
          * @return bool
          * @throws DatabaseError
          */
         public function selectDatabase($dbName){
-			return $this->driver->__FUNCTION__($dbName);
+			return $this->driver->selectDatabase($dbName);
 		}
 
         /**
@@ -48,19 +53,21 @@
          */
 		static public function getInstance(){
 		    if(empty(self::$selectDriver)) self::$selectDriver = self::$connInf['driver'];
-			if(is_null(self::$instance))
-				self::$instance = new self::$selectDriver(self::$connInf);
+			if(is_null(self::$instance)){
+				self::$instance = new Database(new self::$selectDriver(self::$connInf));
+				self::$instance->selectDatabase(self::$connInf['db_name']);
+			}
 			return self::$instance;
 		}
 		
 		/**
-         * Executa uma instrução.
-         * @param string
+         * Executa uma instrução sql.
+         * @param string $sql String de consulta da query
          * @return bool|DatabaseResult
          * @throws DatabaseError
          */
 		public function query($sql){
-			return $this->driver->__FUNCTION__($sql);
+			return $this->driver->query($sql);
 		}
         
         /**
@@ -68,7 +75,7 @@
          * @return void
          */
 		public function startTransaction(){
-			$this->driver->__FUNCTION__(); 
+			$this->driver->startTransaction(); 
 		}
         
         /**
@@ -76,7 +83,7 @@
          * @return bool
          */
 		public function commit(){
-			return $this->driver->__FUNCTION__();
+			return $this->driver->commit();
 		}
         
         /**
@@ -84,7 +91,7 @@
          * @return bool
          */
 		public function rollback(){
-			return $this->driver->__FUNCTION__();
+			return $this->driver->rollback();
 		}
         
         /**
@@ -92,6 +99,6 @@
          * @return int
          */
 		public function affectedRows(){
-			return $this->driver->__FUNCTION__();
+			return $this->driver->affectedRows();
 		}
 	}
