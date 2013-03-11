@@ -67,6 +67,7 @@
                 'DATABASE'          => self::CTRL_PATH()."/_DATABASE",
                 'CTRL_TOOLS'        => self::CTRL_PATH()."/_TOOLS",
                 'TOOL_PHPMailer'    => self::CTRL_PATH()."/_TOOLS/PHPMailer",
+                'TOOL_html2pdf'    => self::CTRL_PATH()."/_TOOLS/html2pdf",
                 'VIEW_PATH' 		=> self::VIEW_PATH(),
                 '_HTML'				=> self::VIEW_PATH()."/_HTML"
             );
