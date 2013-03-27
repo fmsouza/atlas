@@ -23,12 +23,13 @@
 		 */
 		public function __construct(array $connInf){
 			try{
+				if(empty($connInf["charset"])) $connInf["charset"] = 'utf8';
 				$this->db = new mysqli($connInf["host"],$connInf["user"],$connInf["password"]);
 				$this->db->autocommit(TRUE);
-				$this->query("SET NAMES 'utf8'"); 
-				$this->query('SET character_set_connection=utf8'); 
-				$this->query('SET character_set_client=utf8'); 
-				$this->query('SET character_set_results=utf8'); 
+				$this->query("SET NAMES '{$connInf["charset"]}'"); 
+				$this->query("SET character_set_connection={$connInf["charset"]}"); 
+				$this->query("SET character_set_client={$connInf["charset"]}"); 
+				$this->query("SET character_set_results={$connInf["charset"]}"); 
 			}catch(ErrorException $e){
 				throw new DatabaseError($e->getMessage(),$e->getCode());
 			}
