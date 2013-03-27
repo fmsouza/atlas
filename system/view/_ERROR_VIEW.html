@@ -2,19 +2,35 @@
 	<head>
 		<title>Erro</title>
 		<style type="text/css">
-			#stackTrace{
-				border: 1px dashed #000;
-			}
-			#stackTrace p {
+			body{
+				background-color: #efefef;
 				text-align: center;
+				width: 800px;
+				margin: 20px auto;
+				font-family: monospace;
+				color: #6e6e6e;
+			}
+			h1,h2{
+				color: #000;
+			}
+			#ERROR_TYPE,#ERROR_MESSAGE{
+				background-color: #fff;
+			}
+			div{
+				border: 1px dashed #aaa;
+				background-color: #fff;
+				margin-bottom: 20px;
 			}
 		</style>
 	</head>
 	<body>
-		<div id="ERROR_TYPE">
-			<h1></h1>
+		<div id="ERROR">
+			<h1>Ops! Algo deu errado!</h1>
 		</div>
-		<div id="ERROR_MENSSAGE">
+		<div id="ERROR_TYPE">
+			<h2></h2>
+		</div>
+		<div id="ERROR_MESSAGE">
 		</div>
 		<div id="stackTrace">
 			
