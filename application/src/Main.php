@@ -42,7 +42,7 @@ class Main extends _APP{
 		//_USER::$EMAIL_ADMIN="exemplo@email.com";
 		//_GLOBAL::$DEBUG=FALSE;
 		header("Content-Type: text/html; charset=utf-8");
-		$this->LAYOUT = GenericElement::layoutInflater("helloCISI.html");
+		$this->LAYOUT = GenericElement::layoutInflater("helloMarvie.html");
 	}
 	
 	/**
