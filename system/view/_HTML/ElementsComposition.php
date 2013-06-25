@@ -108,6 +108,25 @@ abstract class ElementsComposition extends Element implements Inflater{
 	}
 	
 	/**
+	* Este método retorna o elemento com a correspondente class na composição
+	* @param int $class identificador do elemento
+	* @return GenericElement
+	*/
+	public function getElementByClass($class){
+		$return = NULL;	
+		foreach($this->elements as $element){
+			if($element instanceof GenericElement){
+				if(strpos($element->domNode->getAttribute("class"),$class) !== false){
+					$return = $element;
+					break;
+				}
+			$return = $element->getElementByClass($class);
+			}
+		}
+		return $return;
+	}
+	
+	/**
 	* Este método retorna o número elementos da composição
 	* @return integer
 	*/
