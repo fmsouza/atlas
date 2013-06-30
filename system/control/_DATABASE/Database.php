@@ -90,6 +90,14 @@ class Database implements _SINGLETON{
 	}
 	
 	/**
+	* Encerra uma transação
+	* @return void
+	*/
+	public function closeTransaction(){
+		$this->driver->closeTransaction(); 
+	}
+	
+	/**
 	* Faz o commit das instruções para o SGBD.
 	* @return bool
 	*/

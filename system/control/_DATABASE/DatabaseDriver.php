@@ -51,6 +51,12 @@ interface DatabaseDriver{
     public function startTransaction();
     
     /**
+    * Encerra uma transação
+    * @return void
+    */
+    public function closeTransaction();
+    
+    /**
     * Faz o commit das instruções para o SGBD.
     * @return bool
     */

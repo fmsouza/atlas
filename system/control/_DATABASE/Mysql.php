@@ -95,6 +95,14 @@ class Mysql implements DatabaseDriver{
 	}
 	
 	/**
+	* Encerra uma transação
+	* @return void
+	*/
+	public function closeTransaction(){
+		$this->db->autocommit(TRUE);
+	}
+	
+	/**
 	* Faz o commit das instruções para o SGBD.
 	* @return bool
 	*/
