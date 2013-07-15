@@ -25,6 +25,9 @@
 * @subpackage control
 * @abstract
 */
+
+
+
 abstract class _APP implements _SINGLETON{
 	/**
 	* @var bool Estado da sessão
@@ -99,8 +102,8 @@ abstract class _APP implements _SINGLETON{
 	* @ignore
 	*/
 	public function __destruct(){
-		$this->destroy();
 		$this->writeSessionData();
+		$this->destroy();
 	}
 	
 	/**
@@ -157,7 +160,12 @@ abstract class _APP implements _SINGLETON{
 	*/
 	public function getSessionData($key){
 		if($this->getSessionStatus()){
-			return base64_decode($this->sessionData[$key]);
+			try{
+				return base64_decode($this->sessionData[$key]);
+ 			}catch(ErrorException $e){
+ 				$db = debug_backtrace();
+	    		throw new SessionError($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
+			}
 		}
 	}
 	

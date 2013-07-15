@@ -39,8 +39,9 @@ class Main extends _APP{
 	* @return void
 	*/
 	public function onStart(){
-		//_USER::$EMAIL_ADMIN="exemplo@email.com";
-		//_GLOBAL::$DEBUG=FALSE;
+		// _USER::$EMAIL_ADMIN="exemplo@email.com";
+		// _GLOBAL::$DEBUG=FALSE;
+		$this->openSession();
 		header("Content-Type: text/html; charset=utf-8");
 		$this->LAYOUT = GenericElement::layoutInflater("helloMarvie.html");
 	}
@@ -52,6 +53,12 @@ class Main extends _APP{
 	public function onExecute(){
 		$texto = $this->LAYOUT->getElementById("texto")->getElement(0);
 		$texto->setText($texto->getText()." Se você Estiver vendo esta mensagem a instalação foi um sucesso.");
+		$teste = $this->LAYOUT->getElementByClass("teste");
+		foreach($teste as $t)
+			$t->add(GenericElement::stringInflater("<b> Consegui adicionar isso!</b>"));
+		Database::getInstance();
+		$this->getSessionData('foooo');
+
 	}
 	
 	/**

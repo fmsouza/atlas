@@ -40,19 +40,26 @@ class _ERROR{
 	public static function display(exception $e, $fatal=0){
 		$layout = GenericElement::layoutInflater("../../system/view/_ERROR_VIEW.html");
 		
-		if($fatal)
-			$end_msg = "Um erro muito grave ocorreu no sistema, verifique-o.";
-		else
-			$end_msg = "Um erro ocorreu no sistema, verifique-o ou realize o tratamento do mesmo.";
+		if(!_GLOBAL::$DEBUG){
+			$end_msg = "Um erro ocorreu. Por favor, contate o administrador: "._USER::$EMAIL_ADMIN;
+			$layout->removeElementById("ERROR_MESSAGE");
+			$layout->removeElementById("stackTrace");
+		}
+		else{	
+			if($fatal)
+				$end_msg = "Um erro muito grave ocorreu no sistema, verifique-o.";
+			else
+				$end_msg = "Um erro ocorreu no sistema, verifique-o ou realize o tratamento do mesmo.";
+
+			$layout->getElementById("ERROR_MESSAGE")->add(GenericElement::stringInflater("<p>".get_class($e)." ".$e->getCode().": ".$e->getMessage()."</p>"));
+			$layout->getElementById("ERROR_MESSAGE")->add(GenericElement::stringInflater("<p>Este erro ocoreu na <strong>linha ".$e->getLine()."</strong> do arquivo <strong>".$e->getFile()."</strong></p>"));
 		
+			foreach(self::getStack($e) as $stackline)
+				$layout->getElementById("stackTrace")->add(
+					GenericElement::stringInflater("<p>{$stackline}</p>")
+				);
+		}
 		$layout->getElementById("ERROR_TYPE")->getElement(0)->add(new TextElement($end_msg));
-		$layout->getElementById("ERROR_MESSAGE")->add(GenericElement::stringInflater("<p>ERRO ".$e->getCode().": ".$e->getMessage()."</p>"));
-		$layout->getElementById("ERROR_MESSAGE")->add(GenericElement::stringInflater("<p>Este erro ocoreu na <strong>linha ".$e->getLine()."</strong> do arquivo <strong>".$e->getFile()."</strong></p>"));
-		
-		foreach(self::getStack($e) as $stackline)
-			$layout->getElementById("stackTrace")->add(
-				GenericElement::stringInflater("<p>{$stackline}</p>")
-			);
 		unset($_SESSION["_ERROR"]);
 		file_put_contents("php://output", $layout->toRender());
 	}

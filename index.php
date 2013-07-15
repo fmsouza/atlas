@@ -1,7 +1,7 @@
 <?php
 /**
 * 
-* Sistema de MVC do CISI
+* Marvie
 * 
 * Através deste arquivo (index.php) são feitas todas as operações básicas de um sistema
 * MVC. Esse arquivo é conhecido como Controlador Principal, ele funciona como um ponto 
@@ -28,18 +28,18 @@ include(_GLOBAL::SYS_PATH()."/_AUTOLOAD.php"); // Inclui o autoload
 
 /* ---------------------------------------------------------------------------------------------- */
 /*                                                                                                */
-/* Abaixo encontra-se o ciclo de vida da classe Main, esta está escrita sob o padrão Singleton    */
+/* Abaixo encontra-se o ciclo de vida da classe Main, que está escrita sob o padrão Singleton     */
 /* Portanto garantimos uma única instância de Main durante toda a execução;                       */
 /*                                                                                                */
 /* ---------------------------------------------------------------------------------------------- */
 try{
 	ob_start();
-	$typeError=0;
-	if(isset($_SESSION["_ERROR"])) { $typeError=1; FATAL_ERROR_CALL(); }
-	$APPLICATION=Main::getInstance(); // Constrói a Main
-	$APPLICATION->onStart();// Prepara a Main para ser executada
-	$APPLICATION->onExecute();// Executa a aplicação 
-	$APPLICATION->onFinish(); // Prepara a aplicação para ser morta}catch(exception $e){
+	if(isset($_SESSION["_ERROR"])) FATAL_ERROR_CALL();
+	$APPLICATION=Main::getInstance();	// Constrói a Main
+	$APPLICATION->onStart();			// Prepara a Main para ser executada
+	$APPLICATION->onExecute();			// Executa a aplicação 
+	$APPLICATION->onFinish();			// Prepara a aplicação para ser morta
+}catch(exception $e){
 	ob_end_clean();
 	ob_start();
 	_ERROR::display($e,$typeError);

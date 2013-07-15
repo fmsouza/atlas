@@ -90,7 +90,7 @@ abstract class ElementsComposition extends Element implements Inflater{
 	
 	/**
 	* Este método retorna o elemento com o correspondente id na composição
-	* @param int $id identificador do elemento
+	* @param string $id identificador do elemento
 	* @return GenericElement
 	*/
 	public function getElementById($id){
@@ -101,7 +101,28 @@ abstract class ElementsComposition extends Element implements Inflater{
 					$return = $element;
 					break;
 				}
-			$return = $element->getElementById($id);
+				$return = $element->getElementById($id);
+			}
+		}
+		return $return;
+	}
+	
+	/**
+	* Este método remove o elemento com o correspondente id na composição
+	* @param string $id identificador do elemento
+	* @return GenericElement
+	*/
+	public function removeElementById($id){
+		$return = NULL;	
+		foreach($this->elements as $element){
+			if($element instanceof GenericElement){
+				if($element->domNode->getAttribute("id")==$id){
+					$element->domNode->parentNode->removeChild($element->domNode);
+					unset($element);
+					$this->elements = array_values($this->elements);
+					break;
+				}
+				else $element->removeElementById($id);
 			}
 		}
 		return $return;
@@ -112,15 +133,13 @@ abstract class ElementsComposition extends Element implements Inflater{
 	* @param int $class identificador do elemento
 	* @return GenericElement
 	*/
-	public function getElementByClass($class){
-		$return = NULL;	
+	public function getElementByClass($class,$return = array()){
 		foreach($this->elements as $element){
 			if($element instanceof GenericElement){
 				if(strpos($element->domNode->getAttribute("class"),$class) !== false){
-					$return = $element;
-					break;
+					$return[] = &$element;
 				}
-			$return = $element->getElementByClass($class);
+				$element->getElementByClass($class,$return);
 			}
 		}
 		return $return;

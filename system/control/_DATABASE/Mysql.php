@@ -42,7 +42,8 @@ class Mysql implements DatabaseDriver{
 			$this->query("SET character_set_client={$connInf["charset"]}"); 
 			$this->query("SET character_set_results={$connInf["charset"]}"); 
 		}catch(ErrorException $e){
-			throw new DatabaseError($e->getMessage(),$e->getCode());
+			$db = debug_backtrace();
+    		throw new DatabaseError($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
 		}
 	}
 	
@@ -53,8 +54,11 @@ class Mysql implements DatabaseDriver{
 	* @throws DatabaseError
 	*/
 	public function triggerError(){
-		if($this->db->errno) throw new DatabaseError($this->db->error,$this->db->errno);
-	}
+		if($this->db->errno){
+			$db = debug_backtrace();
+    		throw new DatabaseError($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
+    	}
+   	}
 	
 	/**
 	* Escolhe um banco no servidor

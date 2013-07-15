@@ -59,14 +59,27 @@ class Database implements _SINGLETON{
 	}
 	
 	/**
-	* Retorna a instãncia do banco caso exista ou a cria, caso contrário.
+	* Retorna a instância do banco caso exista ou a cria, caso contrário.
 	* @return Database
 	*/
 	static public function getInstance(){
-		if(empty(self::$selectDriver)) self::$selectDriver = self::$connInf['driver'];
+		if(empty(self::$selectDriver))
+			if(isset(self::$connInf['driver']))
+				self::$selectDriver = self::$connInf['driver'];
+			else{
+				$db = debug_backtrace();
+	    		throw new DatabaseError("Driver name not configured", 1, 0, $db[0]['file'], $db[0]['line'] );
+			}
+			
+
 		if(is_null(self::$instance)){
-		self::$instance = new Database(new self::$selectDriver(self::$connInf));
-		self::$instance->selectDatabase(self::$connInf['db_name']);
+			try{
+				self::$instance = new Database(new self::$selectDriver(self::$connInf));
+				self::$instance->selectDatabase(self::$connInf['db_name']);
+			}catch(ErrorException $e){
+				$db = debug_backtrace();
+	    		throw new DatabaseError($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
+			}
 		}
 		return self::$instance;
 	}

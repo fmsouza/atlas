@@ -23,5 +23,5 @@
 * @package system
 * @subpackage control_DATABASE
 */
-class DatabaseError extends Exception{
+class DatabaseError extends ErrorException{
 }

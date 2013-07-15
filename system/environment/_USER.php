@@ -24,7 +24,7 @@ class _USER{
 	/**
 	* @var string Endereço de e-mail do administrador do sistema: a quem serão enviados os e-mails em caso de erro.
 	*/
-	public static $EMAIL_ADMIN = 'admin@cisi.coppe.ufrj.br';
+	public static $EMAIL_ADMIN = 'admin@domain.com';
 	
 	/**
 	* Retorna o caminho da base global
