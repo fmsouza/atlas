@@ -1,155 +1,157 @@
 <?php
-/**
-* Esta classe abstrata representa todos os objetos que são composições html
-* @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
-* @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-* 
-* @copyright Copyright 2012 COPPE
-* Licensed under the Apache License, Version 2.0 (the “License”);
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-* http://www.apache.org/licenses/LICENSE-2.0
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an “AS IS” BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
-/**
-* Esta classe abstrata representa todos os objetos que são composições html
-* @package system
-* @subpackage view_HTML
-*/
-abstract class ElementsComposition extends Element implements Inflater{
 	/**
-	* @var array $elements Array contendo todos os elementos contidos na composição
-	*/	
-	protected $elements;
-	
+	 * Contains ElementsComposition class
+	 * 
+	 * @author Frederico Souza (fredericoamsouza@gmail.com)
+	 * @author Julio Cesar (thisjulio@gmail.com)
+	 * 
+	 * @copyright Copyright 2013 Frederico Souza
+	 * Licensed under the Apache License, Version 2.0 (the “License”);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an “AS IS” BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
 	/**
-	* Este método adiciona um Element na composição
-	* @param Element $e
-	*/
-	public function add(Element $e) {
-		$this->elements[] = $e;
-		$this->domNode->appendChild($e->domNode);
-	}
-	
-	/**
-	* @ignore
-	*/
-	protected function fill(Element $e){
-		$this->elements[] = $e;
-	}
-	
-	/**
-	* Este método altera o Element na composição dado o valor do indice
-	* @param Element $e
-	* @param integer $index
-	*/
-	public function setElement(Element $e,$index) {
-		$this->domNode->replaceChild($e->domNode,$this->getElement($index)->domNode);
-		unset($this->elements[$index]);
-		$this->elements[$index] = $e;
-	}
-	
-	/**
-	* Este método é sinônimo de rm
-	* @param integer $index
-	*/
-	public function rmElement($index) {
-		$this->rm($index);
-	}
-	
-	/**
-	* Este método remove o Element da composição dado o seu indice
-	* @param integer $index
-	*/
-	public function rm($index) {
-		$this->elements[$index]->domNode->parentNode->removeChild($this->elements[$index]->domNode);
-		unset($this->elements[$index]);
-		$this->elements = array_values($this->elements);
-	}
-	
-	/**
-	* Este método retorna o array contendo os elementos da composição
-	* @return array
-	*/
-	public function getElements(){
-		return $this->elements;
-	}
-	
-	/**
-	* Este método retorna o elemento do correspondente indice da composição
-	* @param int $index índice do elemento
-	* @return Element
-	*/
-	public function getElement($index){
-		return $this->elements[$index];
-	}
-	
-	/**
-	* Este método retorna o elemento com o correspondente id na composição
-	* @param string $id identificador do elemento
-	* @return GenericElement
-	*/
-	public function getElementById($id){
-		$return = NULL;	
-		foreach($this->elements as $element){
-			if($element instanceof GenericElement){
-				if($element->domNode->getAttribute("id")==$id){
-					$return = $element;
-					break;
+	 * This is a representation of the HTML trees and compositions. This is the type of those
+	 * elements which holds other elements.
+	 * 
+	 * @package system
+	 * @subpackage view_HTML
+	 */
+	abstract class ElementsComposition extends Element implements Inflater{
+		/**
+		 * @var array $elements Contains the child elements
+		 */	
+		protected $elements;
+		
+		/**
+		 * Adds a new child Element
+		 * @param Element $e New Element
+		 */
+		public function add(Element $e) {
+			$this->elements[] = $e;
+			$this->domNode->appendChild($e->domNode);
+		}
+		
+		/**
+		 * @ignore
+		 */
+		protected function fill(Element $e){
+			$this->elements[] = $e;
+		}
+		
+		/**
+		 * Exchange the Element on the especified index for a new one
+		 * @param Element $e New Element
+		 * @param int $index Element index
+		 */
+		public function setElement(Element $e,$index) {
+			$this->domNode->replaceChild($e->domNode,$this->getElement($index)->domNode);
+			unset($this->elements[$index]);
+			$this->elements[$index] = $e;
+		}
+		
+		/**
+		 * Removes the child element in the especified position
+		 * @param int $index Element index
+		 */
+		public function rmElement($index) {
+			$this->rm($index);
+		}
+		
+		/**
+		 * Removes the child element in the especified position
+		 * @param int $index Element index
+		 */
+		public function rm($index){
+			$this->elements[$index]->domNode->parentNode->removeChild($this->elements[$index]->domNode);
+			unset($this->elements[$index]);
+			$this->elements = array_values($this->elements);
+		}
+		
+		/**
+		 * Returns all child elements
+		 * @return array
+		 */
+		public function getElements(){
+			return $this->elements;
+		}
+		
+		/**
+		 * Returns a child element in the especified position
+		 * @param int $index Element index
+		 * @return Element
+		 */
+		public function getElement($index){
+			return $this->elements[$index];
+		}
+		
+		/**
+		 * Returns the child element with certain id
+		 * @param string $id Element id
+		 * @return GenericElement
+		 */
+		public function getElementById($id){
+			$return = NULL;	
+			foreach($this->elements as $element){
+				if($element instanceof GenericElement){
+					if($element->domNode->getAttribute("id")==$id){
+						$return = $element;
+						break;
+					}
+					$return = $element->getElementById($id);
 				}
-				$return = $element->getElementById($id);
+			}
+			return $return;
+		}
+		
+		/**
+		 * Removes the child element which has certain id
+		 * @param string $id Element id
+		 * @return void
+		 */
+		public function removeElementById($id){	
+			foreach($this->elements as $element){
+				if($element instanceof GenericElement){
+					if($element->domNode->getAttribute("id")==$id){
+						$element->domNode->parentNode->removeChild($element->domNode);
+						unset($element);
+						$this->elements = array_values($this->elements);
+						break;
+					}
+					else $element->removeElementById($id);
+				}
 			}
 		}
-		return $return;
-	}
-	
-	/**
-	* Este método remove o elemento com o correspondente id na composição
-	* @param string $id identificador do elemento
-	* @return GenericElement
-	*/
-	public function removeElementById($id){
-		$return = NULL;	
-		foreach($this->elements as $element){
-			if($element instanceof GenericElement){
-				if($element->domNode->getAttribute("id")==$id){
-					$element->domNode->parentNode->removeChild($element->domNode);
-					unset($element);
-					$this->elements = array_values($this->elements);
-					break;
+		
+		/**
+		 * Returns all the Elements which has certain class
+		 * @param string $class Element class
+		 * @return GenericElement
+		 * 
+		 * TODO Fix it. Actually it is working equal to getElementById()
+		 */
+		public function getElementByClass($class,$return = array()){
+			foreach($this->elements as $element){
+				if($element instanceof GenericElement){
+					if(strpos($element->domNode->getAttribute("class"),$class) !== false)
+						$return[] = &$element;
+					$element->getElementByClass($class,$return);
 				}
-				else $element->removeElementById($id);
 			}
+			return $return;
 		}
-		return $return;
-	}
-	
-	/**
-	* Este método retorna o elemento com a correspondente class na composição
-	* @param int $class identificador do elemento
-	* @return GenericElement
-	*/
-	public function getElementByClass($class,$return = array()){
-		foreach($this->elements as $element){
-			if($element instanceof GenericElement){
-				if(strpos($element->domNode->getAttribute("class"),$class) !== false){
-					$return[] = &$element;
-				}
-				$element->getElementByClass($class,$return);
-			}
+		
+		/**
+		 * Returns the count of child elements
+		 * @return integer
+		 */
+		public function getElementCount(){
+			return count($this->elements);
 		}
-		return $return;
 	}
-	
-	/**
-	* Este método retorna o número elementos da composição
-	* @return integer
-	*/
-	public function getElementCount(){
-		return count($this->elements);
-	}
-}

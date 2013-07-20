@@ -1,10 +1,11 @@
 <?php
 /**
- * Interface que permite o padrão inflater nos objetos
- * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
- * @author Julio Cesar da Silva Pereira (julio@cisi.coppe.ufrj.br)
+ * Contains Inflater interface
  * 
- * @copyright Copyright 2012 COPPE
+ * @author Frederico Souza (fredericoamsouza@gmail.com)
+ * @author Julio Cesar da Silva Pereira (thisjulio@gmail.com)
+ * 
+ * @copyright Copyright 2013 Frederico Souza
  * Licensed under the Apache License, Version 2.0 (the “License”);
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,16 +17,16 @@
  * limitations under the License.
  */
 /**
- * Interface que permite o padrão inflater nos objetos
+ * Implements the Inflater pattern
  * @package system
  * @subpackage view_HTML
  */
 interface Inflater{
+		
     /**
-     * Este método infla um arquivo de html criando objetos em seus respectivos tipos.
-     * @param string $layout
-     * @param integer $index
-     * @return void
+     * Inflates an Element tree from a file
+	 * 
+     * @param string $layout HTML file path stored in application/view
      */
-    static public function layoutInflater($layout,$index=0);
+    static public function layoutInflater($layout);
 }
