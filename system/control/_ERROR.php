@@ -38,6 +38,8 @@ class _ERROR{
 	* @return string
 	*/
 	public static function display(exception $e, $fatal=0){
+		$this->writeLog($e->getCode(),get_class($e),$e->getMessage(),$e->getFile(),$e->getLine());
+		
 		$layout = GenericElement::layoutInflater("../../system/view/_ERROR_VIEW.html");
 		
 		if(!_GLOBAL::$DEBUG){
@@ -52,7 +54,7 @@ class _ERROR{
 				$end_msg = "Um erro ocorreu no sistema, verifique-o ou realize o tratamento do mesmo.";
 
 			$layout->getElementById("ERROR_MESSAGE")->add(GenericElement::stringInflater("<p>".get_class($e)." ".$e->getCode().": ".$e->getMessage()."</p>"));
-			$layout->getElementById("ERROR_MESSAGE")->add(GenericElement::stringInflater("<p>Este erro ocoreu na <strong>linha ".$e->getLine()."</strong> do arquivo <strong>".$e->getFile()."</strong></p>"));
+			$layout->getElementById("ERROR_MESSAGE")->add(GenericElement::stringInflater("<p>Este erro ocorreu na <strong>linha ".$e->getLine()."</strong> do arquivo <strong>".$e->getFile()."</strong></p>"));
 		
 			foreach(self::getStack($e) as $stackline)
 				$layout->getElementById("stackTrace")->add(
@@ -62,5 +64,18 @@ class _ERROR{
 		$layout->getElementById("ERROR_TYPE")->getElement(0)->add(new TextElement($end_msg));
 		unset($_SESSION["_ERROR"]);
 		file_put_contents("php://output", $layout->toRender());
+	}
+
+	/**
+	 * Writes a log file with current error data.
+	 * @param int $errorNumber Error number
+	 * @param string $errorType Error type
+	 * @param string $errorMsg Error message
+	 * @param string $file Error file
+	 * @param int $line Error line
+	 * @return void
+	 */
+	private function writeLog($errorNumber,$errorType,$errorMsg,$file,$line){
+		file_put_contents(Config::log_path(),"[".date("c")."] {$errorType} ERROR {$errorNumber}: {$errorMsg} in {$file}({$line})",FILE_APPEND);
 	}
 }

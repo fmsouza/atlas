@@ -1,46 +1,45 @@
 <?php
-/**
-* 
-* Marvie
-* 
-* Através deste arquivo (index.php) são feitas todas as operações básicas de um sistema
-* MVC. Esse arquivo é conhecido como Controlador Principal, ele funciona como um ponto 
-* de entrada no sistema e gerencia todas as requisições. Portanto, todas os endereços passados
-* devem apontá-lo.
-* 
-* @copyright Copyright 2012 COPPE
-* Licensed under the Apache License, Version 2.0 (the “License”);
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-* http://www.apache.org/licenses/LICENSE-2.0
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an “AS IS” BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-* 
-* @ignore
-*/
-session_start(); //Inicializa o serviço de sessão
-require_once("system/_GLOBAL.php"); // Chama a classe que com os endereços globais da aplicação
-include(_GLOBAL::SYS_PATH()."/_EXCEPTION_ERROR_HANDLER.php"); // Inclui a captura de erros por exception
-include(_GLOBAL::SYS_PATH()."/_AUTOLOAD.php"); // Inclui o autoload
-
-/* ---------------------------------------------------------------------------------------------- */
-/*                                                                                                */
-/* Abaixo encontra-se o ciclo de vida da classe Main, que está escrita sob o padrão Singleton     */
-/* Portanto garantimos uma única instância de Main durante toda a execução;                       */
-/*                                                                                                */
-/* ---------------------------------------------------------------------------------------------- */
-try{
-	ob_start();
-	if(isset($_SESSION["_ERROR"])) FATAL_ERROR_CALL();
-	$APPLICATION=Main::getInstance();	// Constrói a Main
-	$APPLICATION->onStart();			// Prepara a Main para ser executada
-	$APPLICATION->onExecute();			// Executa a aplicação 
-	$APPLICATION->onFinish();			// Prepara a aplicação para ser morta
-}catch(exception $e){
-	ob_end_clean();
-	ob_start();
-	_ERROR::display($e,$typeError);
-}
+	/**
+	 * 
+	 * Marvie MVC Framework
+	 * 
+	 * Through this file all the basic MVC Framework operations are done. This file is known as
+	 * Main Controller. It works as a enter point to the system and manages all the requests.
+	 * Thus all the paths must pass here.
+	 * 
+	 * @copyright Copyright 2013 Frederico Souza
+	 * Licensed under the Apache License, Version 2.0 (the “License”);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an “AS IS” BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 * 
+	 * @ignore
+	 */
+	session_start(); // Starts PHP session
+	require_once("system/_GLOBAL.php"); // Loads all the paths
+	include(_GLOBAL::SYS_PATH()."/_EXCEPTION_ERROR_HANDLER.php"); // Loads the exception error catch
+	include(_GLOBAL::SYS_PATH()."/_AUTOLOAD.php"); // Loads the autoload configuration
+	
+	/* ---------------------------------------------------------------------------------------------- */
+	/*                                                                                                */
+	/* This is the Main class life cycle, which is written under Singleton Pattern. It grants that    */
+	/* the application will only be instantiated once throughout the execution.                       */
+	/*                                                                                                */
+	/* ---------------------------------------------------------------------------------------------- */
+	try{
+		ob_start();
+		if(isset($_SESSION["_ERROR"])) FATAL_ERROR_CALL();
+		$APPLICATION=Main::getInstance();	// Instantiates Main
+		$APPLICATION->onStart();			// Prepare Main's environment
+		$APPLICATION->onExecute();			// Runs the application 
+		$APPLICATION->onFinish();			// Prepares the application to stop
+	}catch(exception $e){
+		ob_end_clean();
+		ob_start();
+		_ERROR::display($e,$typeError);		// Catches and render the errors
+	}
