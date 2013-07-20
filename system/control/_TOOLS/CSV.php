@@ -1,122 +1,131 @@
 <?php
-/**
- * Contém a classe CSV, responsável pelas funções de conversão de dados de arrays para CSV 
- * para que sejam exportados.
- * @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
- * 
- * @copyright Copyright 2012 COPPE
- * Licensed under the Apache License, Version 2.0 (the “License”);
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an “AS IS” BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-/**
- * Classe responsável pelas funções de conversão de dados em array para arquivo CSV.
- * @package system
- * @subpackage tools
- */
-class CSV{
-    /**
-     * @var string Nome do arquivo exportado
-     */
-    private $fileName;
-    /**
-     * @var int Quantidade de memória máxima disponível para armazenar o arquivo temporário
-     */
-    private $memory;
-    /**
-     * @var string Charset a ser utilizado na codificação de caracteres do arquivo gerado.
-     */
-    private $charset;
-    /**
-     * @var string Define como o arquivo deve ser enviado
-     */
-    private $contentDisposition;
-    /**
-     * @var resource Buffer do arquivo temporário gerado
-     */
-    private $buffer;
-    /**
-     * @var array Matriz de valores que serão escritos no arquivo
-     */
-    private $output;
-    
-    /**
-     * Constrói um arquivo CSV
-     * @param string $filename Nome do arquivo
-     * @param $string $charset Codificação de caracteres
-     * @param int $memoryAmount Quantidade de memória disponível para criação do arquivo em MegaBytes
-     * @param string $disposition Como o arquivo deve ser enviado pelo Output
-     * @return void
-     */
-    public function __construct($filename, $charset, $memoryAmount = 2, $disposition = 'attachment'){
-        $this->fileName = $filename;
-        $this->charset = $charset;
-        $this->memory = $memoryAmount * 1024 * 1024;
-        $this->contentDisposition = $disposition;
-        $this->open();
-    }
-    
-    /**
-     * Abre uma nova instãncia de um CSV temporário
-     * @throws ErrorException
-     */
-    private function open(){
-        try{
-            $this->buffer = fopen("php://temp/maxmemory:".$this->memory, 'r+');
-        }
-        catch(ErrorException $e){
-            $db = debug_backtrace();
-            throw new ErrorException("Não foi possível abrir o arquivo.",$e->getCode(),0,$db[1]['file'],$db[1]['line']);
-        }
-    }
-    
-    /**
-     * Adiciona uma nova linha ao Buffer
-     * @return void
-     */
-    public function addRow($data){
-        $this->output[] = $data;
-    }
-    
-    /**
-     * Escreve uma matriz completa de valores no Buffer. Apaga todo o conteúdo anterior, caso haja algum.
-     * @return void
-     */
-    public function addAll($data){
-        $this->output = $data;
-    }
-    
-    /**
-     * Prepara os cabeçalhos e o arquivo para ser enviado
-     * @return void
-     * @throws ErrorException
-     */
-    private function prepare(){
-        header('Content-Type: text/csv; charset='.$this->charset);
-        header('Content-Disposition: '.$this->contentDisposition.'; filename='.$this->fileName.'.csv');
-        try{
-            foreach ($this->output as $buffer) fputcsv($this->buffer, $buffer);
-            rewind($this->buffer);
-            $this->output = stream_get_contents($this->buffer);
-        }
-        catch(ErrorException $e){
-            $db = debug_backtrace();
-            throw new ErrorException("Não foi possível preparar o arquivo CSV para ser enviado.",$e->getCode(),0,$db[1]['file'],$db[1]['line']);
-        }
-    }
-    
-    /**
-     * Gera o arquivo CSV
-     * @return string
-     */
-    public function generate(){
-        $this->prepare();
-        return $this->output;
-    }
-}
+	/**
+	 * Contains CSV class
+	 * @author Frederico Souza (fredericoamsouza@gmail.com)
+	 * 
+	 * @copyright Copyright 2013 Frederico Souza
+	 * Licensed under the Apache License, Version 2.0 (the “License”);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an “AS IS” BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
+	/**
+	 * Converts array to CSV and works with a CSV file object.
+	 * 
+	 * @package system
+	 * @subpackage tools
+	 */
+	class CSV{
+	    /**
+	     * @var string Exported file name
+	     */
+	    private $fileName;
+	    /**
+	     * @var int Memory size available to the temporary file
+	     */
+	    private $memory;
+	    /**
+	     * @var string Character encoding
+	     */
+	    private $charset;
+	    /**
+	     * @var string Stores data about how the file should be sent
+	     */
+	    private $contentDisposition;
+	    /**
+	     * @var resource Temporary file buffer
+	     */
+	    private $buffer;
+	    /**
+	     * @var array Output data to be saved on the file
+	     */
+	    private $output;
+	    
+	    /**
+	     * Constructs the object
+		 * 
+	     * @param string $filename File name
+	     * @param $string $charset Character encoding
+	     * @param int $memoryAmount Memory size available in MegaBytes
+	     * @param string $disposition How to send the output file
+	     * @return void
+	     */
+	    public function __construct($filename, $charset, $memoryAmount = 2, $disposition = 'attachment'){
+	        $this->fileName = $filename;
+	        $this->charset = $charset;
+	        $this->memory = $memoryAmount * 1024 * 1024;
+	        $this->contentDisposition = $disposition;
+	        $this->open();
+	    }
+	    
+	    /**
+	     * Open a new temporary CSV instance
+	     * @throws ErrorException
+	     */
+	    private function open(){
+	        try{
+	            $this->buffer = fopen("php://temp/maxmemory:".$this->memory, 'r+');
+	        }
+	        catch(ErrorException $e){
+	            $db = debug_backtrace();
+	            throw new ErrorException("Não foi possível abrir o arquivo.",$e->getCode(),0,$db[1]['file'],$db[1]['line']);
+	        }
+	    }
+	    
+	    /**
+	     * Add a new line
+	     * @return void
+	     */
+	    public function addRow($data){
+	        $this->output[] = $data;
+	    }
+	    
+	    /**
+	     * Writes a full array to the file
+	     * @return void
+	     */
+	    public function addAll(array $data){
+	        $this->output = $data;
+	    }
+	    
+	    /**
+	     * Prepares the header and the data to be sent
+		 * 
+	     * @return void
+	     * @throws ErrorException
+	     */
+	    private function prepare(){
+	        header('Content-Type: text/csv; charset='.$this->charset);
+	        header('Content-Disposition: '.$this->contentDisposition.'; filename='.$this->fileName.'.csv');
+	        try{
+	            foreach ($this->output as $buffer) fputcsv($this->buffer, $buffer);
+	            rewind($this->buffer);
+	            $this->output = stream_get_contents($this->buffer);
+	        }
+	        catch(ErrorException $e){
+	            $db = debug_backtrace();
+	            throw new ErrorException("Error preparing file to be sent.",$e->getCode(),0,$db[1]['file'],$db[1]['line']);
+	        }
+	    }
+	    
+	    /**
+	     * File output
+	     * @return string
+		 * @throws ErrorException
+	     */
+	    public function generate(){
+	    	try{
+		        $this->prepare();
+		        return $this->output;
+			}
+			catch(ErrorException $e){
+	            $db = debug_backtrace();
+	            throw new ErrorException("Error in the file output.",$e->getCode(),0,$db[1]['file'],$db[1]['line']);
+			}
+	    }
+	}
