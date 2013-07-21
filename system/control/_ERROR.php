@@ -40,21 +40,21 @@
 		 * @return string
 		 */
 		public static function display(exception $e, $fatal=0){
-			$this->writeLog($e->getCode(),get_class($e),$e->getMessage(),$e->getFile(),$e->getLine());
+			self::writeLog($e->getCode(),get_class($e),$e->getMessage(),$e->getFile(),$e->getLine());
 			
 			$layout = GenericElement::layoutInflater("../../system/view/_ERROR_VIEW.html");
 			
 			if(!_GLOBAL::$DEBUG){
-				$end_msg = "Um erro ocorreu. Por favor, contate o administrador: "._USER::$EMAIL_ADMIN;
+				$end_msg = "An error ocurred. Please, contact the administrator: "._USER::$EMAIL_ADMIN;
 				$layout->removeElementById("ERROR_MESSAGE");
 				$layout->removeElementById("stackTrace");
 			}
 			else{	
-				$end_msg = ($fatal)? "Um erro muito grave ocorreu no sistema, verifique-o.":
-					"Um erro ocorreu no sistema, verifique-o ou realize o tratamento do mesmo.";
+				$end_msg = ($fatal)? "A fatal error ocurred, check it.":
+					"An error ocurred in the system. Check it or catch it's exception.";
 	
 				$layout->getElementById("ERROR_MESSAGE")->add(GenericElement::stringInflater("<p>".get_class($e)." ".$e->getCode().": ".$e->getMessage()."</p>"));
-				$layout->getElementById("ERROR_MESSAGE")->add(GenericElement::stringInflater("<p>Este erro ocorreu na <strong>linha ".$e->getLine()."</strong> do arquivo <strong>".$e->getFile()."</strong></p>"));
+				$layout->getElementById("ERROR_MESSAGE")->add(GenericElement::stringInflater("<p>Error ocurred in <strong>line ".$e->getLine()."</strong> of the file <strong>".$e->getFile()."</strong></p>"));
 			
 				foreach(self::getStack($e) as $stackline)
 					$layout->getElementById("stackTrace")->add(
@@ -76,7 +76,7 @@
 		 * @param int $line Error line
 		 * @return void
 		 */
-		private function writeLog($errorNumber,$errorType,$errorMsg,$file,$line){
-			file_put_contents(Config::log_path(),"[".date("c")."] {$errorType} ERROR {$errorNumber}: {$errorMsg} in {$file}({$line})",FILE_APPEND);
+		private static function writeLog($errorNumber,$errorType,$errorMsg,$file,$line){
+			file_put_contents(Config::log_path(),"[".date("c")."] {$errorType} ERROR {$errorNumber}: {$errorMsg} in {$file}({$line})\n",FILE_APPEND);
 		}
 	}

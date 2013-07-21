@@ -135,6 +135,7 @@
 			if(!$this->getSessionStatus()){
 				$this->sessionStatus = 1;
 				$_SESSION['_APP']['sessionStatus'] = 1;
+				$_SESSION['_APP']['data'] = array();
 			}
 		}
 		
@@ -164,6 +165,14 @@
 		    		throw new SessionError($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
 				}
 			}
+		}
+
+		/**
+		 * Returns all the application data stored in session
+		 * @return array
+		 */
+		public function getSession(){
+			return $this->sessionData;
 		}
 		
 		/**

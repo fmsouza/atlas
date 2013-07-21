@@ -37,11 +37,14 @@
 	function CatchFatalError() {
 	    $E = error_get_last();
 	    $error =  base64_encode(serialize((object)$E));
-	    if ($E['type'] != 0){ $_SESSION['_ERROR']=$error; header("location: ."); }
+	    if($E['type'] != 0){
+			$_SESSION['_ERROR']=$error;
+			header("location: index.php");
+		}
 	}
 	
 	/**
-	 * Throws exceptions when an error occurs
+	 * Throws exceptions when fatal error occurs
 	 * @return void
 	 * @throws ErrorException
 	 */

@@ -33,7 +33,8 @@
 	/* ---------------------------------------------------------------------------------------------- */
 	try{
 		ob_start();
-		if(isset($_SESSION["_ERROR"])) FATAL_ERROR_CALL();
+		$errorType=0;
+		if(isset($_SESSION["_ERROR"])){$errorType=1;FATAL_ERROR_CALL();}
 		$APPLICATION=Main::getInstance();	// Instantiates Main
 		$APPLICATION->onStart();			// Prepare Main's environment
 		$APPLICATION->onExecute();			// Runs the application 
@@ -41,5 +42,5 @@
 	}catch(exception $e){
 		ob_end_clean();
 		ob_start();
-		_ERROR::display($e,$typeError);		// Catches and render the errors
+		_ERROR::display($e,$errorType);		// Catches and render the errors
 	}
