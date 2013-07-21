@@ -58,6 +58,10 @@
 			return self::SYS_PATH()."/control";
 		}
 		
+		public static function ERROR_PATH(){
+			return self::CTRL_PATH()."/_ERROR";
+		} 
+		
 		/**
 		 * Path to core view classes
 		 * @return string
@@ -80,6 +84,7 @@
 				'CTRL_TOOLS'	    => self::CTRL_PATH()."/_TOOLS",
 				'TOOL_PHPMailer'	=> self::CTRL_PATH()."/_TOOLS/PHPMailer",
 				'TOOL_html2pdf' 	=> self::CTRL_PATH()."/_TOOLS/html2pdf",
+				'CTRL_ERROR'		=> self::ERROR_PATH(),
 				'VIEW_PATH' 		=> self::VIEW_PATH(),
 				'_HTML'				=> self::VIEW_PATH()."/_HTML"
 			);

@@ -22,15 +22,15 @@
 	 */
 	session_start(); // Starts PHP session
 	require_once("system/_GLOBAL.php"); // Loads all the paths
-	include(_GLOBAL::SYS_PATH()."/_EXCEPTION_ERROR_HANDLER.php"); // Loads the exception error catch
+	include(_GLOBAL::ERROR_PATH()."/_EXCEPTION_ERROR_HANDLER.php"); // Loads the exception error handler
 	include(_GLOBAL::SYS_PATH()."/_AUTOLOAD.php"); // Loads the autoload configuration
 	
-	/* ---------------------------------------------------------------------------------------------- */
-	/*                                                                                                */
-	/* This is the Main class life cycle, which is written under Singleton Pattern. It grants that    */
-	/* the application will only be instantiated once throughout the execution.                       */
-	/*                                                                                                */
-	/* ---------------------------------------------------------------------------------------------- */
+	/* -------------------------------------------------------------------------------------------- */
+	/*                                                                                              */
+	/* This is the Main class life cycle, which is written under Singleton Pattern. It grants that  */
+	/* the application will only be instantiated once throughout the execution.                     */
+	/*                                                                                              */
+	/* -------------------------------------------------------------------------------------------- */
 	try{
 		ob_start();
 		$errorType=0;
