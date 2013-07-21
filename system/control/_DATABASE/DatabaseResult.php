@@ -1,75 +1,75 @@
 <?php
-/**
-* Classe que representa um resultado de uma consulta realizada por um DatabaseDriver.
-* @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
-* @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-* 
-* @copyright Copyright 2012 COPPE
-* Licensed under the Apache License, Version 2.0 (the “License”);
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-* http://www.apache.org/licenses/LICENSE-2.0
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an “AS IS” BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
-/**
-* Classe que representa um resultado de uma consulta realizada por um DatabaseDriver.
-* @package system
-* @subpackage control_DATABASE
-*/
-class DatabaseResult{
-
 	/**
-	* @var array Array contendo todas as linhas do resultado de uma consulta
-	*/
-	private $rows;
+	 * Contains DatabaseResult class
+	 * @author Frederico Souza (fredericoamsouza@gmail.com)
+	 * @author Julio Cesar (thisjulio@gmail.com)
+	 * 
+	 * @copyright Copyright 2013 Frederico Souza
+	 * Licensed under the Apache License, Version 2.0 (the “License”);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an “AS IS” BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
 	/**
-	* @var int Posição atual da linha
-	*/
-	private $cursor = -1;
-	/**
-	* @var int Número de linhas
-	*/
-	private $numRows;
+	 * Represents the result of a query run by a DatabaseDriver.
+	 * @package system
+	 * @subpackage control_DATABASE
+	 */
+	class DatabaseResult{
 	
-	/**
-	* Adiciona uma nova linha ao resultado.
-	* @param array
-	* @return boolean
-	*/
-	public function setRow(array $data){
-		if(empty($data)) return FALSE;
-		$this->rows[] = (object)$data;
-		$this->numRows++;
-		return TRUE;
+		/**
+		 * @var array Query result array
+		 */
+		private $rows;
+		/**
+		 * @var int Current line position counter
+		 */
+		private $cursor = -1;
+		/**
+		 * @var int Number of rows
+		 */
+		private $numRows;
+		
+		/**
+		 * Set a new row to the result
+		 * @param array $data Data array
+		 * @return boolean
+		 */
+		public function setRow(array $data){
+			if(empty($data)) return FALSE;
+			$this->rows[] = (object)$data;
+			$this->numRows++;
+			return TRUE;
+		}
+		
+		/**
+		 * Returns a new data row
+		 * @return stdClass|NULL
+		 */
+		public function getRow(){
+			$this->cursor = ($this->cursor<$this->getNumRows()) ? $this->cursor+1 : $this->cursor; 
+			return ($this->cursor==-1 || $this->cursor==$this->getNumRows()) ? NULL : $this->rows[$this->cursor];
+		}
+		
+		/**
+		 * Returns the number of lines of the query result
+		 * @return int
+		 */
+		public function getNumRows(){
+			return $this->numRows;
+		}
+		
+		/**
+		 * Points the cursor to the especified line
+		 * @param int
+		 * @return void
+		 */
+		public function seek($i){
+			$this->cursor = ($i>$this->getNumRows()) ? $this->cursor : $i;
+		}
 	}
-	
-	/**
-	* Retorna uma linha seguindo o percurso na estrutura da classe.
-	* @return stdClass|NULL
-	*/
-	public function getRow(){
-		$this->cursor = ($this->cursor<$this->getNumRows()) ? $this->cursor+1 : $this->cursor; 
-		return ($this->cursor==-1 || $this->cursor==$this->getNumRows()) ? NULL : $this->rows[$this->cursor];
-	}
-	
-	/**
-	* Retorna o número de linhas da consulta.
-	* @return int
-	*/
-	public function getNumRows(){
-		return $this->numRows;
-	}
-	
-	/**
-	* Aponta o cursor para uma linha pelo índice.
-	* @param int
-	* @return void
-	*/
-	public function seek($i){
-		$this->cursor = ($i>$this->getNumRows()) ? $this->cursor : $i;
-	}
-}

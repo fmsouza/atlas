@@ -1,132 +1,131 @@
-<?php	
-/**
-* Driver de conexão com bancos de dados MySQL. 
-* @author Frederico Souza (fmsouza@cisi.coppe.ufrj.br)
-* @author Julio Cesar (julio@cisi.coppe.ufrj.br)
-* 
-* @copyright Copyright 2012 COPPE
-* Licensed under the Apache License, Version 2.0 (the “License”);
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-* http://www.apache.org/licenses/LICENSE-2.0
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an “AS IS” BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
-/**
-* Driver de conexão com bancos de dados MySQL.
-* @package system
-* @subpackage control_DATABASE
-*/
-class Mysql implements DatabaseDriver{
-
+<?php
 	/**
-	* @var mysqli Instância de mysqli
-	*/
-	public $db;
+	 * Contains MySQL class
+	 * @author Frederico Souza (fredericoamsouza@gmail.com)
+	 * @author Julio Cesar (thisjulio@gmail.com)
+	 * 
+	 * @copyright Copyright 2013 Frederico Souza
+	 * Licensed under the Apache License, Version 2.0 (the “License”);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an “AS IS” BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
+	/**
+	 * MySQL connection driver
+	 * @package system
+	 * @subpackage control_DATABASE
+	 */
+	class Mysql implements DatabaseDriver{
 	
-	/**
-	* Construtor do driver Mysql
-	* @param array Array de configurações de acesso ao banco MySQL
-	* @throws DatabaseError
-	*/
-	public function __construct(array $connInf){
-		try{
-			if(empty($connInf["charset"])) $connInf["charset"] = 'utf8';
-			$this->db = new mysqli($connInf["host"],$connInf["user"],$connInf["password"]);
+		/**
+		 * @var $db Driver instance
+		 */
+		public $db;
+		
+		/**
+		 * Configures MySQL connection driver
+		 * @param array Server configuration data
+		 * @throws DatabaseError
+		 */
+		public function __construct(array $connInf){
+			try{
+				if(empty($connInf["charset"])) $connInf["charset"] = 'utf8';
+				$this->db = new mysqli($connInf["host"],$connInf["user"],$connInf["password"]);
+				$this->db->autocommit(TRUE);
+				$this->query("SET NAMES '{$connInf["charset"]}'"); 
+				$this->query("SET character_set_connection={$connInf["charset"]}"); 
+				$this->query("SET character_set_client={$connInf["charset"]}"); 
+				$this->query("SET character_set_results={$connInf["charset"]}"); 
+			}catch(ErrorException $e){
+				$db = debug_backtrace();
+	    		throw new DatabaseError($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
+			}
+		}
+		
+		/**
+		 * Checks if an error ocurred in any query
+		 * @return void
+		 * @throws DatabaseError
+		 */
+		public function triggerError(){
+			if($this->db->errno){
+				$db = debug_backtrace();
+	    		throw new DatabaseError($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
+	    	}
+	   	}
+		
+		/**
+		 * Select a database
+		 * @param $dbName Database name
+		 * @return bool
+		 * @throws DatabaseError
+		 */
+		public function selectDatabase($dbName){
+			$r = $this->db->select_db($dbName);
+			$this->triggerError();
+			return $r;
+		}
+		
+		/**
+		 * Executes an instruction
+		 * @param string $sql SQL query string
+		 * @return bool|DatabaseResult
+		 * @throws DatabaseError
+		 */
+		public function query($sql){
+			$r = $this->db->query($sql);
+			$this->triggerError();
+			if($r instanceof mysqli_result){
+				$tmp = new DatabaseResult();
+				while($tmp->setRow((array)$r->fetch_assoc()));
+				unset($r);
+				return $tmp;
+			}
+			return $r;
+		}
+		
+		/**
+		 * Starts a transaction
+		 * @return void
+		 */
+		public function startTransaction(){
+			$this->db->autocommit(FALSE);
+		}
+		
+		/**
+		 * closes a transaction
+		 * @return void
+		 */
+		public function closeTransaction(){
 			$this->db->autocommit(TRUE);
-			$this->query("SET NAMES '{$connInf["charset"]}'"); 
-			$this->query("SET character_set_connection={$connInf["charset"]}"); 
-			$this->query("SET character_set_client={$connInf["charset"]}"); 
-			$this->query("SET character_set_results={$connInf["charset"]}"); 
-		}catch(ErrorException $e){
-			$db = debug_backtrace();
-    		throw new DatabaseError($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
+		}
+		
+		/**
+		 * Commit changes to the database
+		 * @return bool
+		 */
+		public function commit(){
+			$this->db->commit();
+		}
+		
+		/**
+		 * Do the rollback
+		 * @return bool
+		 */
+		public function rollback(){
+			$this->db->rollback();
+		}
+		
+		/**
+		 * Return the number of affected rows
+		 * @return int
+		 */
+		public function affectedRows(){
+			return $this->db->affected_rows;
 		}
 	}
-	
-	/**
-	* verifica se ocorreu erro em alguma instrução.
-	* Deve ser utilizado na implementação de qualquer método query.
-	* @return void
-	* @throws DatabaseError
-	*/
-	public function triggerError(){
-		if($this->db->errno){
-			$db = debug_backtrace();
-    		throw new DatabaseError($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
-    	}
-   	}
-	
-	/**
-	* Escolhe um banco no servidor
-	* @param $dbName
-	* @return bool
-	* @throws DatabaseError
-	*/
-	public function selectDatabase($dbName){
-		$r = $this->db->select_db($dbName);
-		$this->triggerError();
-		return $r;
-	}
-	
-	/**
-	* Executa uma instrução.
-	* @param string
-	* @return bool|DatabaseResult
-	* @throws DatabaseError
-	*/
-	public function query($sql){
-		$r = $this->db->query($sql);
-		$this->triggerError();
-		if($r instanceof mysqli_result){
-			$tmp = new DatabaseResult();
-			while($tmp->setRow((array)$r->fetch_assoc()));
-			unset($r);
-			return $tmp;
-		}
-		return $r;
-	}
-	
-	/**
-	* Inicia uma transação
-	* @return void
-	*/
-	public function startTransaction(){
-		$this->db->autocommit(FALSE);
-	}
-	
-	/**
-	* Encerra uma transação
-	* @return void
-	*/
-	public function closeTransaction(){
-		$this->db->autocommit(TRUE);
-	}
-	
-	/**
-	* Faz o commit das instruções para o SGBD.
-	* @return bool
-	*/
-	public function commit(){
-		$this->db->commit();
-	}
-	
-	/**
-	* Faz o rollback
-	* @return bool
-	*/
-	public function rollback(){
-		$this->db->rollback();
-	}
-	
-	/**
-	* Retorna as linhas afetadas
-	* @return int
-	*/
-	public function affectedRows(){
-		return $this->db->affected_rows;
-	}
-}
