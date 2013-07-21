@@ -42,7 +42,6 @@
 		public function onStart(){
 			// _USER::$EMAIL_ADMIN="exemplo@email.com";
 			// _GLOBAL::$DEBUG=FALSE;
-			$this->openSession();
 			header("Content-Type: text/html; charset=utf-8");
 			$this->LAYOUT = GenericElement::layoutInflater("helloMarvie.html");
 		}
