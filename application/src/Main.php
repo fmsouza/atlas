@@ -44,7 +44,6 @@
 			// _GLOBAL::$DEBUG=FALSE;
 			header("Content-Type: text/html; charset=utf-8");
 			$this->LAYOUT = GenericElement::layoutInflater("helloMarvie.html");
-			$this->db;
 		}
 		
 		/**
