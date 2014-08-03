@@ -25,7 +25,7 @@
 		/**
 		 * @var string System administrator email
 		 */
-		public static $EMAIL_ADMIN = 'admin@domain.com';
+		public static $EMAIL_ADMIN = "admin@localhost";
 		
 		/**
 		 * Base path
@@ -73,11 +73,11 @@
 		 */
 		public static function ALL_PATHS(){
 			return array(
-				'BASE'  => self::BASE(),
-				'HOME'  => self::HOME(),
-				'ENV'   => self::ENV(),
-				'VIEW'  => self::VIEW(),
-				'SRC'   => self::SRC()
+				self::BASE(),
+				self::HOME(),
+				self::ENV(),
+				self::VIEW(),
+				self::SRC()
 			);
 		}
 	}

@@ -25,27 +25,27 @@
 	 * @return bool
 	 */
 	function autoload($classname){
-	    // Runs the global pathhs
+	    // Runs the global paths
 	    foreach (_GLOBAL::ALL_PATHS() as $value){
-		if(file_exists("{$value}/{$classname}.php")){
-		    require_once("{$value}/{$classname}.php");
-		    return true;
-		}
+            if(file_exists("{$value}/{$classname}.php")){
+                require_once("{$value}/{$classname}.php");
+                return true;
+            }
 	    }
 	    // Runs the application paths
 	    foreach (_USER::ALL_PATHS() as $value){
-		if(file_exists("{$value}/{$classname}.php")){
-		    require_once("{$value}/{$classname}.php");
-		    return true;
-		}
+            if(file_exists("{$value}/{$classname}.php")){
+                require_once("{$value}/{$classname}.php");
+                return true;
+            }
 	    }
 	    
 	    // Runs the paths defined as packages
 	    foreach (Package::ALL_PACKS() as $value){
-		if(file_exists(_USER::SRC()."/{$value}/{$classname}.php")){
-		    require_once(_USER::SRC()."/{$value}/{$classname}.php");
-		    return true;
-		}
+            if(file_exists(_USER::SRC()."/{$value}/{$classname}.php")){
+                require_once(_USER::SRC()."/{$value}/{$classname}.php");
+                return true;
+            }
 	    }
 	    return false;
 	}

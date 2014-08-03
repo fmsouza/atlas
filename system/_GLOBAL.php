@@ -76,17 +76,18 @@
 		 */
 		public static function ALL_PATHS(){
 			return array(
-				'BASE'      		=> self::BASE(),
-				'SYS_PATH'  		=> self::SYS_PATH(),
-				'ENV_PATH'  		=> self::ENV_PATH(),
-				'CTRL_PATH' 		=> self::CTRL_PATH(),
-				'DATABASE'			=> self::CTRL_PATH()."/_DATABASE",
-				'CTRL_TOOLS'	    => self::CTRL_PATH()."/_TOOLS",
-				'TOOL_PHPMailer'	=> self::CTRL_PATH()."/_TOOLS/PHPMailer",
-				'TOOL_html2pdf' 	=> self::CTRL_PATH()."/_TOOLS/html2pdf",
-				'CTRL_ERROR'		=> self::ERROR_PATH(),
-				'VIEW_PATH' 		=> self::VIEW_PATH(),
-				'_HTML'				=> self::VIEW_PATH()."/_HTML"
+				self::BASE(),
+				self::SYS_PATH(),
+				self::ENV_PATH(),
+				self::CTRL_PATH(),
+				self::CTRL_PATH()."/_DATABASE",
+				self::CTRL_PATH()."/_DATATYPES",
+				self::CTRL_PATH()."/_TOOLS",
+				self::CTRL_PATH()."/_TOOLS/PHPMailer",
+				self::CTRL_PATH()."/_TOOLS/html2pdf",
+				self::ERROR_PATH(),
+				self::VIEW_PATH(),
+				self::VIEW_PATH()."/_HTML"
 			);
 		}
 	}
