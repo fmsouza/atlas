@@ -42,26 +42,7 @@
             public function onStart(){
                 //_USER::$EMAIL_ADMIN="exemplo@email.com";
                 //_GLOBAL::$DEBUG=FALSE;
-                
-                $json = new JsonObject();
-                $json->setKey("foo","1");
-                $json->setKey("bar","2");
-                $json->setKey("fubar","nome qualquer");
-                
-                $lista2 = new ArrayList();
-                $lista2->push(5);
-                $lista2->push(6);
-                $lista2->push(7);
-                $lista2->push("string");
-                
-                $json2 = new JsonObject();
-                $json2->setKey("foo","3");
-                $json2->setKey("bar","4");
-                $json2->setKey("outro",$lista2);
-                
-                $json->setKey("teste", $json2);
-                
-                echo($json);
+                $this->LAYOUT = GenericElement::layoutInflater("helloMarvie.html");
             }
             
             /**
@@ -77,7 +58,7 @@
             * @return void
             */
             public function onFinish(){
-//                  Main::display($this->LAYOUT);
-//		    unset($this->LAYOUT);
+                Main::display($this->LAYOUT);
+                unset($this->LAYOUT);
             }
     }
