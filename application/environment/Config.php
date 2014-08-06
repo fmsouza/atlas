@@ -23,6 +23,8 @@
 	 * @subpackage environment
 	 */
 	class Config{
+	    
+	    public static $encoding = "UTF-8";
 	    /**
 	     * Web application base path
 		 * @example http://www.example.com/

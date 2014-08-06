@@ -50,10 +50,10 @@
 				$layout->removeElementById("stackTrace");
 			}
 			else{	
-				$end_msg = ($fatal)? "A fatal error ocurred, check it.":
-					"An error ocurred in the system. Check it or catch it's exception.";
-	
-				$layout->getElementById("ERROR_MESSAGE")->add(GenericElement::stringInflater("<p>".get_class($e)." ".$e->getCode().": ".$e->getMessage()."</p>"));
+				$end_msg = ($fatal)? "A fatal error ocurred.":
+					"An error ocurred in the system.";
+					
+				$layout->getElementById("ERROR_MESSAGE")->add(GenericElement::stringInflater(str_replace('&','&#38;',"<p>".get_class($e)." ".$e->getCode().": ".$e->getMessage()."</p>")));
 				$layout->getElementById("ERROR_MESSAGE")->add(GenericElement::stringInflater("<p>Error ocurred in <strong>line ".$e->getLine()."</strong> of the file <strong>".$e->getFile()."</strong></p>"));
 			
 				foreach(self::getStack($e) as $stackline)

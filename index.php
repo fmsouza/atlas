@@ -24,7 +24,7 @@
 	require_once("system/_GLOBAL.php"); // Loads all the paths
 	include(_GLOBAL::ERROR_PATH()."/_EXCEPTION_ERROR_HANDLER.php"); // Loads the exception error handler
 	include(_GLOBAL::SYS_PATH()."/_AUTOLOAD.php"); // Loads the autoload configuration
-	
+	header("Content-Type: text/html; charset=".Config::$encoding);
 	/* -------------------------------------------------------------------------------------------- */
 	/*                                                                                              */
 	/* This is the Main class life cycle, which is written under Singleton Pattern. It grants that  */
@@ -36,9 +36,9 @@
 		$errorType=0;
 		if(isset($_SESSION["_ERROR"])){$errorType=1;FATAL_ERROR_CALL();}
 		$APPLICATION=Main::getInstance();	// Instantiates Main
-		$APPLICATION->onStart();			// Prepare Main's environment
-		$APPLICATION->onExecute();			// Runs the application 
-		$APPLICATION->onFinish();			// Prepares the application to stop
+		$APPLICATION->onStart();		// Prepare Main's environment
+		$APPLICATION->onExecute();		// Runs the application 
+		$APPLICATION->onFinish();		// Prepares the application to stop
 	}catch(exception $e){
 		ob_end_clean();
 		ob_start();
