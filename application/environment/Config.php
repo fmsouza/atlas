@@ -24,7 +24,7 @@
 	 */
 	class Config{
 	    
-	    public static $encoding = "UTF-8";
+	    const encoding = "UTF-8";
 	    /**
 	     * Web application base path
 		 * @example http://www.example.com/

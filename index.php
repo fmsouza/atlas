@@ -24,11 +24,11 @@
 	require_once("system/_GLOBAL.php"); // Loads all the paths
 	include(_GLOBAL::ERROR_PATH()."/_EXCEPTION_ERROR_HANDLER.php"); // Loads the exception error handler
 	include(_GLOBAL::SYS_PATH()."/_AUTOLOAD.php"); // Loads the autoload configuration
-	header("Content-Type: text/html; charset=".Config::$encoding);
+	header("Content-Type: text/html; charset=".Config::encoding);
 	/* -------------------------------------------------------------------------------------------- */
 	/*                                                                                              */
 	/* This is the Main class life cycle, which is written under Singleton Pattern. It grants that  */
-	/* the application will only be instantiated once throughout the execution.                     */
+	/* the application will only be initialized once throughout the execution.                      */
 	/*                                                                                              */
 	/* -------------------------------------------------------------------------------------------- */
 	try{
