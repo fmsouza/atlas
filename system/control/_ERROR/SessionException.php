@@ -1,11 +1,11 @@
 <?php	
     /**
-     * Contains SessionError class
+     * Contains SessionErrorException class
      * 
      * @author Frederico Souza (fredericoamsouza@gmail.com)
      * @author Julio Cesar (thisjulio@gmail.com)
      * 
-     * @copyright Copyright 2013 Frederico Souza
+     * @copyright Copyright 2014 Frederico Souza
      * Licensed under the Apache License, Version 2.0 (the “License”);
      * you may not use this file except in compliance with the License.
      * You may obtain a copy of the License at
@@ -17,9 +17,9 @@
      * limitations under the License.
      */
     /**
-     * SessionError Exception type. It is thrown in case of session errors
+     * SessionErrorException type. It is thrown in case of session errors
      * 
      * @package system
      * @subpackage control_ERROR
      */
-    class SessionError extends ErrorException{}
+    class SessionException extends ErrorException{}

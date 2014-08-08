@@ -162,7 +162,7 @@
 					return base64_decode($this->sessionData[$key]);
 	 			}catch(ErrorException $e){
 	 				$db = debug_backtrace();
-		    		throw new SessionError($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
+		    		throw new SessionException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line']);
 				}
 			}
 		}

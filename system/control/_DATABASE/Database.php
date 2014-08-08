@@ -67,7 +67,7 @@
 				if(isset(self::$connInf['driver'])) self::$selectDriver = self::$connInf['driver'];
 				else{
 					$db = debug_backtrace();
-		    		throw new DatabaseError("Driver name not configured", 1, 0, $db[0]['file'], $db[0]['line'] );
+		    		throw new DatabaseException("Driver name not configured", 1, 0, $db[0]['file'], $db[0]['line']);
 				}
 				
 	
@@ -77,7 +77,7 @@
 					self::$instance->selectDatabase(self::$connInf['db_name']);
 				}catch(ErrorException $e){
 					$db = debug_backtrace();
-		    		throw new DatabaseError($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
+		    		throw new DatabaseException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
 				}
 			}
 			return self::$instance;

@@ -1,10 +1,10 @@
 <?php
     /**
-     * Contains DatabaseError class
+     * Contains DatabaseErrorException class
      * @author Frederico Souza (fredericoamsouza@gmail.com)
      * @author Julio Cesar (thisjulio@gmail.com)
      * 
-     * @copyright Copyright 2013 Frederico Souza
+     * @copyright Copyright 2014 Frederico Souza
      * Licensed under the Apache License, Version 2.0 (the “License”);
      * you may not use this file except in compliance with the License.
      * You may obtain a copy of the License at
@@ -16,8 +16,8 @@
      * limitations under the License.
      */
     /**
-     * DatabaseError exception
+     * DatabaseErrorException exception
      * @package system
      * @subpackage control_ERROR
      */
-    class DatabaseError extends ErrorException{}
+    class DatabaseException extends ErrorException{}
