@@ -30,34 +30,34 @@
      * @subpackage src
      */
     class Main extends _APP{
-            /**
-            * @ignore
-            */
-            public $LAYOUT;
-            
-            /**
-            * Start life cycle
-            * @return void
-            */
-            public function onStart(){
-                //_USER::$EMAIL_ADMIN="exemplo@email.com";
-                //_GLOBAL::$DEBUG=FALSE;
-                $this->LAYOUT = GenericElement::layoutInflater("helloMarvie.html");
-            }
-            
-            /**
-            * Main execution instructions
-            * @return void
-            */
-            public function onExecute(){
-            }
-            
-            /**
-            * Life cycle end instructions
-            * @return void
-            */
-            public function onFinish(){
-                Main::display($this->LAYOUT);
-                unset($this->LAYOUT);
-            }
+        /**
+        * @ignore
+        */
+        public $LAYOUT;
+        
+        /**
+        * Start life cycle
+        * @return void
+        */
+        public function onStart(){
+            //_USER::$EMAIL_ADMIN="exemplo@email.com";
+            //_GLOBAL::$DEBUG=FALSE;
+            $this->LAYOUT = GenericElement::layoutInflater("helloMarvie.html");
+        }
+        
+        /**
+        * Main execution instructions
+        * @return void
+        */
+        public function onExecute(){
+        }
+        
+        /**
+        * Life cycle end instructions
+        * @return void
+        */
+        public function onFinish(){
+            Main::display($this->LAYOUT);
+            unset($this->LAYOUT);
+        }
     }

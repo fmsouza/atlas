@@ -110,9 +110,9 @@
 	    static public function stringInflater($layout){
 			$tmp = new DOMDocument;
 			if(is_null(self::$DOC))
-			    self::$DOC = new DOMDocument("1.0",Config::$encoding);
+			    self::$DOC = new DOMDocument("1.0",Config::encoding);
 			try{
-			    $tmp->loadXML(mb_convert_encoding($layout, 'HTML-ENTITIES', Config::$encoding));
+			    $tmp->loadXML(mb_convert_encoding($layout, 'HTML-ENTITIES', Config::encoding));
 			    $root = self::$DOC->importNode($tmp->firstChild,TRUE);
 			    return self::constructByNode($root);
 			}catch(ErrorException $e){

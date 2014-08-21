@@ -31,7 +31,7 @@
 	     * @return string
 	     */
 	    public static function base_url(){
-		return "http://{$_SERVER['SERVER_NAME']}/marvie/";
+			return "http://{$_SERVER['SERVER_NAME']}/marvie/";
 	    }
 		
 		/**
