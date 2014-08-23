@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Contains _ERROR class
+	 * Contains Error class
 	 * @author Frederico Souza (fredericoamsouza@gmail.com)
 	 * @author Julio Cesar (thisjulio@gmail.com)
 	 * 
@@ -16,12 +16,12 @@
 	 * limitations under the License.
 	 */
 	/**
-	 * _ERROR class handles the display of errors and exceptions.
+	 * Error class handles the display of errors and exceptions.
 	 * 
 	 * @package system
 	 * @subpackage control_ERROR
 	 */
-	class _ERROR{
+	class Error{
 		/**
 		 * Returns the stack trace as array
 		 * @param exception $e
@@ -42,10 +42,10 @@
 		public static function display(exception $e, $fatal=0){
 			self::writeLog($e->getCode(),get_class($e),$e->getMessage(),$e->getFile(),$e->getLine());
 			
-			$layout = GenericElement::layoutInflater("../../system/view/_ERROR_VIEW.html");
+			$layout = GenericElement::layoutInflater("../../system/view/error_template.html");
 			
-			if(!_GLOBAL::$DEBUG){
-				$end_msg = "An error ocurred. Please, contact the administrator: "._USER::$EMAIL_ADMIN;
+			if(!Globals::$debug){
+				$end_msg = "An error ocurred. Please, contact the administrator: ".User::$emailAdmin;
 				$layout->removeElementById("ERROR_MESSAGE");
 				$layout->removeElementById("stackTrace");
 			}
@@ -62,7 +62,7 @@
 					);
 			}
 			$layout->getElementById("ERROR_TYPE")->getElement(0)->add(new TextElement($end_msg));
-			unset($_SESSION["_ERROR"]);
+			unset($_SESSION[get_class()]);
 			file_put_contents("php://output", $layout->toRender());
 		}
 
@@ -97,6 +97,6 @@
 		 * @return void
 		 */
 		private static function writeLog($errorNumber,$errorType,$errorMsg,$file,$line){
-			file_put_contents(Config::log_path(),"[".date("c")."] {$errorType} ERROR {$errorNumber}: {$errorMsg} in {$file}({$line})\n",FILE_APPEND);
+			file_put_contents(Config::logPath(),"[".date("c")."] {$errorType} ERROR {$errorNumber}: {$errorMsg} in {$file}({$line})\n",FILE_APPEND);
 		}
 	}

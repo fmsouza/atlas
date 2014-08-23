@@ -19,7 +19,7 @@
 /**
  * Implements the Inflater pattern
  * @package system
- * @subpackage view_HTML
+ * @subpackage viewHtml
  */
 interface Inflater{
 		

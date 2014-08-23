@@ -43,7 +43,7 @@
 				$this->query("SET character_set_results={$connInf["charset"]}"); 
 			}catch(ErrorException $e){
 				$db = debug_backtrace();
-	    		throw new DatabaseError($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
+	    		throw new DatabaseException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
 			}
 		}
 		
@@ -55,7 +55,7 @@
 		public function triggerError(){
 			if($this->db->errno){
 				$db = debug_backtrace();
-	    		throw new DatabaseError($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
+	    		throw new DatabaseException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
 	    	}
 	   	}
 		

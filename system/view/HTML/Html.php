@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Contains _HTML class
+	 * Contains Html class
 	 * 
 	 * @author Frederico Souza (fredericoamsouza@gmail.com)
 	 * @author Julio Cesar (thisjulio@gmail.com)
@@ -20,9 +20,9 @@
 	 * Contains the HTML template controller
 	 * 
 	 * @package system
-	 * @subpackage view_HTML
+	 * @subpackage viewHtml
 	 */
-	class _HTML extends GenericElementsComposition {
+	class Html extends GenericElementsComposition {
 		/**
 		 * @var array $headElements HTML <head> Elements array 
 		 */

@@ -21,7 +21,7 @@
 	 * elements which holds other elements.
 	 * 
 	 * @package system
-	 * @subpackage view_HTML
+	 * @subpackage viewHtml
 	 */
 	abstract class ElementsComposition extends Element implements Inflater{
 		/**

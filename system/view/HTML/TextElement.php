@@ -18,7 +18,7 @@
 	/**
 	 * Represents a text string inside of an element as an element
 	 * @package system
-	 * @subpackage view_HTML
+	 * @subpackage viewHtml
 	 */
 	
 	class TextElement extends Element{

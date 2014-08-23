@@ -20,7 +20,7 @@
 	 * @package system
 	 * @subpackage control
 	 */
-	interface _SINGLETON{
+	interface Singleton{
 	    /**
 	    * @ignore
 	    */

@@ -30,7 +30,7 @@
 		 * @example http://www.example.com/
 	     * @return string
 	     */
-	    public static function base_url(){
+	    public static function baseURL(){
 			return "http://{$_SERVER['SERVER_NAME']}/marvie/";
 	    }
 		
@@ -38,7 +38,7 @@
 		 * Path to the error log file.
 		 * @return string
 		 */
-		public static function log_path(){
+		public static function logPath(){
 			return "./errors.log";
 		}
 	    
@@ -47,13 +47,13 @@
 		 * Fill it with your database configuration data.
 	     * @return array
 	     */
-	    public static function db_config(){
+	    public static function dbConfig(){
 			return array(
 			    'host'       => '',
 			    'user'       => '',
 			    'password'   => '',
-			    'db_name'    => '',
-			    'tbl_prefix' => '',
+			    'dbName'    => '',
+			    'tblPrefix' => '',
 			    'charset'    => '',
 			    'driver'     => '',
 			);

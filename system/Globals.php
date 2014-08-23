@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Contains _GLOBAL class
+	 * Contains Globals class
 	 * 
 	 * @author Frederico Souza (fredericoamsouza@gmail.com)
 	 * @author Julio Cesar (thisjulio@gmail.com)
@@ -17,14 +17,14 @@
 	 * limitations under the License.
 	 */
 	/**
-	 * _GLOBAL class contains the global system configurations
+	 * Globals class contains the global system configurations
 	 * @package system
 	 */
-	class _GLOBAL{
+	class Globals{
 		/**
 		 * @var bool $DEBUG Turns debug mode on/off
 		 */
-		public static $DEBUG = TRUE;
+		public static $debug = TRUE;
 		
 		/**
 		 * Application's base path
@@ -59,7 +59,7 @@
 		}
 		
 		public static function ERROR_PATH(){
-			return self::CTRL_PATH()."/_ERROR";
+			return self::CTRL_PATH()."/error";
 		} 
 		
 		/**
@@ -80,14 +80,14 @@
 				self::SYS_PATH(),
 				self::ENV_PATH(),
 				self::CTRL_PATH(),
-				self::CTRL_PATH()."/_DATABASE",
-				self::CTRL_PATH()."/_DATATYPES",
-				self::CTRL_PATH()."/_TOOLS",
-				self::CTRL_PATH()."/_TOOLS/PHPMailer",
-				self::CTRL_PATH()."/_TOOLS/html2pdf",
+				self::CTRL_PATH()."/database",
+				self::CTRL_PATH()."/datatypes",
+				self::CTRL_PATH()."/tools",
+				self::CTRL_PATH()."/tools/PHPMailer",
+				self::CTRL_PATH()."/tools/html2pdf",
 				self::ERROR_PATH(),
 				self::VIEW_PATH(),
-				self::VIEW_PATH()."/_HTML"
+				self::VIEW_PATH()."/HTML"
 			);
 		}
 	}

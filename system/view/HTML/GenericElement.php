@@ -19,7 +19,7 @@
 	/**
 	 * Represents a generic element, which can be any HTML element
 	 * @package system
-	 * @subpackage view_HTML
+	 * @subpackage viewHtml
 	 */
 	class GenericElement extends ElementsComposition{
 	    /**
@@ -127,6 +127,6 @@
 	     * @param string $layout HTML file path stored in application/view
 	     */
 	    static public function layoutInflater($layout){
-			return self::stringInflater(preg_replace('~\s*(<([^>]*)>[^<]*</\2>|<[^>]*>)\s*~','$1',file_get_contents(_USER::VIEW()."/".$layout)));
+			return self::stringInflater(preg_replace('~\s*(<([^>]*)>[^<]*</\2>|<[^>]*>)\s*~','$1',file_get_contents(User::VIEW()."/".$layout)));
 	    }
 	}

@@ -20,7 +20,7 @@
 	 * @package system
 	 * @subpackage control_DATABASE
 	 */
-	class Database implements _SINGLETON{
+	class Database implements Singleton{
 	
 		/** 
 		 * @var string Driver name
@@ -74,7 +74,7 @@
 			if(is_null(self::$instance)){
 				try{
 					self::$instance = new Database(new self::$selectDriver(self::$connInf));
-					self::$instance->selectDatabase(self::$connInf['db_name']);
+					self::$instance->selectDatabase(self::$connInf['dbName']);
 				}catch(ErrorException $e){
 					$db = debug_backtrace();
 		    		throw new DatabaseException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );

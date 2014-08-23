@@ -1,6 +1,6 @@
 <?php
 	/** 
-	 * Contains _USER class
+	 * Contains User class
 	 * 
 	 * @author Frederico Souza (fredericoamsouza@gmail.com)
 	 * @author Julio Cesar (thisjulio@gmail.com)
@@ -17,22 +17,22 @@
 	 * limitations under the License.
 	 */
 	/**
-	 * _USER class contains the paths and configurations to the application
+	 * User class contains the paths and configurations to the application
 	 * @package system
 	 * @subpackage environment
 	 */
-	class _USER{
+	class User{
 		/**
 		 * @var string System administrator email
 		 */
-		public static $EMAIL_ADMIN = "admin@localhost";
+		public static $emailAdmin = "admin@localhost";
 		
 		/**
 		 * Base path
 		 * @return string
 		 */
 		public static function BASE(){
-			return _GLOBAL::BASE();
+			return Globals::BASE();
 		}
 		
 		/**

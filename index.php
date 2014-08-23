@@ -21,9 +21,9 @@
 	 * @ignore
 	 */
 	session_start(); // Starts PHP session
-	require_once("system/_GLOBAL.php"); // Loads all the paths
-	include(_GLOBAL::ERROR_PATH()."/_EXCEPTION_ERROR_HANDLER.php"); // Loads the exception error handler
-	include(_GLOBAL::SYS_PATH()."/_AUTOLOAD.php"); // Loads the autoload configuration
+	require_once("system/Globals.php"); // Loads all the paths
+	include(Globals::ERROR_PATH()."/error_handler.php"); // Loads the exception error handler
+	include(Globals::SYS_PATH()."/autoload.php"); // Loads the autoload configuration
 	header("Content-Type: text/html; charset=".Config::encoding);
 	/* -------------------------------------------------------------------------------------------- */
 	/*                                                                                              */
@@ -34,7 +34,7 @@
 	try{
 		ob_start();
 		$errorType=0;
-		if(isset($_SESSION["_ERROR"])){$errorType=1;FATAL_ERROR_CALL();}
+		if(isset($_SESSION["Error"])){$errorType=1;FATAL_ERROR_CALL();}
 		$APPLICATION=Main::getInstance();	// Instantiates Main
 		$APPLICATION->onStart();		// Prepare Main's environment
 		$APPLICATION->onExecute();		// Runs the application 
@@ -42,5 +42,5 @@
 	}catch(exception $e){
 		ob_end_clean();
 		ob_start();
-		_ERROR::display($e,$errorType);		// Catches and render the errors
+		Error::display($e,$errorType);		// Render the errors
 	}

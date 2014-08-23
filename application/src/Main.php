@@ -29,20 +29,20 @@
      * @package application
      * @subpackage src
      */
-    class Main extends _APP{
+    class Main extends App{
         /**
         * @ignore
         */
-        public $LAYOUT;
+        public $view;
         
         /**
         * Start life cycle
         * @return void
         */
         public function onStart(){
-            //_USER::$EMAIL_ADMIN="exemplo@email.com";
-            //_GLOBAL::$DEBUG=FALSE;
-            $this->LAYOUT = GenericElement::layoutInflater("helloMarvie.html");
+            //User::$emailAdmin="exemplo@email.com";
+            //Globals::$debug=FALSE;
+            $this->view = GenericElement::layoutInflater("helloMarvie.html");
         }
         
         /**
@@ -57,7 +57,7 @@
         * @return void
         */
         public function onFinish(){
-            Main::display($this->LAYOUT);
-            unset($this->LAYOUT);
+            Main::display($this->view);
+            unset($this->view);
         }
     }

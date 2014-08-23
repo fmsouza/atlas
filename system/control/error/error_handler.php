@@ -27,7 +27,7 @@
      * @param $errline Error line
      * @throws ErrorException
      */
-    function exception_error_handler($errno, $errstr, $errfile, $errline ) {
+    function error_handler($errno, $errstr, $errfile, $errline ) {
 	throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
     }
     
@@ -36,11 +36,11 @@
      * @return void
      */
     function CatchFatalError() {
-	$error = error_get_last();
-	if($error['type'] != 0){
-	    $_SESSION['_ERROR'] = base64_encode(serialize((object)$error));
-	    header("location: index.php");
-	}
+		$error = error_get_last();
+		if($error['type'] != 0){
+			$_SESSION['Error'] = base64_encode(serialize((object)$error));
+			header("location: index.php");
+		}
     }
     
     /**
@@ -49,9 +49,9 @@
      * @throws ErrorException
      */
     function FATAL_ERROR_CALL(){
-	$error = unserialize(base64_decode($_SESSION["_ERROR"]));
-	unset($_SESSION["_ERROR"]);
-	throw new ErrorException($error->message,$error->type,0,"{$error->file}", $error->line);
+		$error = unserialize(base64_decode($_SESSION["Error"]));
+		unset($_SESSION["Error"]);
+		throw new ErrorException($error->message,$error->type,0,"{$error->file}", $error->line);
     }
-    set_error_handler("exception_error_handler");
+    set_error_handler("error_handler");
     register_shutdown_function('CatchFatalError');

@@ -20,7 +20,7 @@
 	 * The Element class is the smallest unit on the HTML objects abstraction tree.
 	 * 
 	 * @package system
-	 * @subpackage view_HTML
+	 * @subpackage viewHtml
 	 */
 	abstract class Element {
 		/**

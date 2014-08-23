@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Contains _APP class
+	 * Contains App class
 	 * 
 	 * @author Frederico Souza (fredericoamsouza@gmail.com)
 	 * @author Julio Cesar (thisjulio@gmail.com)
@@ -17,7 +17,7 @@
 	 * limitations under the License.
 	 */
 	/**
-	 * The _APP class is the application core. It groups every main parâmeters and methods needed by
+	 * The App class is the application core. It groups every main parâmeters and methods needed by
 	 * the PHP web application to effectively run. It treats the URLs, load classes and, after a request,
 	 * call the right method to do some action. 
 	 * 
@@ -25,7 +25,7 @@
 	 * @subpackage control
 	 * @abstract
 	 */
-	abstract class _APP implements _SINGLETON{
+	abstract class App implements Singleton{
 		/**
 		 * @var bool Session status
 		 */
@@ -134,8 +134,8 @@
 		public function openSession(){
 			if(!$this->getSessionStatus()){
 				$this->sessionStatus = 1;
-				$_SESSION['_APP']['sessionStatus'] = 1;
-				$_SESSION['_APP']['data'] = array();
+				$_SESSION[get_class()]['sessionStatus'] = 1;
+				$_SESSION[get_class()]['data'] = array();
 			}
 		}
 		
@@ -179,8 +179,8 @@
 		 * @ignore
 		 */
 		private function fillSessionData(){
-			if($this->getSessionStatus() && isset($_SESSION['_APP']['data'])){
-				$this->sessionData = $_SESSION['_APP']['data'];
+			if($this->getSessionStatus() && isset($_SESSION[get_class()]['data'])){
+				$this->sessionData = $_SESSION[get_class()]['data'];
 			}
 		}
 		
@@ -202,7 +202,7 @@
 		 * @return void
 		 */
 		private function recoverSession(){
-			if(isset($_SESSION['_APP'])){
+			if(isset($_SESSION[get_class()])){
 				$this->sessionStatus = 1;
 				$this->fillSessionData();
 			}else
@@ -216,7 +216,7 @@
 		 */
 		private function writeSessionData(){
 			if($this->getSessionStatus()){
-				$_SESSION['_APP']['data'] = $this->sessionData;
+				$_SESSION[get_class()]['data'] = $this->sessionData;
 			}
 		}
 		
