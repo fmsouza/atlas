@@ -73,11 +73,4 @@
 	     * @return int
 	     */
 	    public function affectedRows();
-	    
-	    /**
-	     * Check if a error ocurred in any query. 
-	     * @return void
-	     * @throws DatabaseError
-	     */
-	    public function triggerError();
 	}

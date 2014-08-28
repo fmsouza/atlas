@@ -38,9 +38,10 @@
 				$this->db = new mysqli($connInf["host"],$connInf["user"],$connInf["password"]);
 				$this->db->autocommit(TRUE);
 				$this->query("SET NAMES '{$connInf["charset"]}'"); 
-				$this->query("SET character_set_connection={$connInf["charset"]}"); 
-				$this->query("SET character_set_client={$connInf["charset"]}"); 
-				$this->query("SET character_set_results={$connInf["charset"]}"); 
+				$this->query("SET character_set_connection={$connInf["charset"]}");
+				$this->query("SET character_set_client={$connInf["charset"]}");
+				$this->query("SET character_set_results={$connInf["charset"]}");
+				$this->selectDatabase($connInf["dbName"]);
 			}catch(ErrorException $e){
 				$db = debug_backtrace();
 	    		throw new DatabaseException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line']);
@@ -54,14 +55,8 @@
 		 * @throws DatabaseError
 		 */
 		public function selectDatabase($dbName){
-			try{
-				$r = $this->db->select_db($dbName);
-				$this->triggerError();
-				return $r;
-			}catch(ErrorException $e){
-				$db = debug_backtrace();
-	    		throw new DatabaseException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line']);
-			}
+			if(!$this->db->select_db($dbName))
+				throw new ErrorException("Database not found");
 		}
 		
 		/**

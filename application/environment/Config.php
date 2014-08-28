@@ -52,10 +52,10 @@
 			    'host'       => '',
 			    'user'       => '',
 			    'password'   => '',
-			    'dbName'    => '',
-			    'tblPrefix' => '',
+			    'dbName'     => '',
+			    'tblPrefix'  => '',
 			    'charset'    => '',
-			    'driver'     => '',
+			    'driver'     => ''
 			);
 	    }
 	}
