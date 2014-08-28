@@ -25,6 +25,7 @@
 	include(Globals::errorPath()."/error_handler.php"); // Loads the exception error handler
 	include(Globals::systemPath()."/autoload.php"); // Loads the autoload configuration
 	header("Content-Type: text/html; charset=".Config::encoding);
+    Globals::$debug = TRUE; // toggles error display mode
 	/* -------------------------------------------------------------------------------------------- */
 	/*                                                                                              */
 	/* This is the Main class life cycle, which is written under Singleton Pattern. It grants that  */
