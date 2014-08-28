@@ -40,6 +40,11 @@
 		/**
 		 * @ignore
 		 */
+		static private $dump = array();
+		
+		/**
+		 * @ignore
+		 */
 		private function __construct(){
 			$this->recoverSession();
 		}
@@ -151,7 +156,6 @@
 		
 		/**
 		 * Recover last execution's session if set
-		 * 
 		 * @return void
 		 */
 		private function recoverSession(){
@@ -164,7 +168,6 @@
 		
 		/**
 		 * Updates PHP session with the application session data
-		 * 
 		 * @return void
 		 */
 		private function writeSessionData(){
@@ -175,12 +178,28 @@
 		
 		/**
 		 * Renders content into the screen
-		 * 
 		 * @param mixed $value
 		 * @return void
 		 */
 		public static function display($value){
 			file_put_contents("php://output", $value);
+		}
+		
+		/**
+		 * Displays the content set to dump
+		 * @return void
+		 */
+		public static function dump(){
+			foreach(self::$dump as $dump) var_dump($dump);
+		}
+		
+		/**
+		 * Pushs the element to the dump List
+		 * @param mixed $value
+		 * @return void
+		 */
+		public static function setToDump($value){
+			self::$dump[] = $value;
 		}
 		
 		/**

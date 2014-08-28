@@ -36,7 +36,6 @@
         */
         public function onStart(){
             //User::$emailAdmin="exemplo@email.com";
-            Globals::$debug=TRUE; // shows errors in exception screen
             $this->view = GenericElement::layoutInflater("helloMarvie.html");
         }
         
@@ -52,7 +51,7 @@
         * @return void
         */
         public function onFinish(){
-            Main::display($this->view);
+            self::display($this->view);
             unset($this->view);
         }
     }
