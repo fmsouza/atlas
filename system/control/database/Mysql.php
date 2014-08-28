@@ -43,21 +43,9 @@
 				$this->query("SET character_set_results={$connInf["charset"]}"); 
 			}catch(ErrorException $e){
 				$db = debug_backtrace();
-	    		throw new DatabaseException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
+	    		throw new DatabaseException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line']);
 			}
 		}
-		
-		/**
-		 * Checks if an error ocurred in any query
-		 * @return void
-		 * @throws DatabaseError
-		 */
-		public function triggerError(){
-			if($this->db->errno){
-				$db = debug_backtrace();
-	    		throw new DatabaseException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
-	    	}
-	   	}
 		
 		/**
 		 * Select a database
@@ -66,9 +54,14 @@
 		 * @throws DatabaseError
 		 */
 		public function selectDatabase($dbName){
-			$r = $this->db->select_db($dbName);
-			$this->triggerError();
-			return $r;
+			try{
+				$r = $this->db->select_db($dbName);
+				$this->triggerError();
+				return $r;
+			}catch(ErrorException $e){
+				$db = debug_backtrace();
+	    		throw new DatabaseException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line']);
+			}
 		}
 		
 		/**
@@ -78,15 +71,19 @@
 		 * @throws DatabaseError
 		 */
 		public function query($sql){
-			$r = $this->db->query($sql);
-			$this->triggerError();
-			if($r instanceof mysqli_result){
-				$tmp = new DatabaseResult();
-				while($tmp->setRow((array)$r->fetch_assoc()));
-				unset($r);
-				return $tmp;
+			try{
+				$r = $this->db->query($sql);
+				if($r instanceof mysqli_result){
+					$tmp = new DatabaseResult();
+					while($tmp->setRow((array)$r->fetch_assoc()));
+					unset($r);
+					return $tmp;
+				}
+				return $r;
+			}catch(ErrorException $e){
+				$db = debug_backtrace();
+	    		throw new DatabaseException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line']);
 			}
-			return $r;
 		}
 		
 		/**
