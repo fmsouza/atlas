@@ -38,18 +38,18 @@
 		 * @var Main Stores Main class Instance
 		 */
 		static private $instance;
+		
 		/**
-		 * @var mixed Stores router $_GET value
+		 * @ignore
 		 */
-		static public $mRequest;
+		private function __construct(){
+			$this->recoverSession();
+		}
+		
 		/**
-		 * @var mixed Stores arguments $_GET value
+		 * @ignore
 		 */
-		static public $args;
-		/**
-		 * @var mixed Stores database connection
-		 */
-		static public $db;
+		public function onStart(){}
 		
 		/**
 		 * Runs the application main instructions
@@ -61,47 +61,7 @@
 		/**
 		 * @ignore
 		 */
-		private function __construct(){
-			$this->recoverSession();
-			$this->construct();
-		}
-		
-		/**
-		 * Constructs the application
-		 * @return void
-		 */
-		protected function construct(){
-			self::$mRequest = (isset($_GET['r']) && $_GET['r']!="onExecute") ? $_GET['r'] : "";
-			self::$args = isset($_GET['args']) ? explode("/",$_GET['args']) : array();
-		}
-		
-		/**
-		 * @ignore
-		 */
-		public function onStart(){}
-		
-		/**
-		 * @ignore
-		 */
 		public function onFinish(){}
-		
-		/**
-		 * Destroy the application instances
-		 * @return void
-		 */
-		protected function destroy(){
-			self::$mRequest = NULL;
-			self::$args = NULL;
-			self::$instance = NULL;
-		}
-		
-		/**
-		 * @ignore
-		 */
-		public function __destruct(){
-			$this->writeSessionData();
-			$this->destroy();
-		}
 		
 		/**
 		 * Returns Main instance
@@ -113,11 +73,6 @@
 				self::$instance = new $className();
 			return self::$instance;
 		}
-		
-		/**
-		 * @ignore
-		 */
-		public function __clone(){}
 		
 		/**
 		 * Verifies if the session is opened or not
@@ -221,12 +176,25 @@
 		}
 		
 		/**
-		 * Render some content into the screen
+		 * Renders content into the screen
 		 * 
-		 * @param Element|string $value
+		 * @param mixed $value
 		 * @return void
 		 */
 		public static function display($value){
-			file_put_contents("php://output", ($value instanceof Element) ? $value->toRender() :  $value);
+			file_put_contents("php://output", $value);
+		}
+		
+		/**
+		 * @ignore
+		 */
+		public function __clone(){}
+		
+		/**
+		 * @ignore
+		 */
+		public function __destruct(){
+			$this->writeSessionData();
+			self::$instance = NULL;
 		}
 	}

@@ -68,7 +68,7 @@
 		 * Generates final HTML string to render.
 		 * @return string
 		 */
-		public function toRender(){
+		public function __toString(){
 			return self::$DOC->saveXML($this->domNode);
 		}
 	}
