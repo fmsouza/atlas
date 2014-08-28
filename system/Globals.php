@@ -30,7 +30,7 @@
 		 * Application's base path
 		 * @return string
 		 */
-		public static function BASE(){
+		public static function base(){
 			return getcwd();
 		}
 		
@@ -38,56 +38,60 @@
 		 * System's directory path
 		 * @return string
 		 */
-		public static function SYS_PATH(){
-			return self::BASE()."/system";
+		public static function systemPath(){
+			return self::base()."/system";
 		}
 		
 		/**
 		 * Path to core environment classes
 		 * @return string
 		 */
-		public static function ENV_PATH(){
-			return self::SYS_PATH()."/environment";
+		public static function environmentPath(){
+			return self::systemPath()."/environment";
 		}
 		
 		/**
 		 * Path to core control classes
 		 * @return string
 		 */
-		public static function CTRL_PATH(){
-			return self::SYS_PATH()."/control";
+		public static function controlPath(){
+			return self::systemPath()."/control";
 		}
 		
-		public static function ERROR_PATH(){
-			return self::CTRL_PATH()."/error";
+		/**
+		 * Path to error classes
+		 * @return string
+		 */
+		public static function errorPath(){
+			return self::controlPath()."/error";
 		} 
 		
 		/**
 		 * Path to core view classes
 		 * @return string
 		 */
-		public static function VIEW_PATH(){
-			return self::SYS_PATH()."/view";
+		public static function viewPath(){
+			return self::systemPath()."/view";
 		}
 		
 		/**
 		 * All system paths
 		 * @return array
 		 */
-		public static function ALL_PATHS(){
+		public static function paths(){
 			return array(
-				self::BASE(),
-				self::SYS_PATH(),
-				self::ENV_PATH(),
-				self::CTRL_PATH(),
-				self::CTRL_PATH()."/database",
-				self::CTRL_PATH()."/datatypes",
-				self::CTRL_PATH()."/tools",
-				self::CTRL_PATH()."/tools/PHPMailer",
-				self::CTRL_PATH()."/tools/html2pdf",
-				self::ERROR_PATH(),
-				self::VIEW_PATH(),
-				self::VIEW_PATH()."/HTML"
+				self::base(),
+				self::systemPath(),
+				self::environmentPath(),
+				self::controlPath(),
+				self::controlPath()."/database",
+				self::controlPath()."/datatypes",
+				self::controlPath()."/tools",
+				self::controlPath()."/tools/PHPMailer",
+				self::controlPath()."/tools/html2pdf",
+				self::errorPath(),
+				self::viewPath(),
+				self::viewPath()."/HTML"
 			);
 		}
 	}

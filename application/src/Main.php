@@ -1,10 +1,5 @@
 <?php
     /**
-     * Application's main controller class<br/>
-     * Method Main::onExecute() must <em>ALWAYS</em> be defined. It'll always be called.<br/><br/>
-     * One of the MVC pillars is the concept of keep markup and logic well separated, in other words,
-     * avoid mixing static and dinamic contents. Therefore all the logic content must be written in the
-     * controller classes and replaced in the HTML through _HTML class and it's applications.
      * @author Frederico Souza (fredericoamsouza@gmail.com)
      * @author Julio Cesar (thisjulio@gmail.com)
      * 
@@ -41,7 +36,7 @@
         */
         public function onStart(){
             //User::$emailAdmin="exemplo@email.com";
-            //Globals::$debug=FALSE;
+            Globals::$debug=TRUE; // shows errors in exception screen
             $this->view = GenericElement::layoutInflater("helloMarvie.html");
         }
         
@@ -53,7 +48,7 @@
         }
         
         /**
-        * Life cycle end instructions
+        * Death instructions
         * @return void
         */
         public function onFinish(){

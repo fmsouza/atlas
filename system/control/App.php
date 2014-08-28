@@ -17,9 +17,7 @@
 	 * limitations under the License.
 	 */
 	/**
-	 * The App class is the application core. It groups every main parâmeters and methods needed by
-	 * the PHP web application to effectively run. It treats the URLs, load classes and, after a request,
-	 * call the right method to do some action. 
+	 * The App class implements the lifecycle. 
 	 * 
 	 * @package system
 	 * @subpackage control

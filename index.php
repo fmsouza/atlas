@@ -22,8 +22,8 @@
 	 */
 	session_start(); // Starts PHP session
 	require_once("system/Globals.php"); // Loads all the paths
-	include(Globals::ERROR_PATH()."/error_handler.php"); // Loads the exception error handler
-	include(Globals::SYS_PATH()."/autoload.php"); // Loads the autoload configuration
+	include(Globals::errorPath()."/error_handler.php"); // Loads the exception error handler
+	include(Globals::systemPath()."/autoload.php"); // Loads the autoload configuration
 	header("Content-Type: text/html; charset=".Config::encoding);
 	/* -------------------------------------------------------------------------------------------- */
 	/*                                                                                              */

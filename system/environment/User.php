@@ -31,53 +31,53 @@
 		 * Base path
 		 * @return string
 		 */
-		public static function BASE(){
-			return Globals::BASE();
+		public static function base(){
+			return Globals::base();
 		}
 		
 		/**
 		 * Application path
 		 * @return string
 		 */
-		public static function HOME(){
-			return self::BASE()."/application";
+		public static function home(){
+			return self::base()."/application";
 		}
 		
 		/**
 		 * Path to environment classes
 		 * @return string
 		 */
-		public static function ENV(){
-			return self::BASE()."/application/environment";
+		public static function environment(){
+			return self::base()."/application/environment";
 		}
 		
 		/**
 		 * Path to views directory
 		 * @return string
 		 */
-		public static function VIEW(){
-			return self::BASE()."/application/view";
+		public static function view(){
+			return self::base()."/application/view";
 		}
 		
 		/**
 		 * Path to source files directory
 		 * @return string
 		 */
-		public static function SRC(){
-			return self::BASE()."/application/src";
+		public static function source(){
+			return self::base()."/application/src";
 		}
 		
 		/**
 		 * All application main paths
 		 * @return array
 		 */
-		public static function ALL_PATHS(){
+		public static function paths(){
 			return array(
-				self::BASE(),
-				self::HOME(),
-				self::ENV(),
-				self::VIEW(),
-				self::SRC()
+				self::base(),
+				self::home(),
+				self::environment(),
+				self::view(),
+				self::source()
 			);
 		}
 	}

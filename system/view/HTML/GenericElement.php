@@ -51,7 +51,6 @@
 	    
 	    /**
 	     * Returns the given attribute value
-		 * 
 	     * @param string $key Attribute name
 	     * @return string
 	     */
@@ -61,8 +60,8 @@
 	    
 	    /**
 	     * Removes all the current attributes for the given
-		 * 
 	     * @param array $attributes New attributes array
+	     * @return void
 	     */
 	    public function setAttributes($attributes){
 			$this->removeAttributes();
@@ -80,9 +79,9 @@
 	    
 	    /**
 	     * Add/update the given element attribute
-		 * 
 	     * @param string $key Attribute name
 	     * @param mixed $value Attribute value
+	     * @return void
 	     */
 	    public function setAttribute($key,$value){
 			$this->domNode->setAttribute($key,$value);
@@ -104,14 +103,16 @@
 	    
 	    /**
 	     * Inflates an Element from a string
-		 * 
 	     * @param string $layout
+	     * @return DOMDocument
 	     */
 	    static public function stringInflater($layout){
 			$tmp = new DOMDocument;
 			if(is_null(self::$DOC))
 			    self::$DOC = new DOMDocument("1.0",Config::encoding);
 			try{
+				// TODO find out the right solution to the problem wih special characters
+				$layout = self::replaceCharacters($layout);
 			    $tmp->loadXML(mb_convert_encoding($layout, 'HTML-ENTITIES', Config::encoding));
 			    $root = self::$DOC->importNode($tmp->firstChild,TRUE);
 			    return self::constructByNode($root);
@@ -123,10 +124,32 @@
 		
 	    /**
 	     * Inflates an Element tree from a file
-		 * 
 	     * @param string $layout HTML file path stored in application/view
+	     * @return string
 	     */
 	    static public function layoutInflater($layout){
 			return self::stringInflater(preg_replace('~\s*(<([^>]*)>[^<]*</\2>|<[^>]*>)\s*~','$1',file_get_contents(User::VIEW()."/".$layout)));
 	    }
+		
+		/**
+		 * @ignore
+		 */
+		static private function specialCharacters(){
+			return array(
+				//'#' => '&#35;',
+				'$' => '&#36;',
+				'%' => '&#37;',
+				'&' => '&#38;',
+				'@' => '&#64;',
+			);
+		}
+		
+		/**
+		 * @ignore
+		 */
+		static private function replaceCharacters($string){
+			foreach(self::specialCharacters() as $key => $value)
+				$string = str_replace($key, $value, $string);
+			return $string;
+		}
 	}

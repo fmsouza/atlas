@@ -65,8 +65,7 @@
 		}
 		
 		/**
-		 * Generates final HTML string to render.
-		 * @return string
+		 * @ignore
 		 */
 		public function __toString(){
 			return self::$DOC->saveXML($this->domNode);

@@ -26,14 +26,14 @@
 	 */
 	function autoload($classname){
 	    // Runs the global paths
-	    foreach (Globals::ALL_PATHS() as $value){
+	    foreach (Globals::paths() as $value){
             if(file_exists("{$value}/{$classname}.php")){
                 require_once("{$value}/{$classname}.php");
                 return true;
             }
 	    }
 	    // Runs the application paths
-	    foreach (User::ALL_PATHS() as $value){
+	    foreach (User::paths() as $value){
             if(file_exists("{$value}/{$classname}.php")){
                 require_once("{$value}/{$classname}.php");
                 return true;
@@ -41,9 +41,9 @@
 	    }
 	    
 	    // Runs the paths defined as packages
-	    foreach (Package::ALL_PACKS() as $value){
-            if(file_exists(User::SRC()."/{$value}/{$classname}.php")){
-                require_once(User::SRC()."/{$value}/{$classname}.php");
+	    foreach (Package::paths() as $value){
+            if(file_exists(User::source()."/{$value}/{$classname}.php")){
+                require_once(User::source()."/{$value}/{$classname}.php");
                 return true;
             }
 	    }
