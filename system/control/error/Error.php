@@ -71,7 +71,7 @@
 		 */
 		public static function error403(){
 			$layout = GenericElement::layoutInflater("../../system/view/error403.html");
-			file_put_contents("php://output", $layout->toRender());
+			file_put_contents("php://output", $layout);
 			exit;
 		}
 
@@ -81,7 +81,7 @@
 		 */
 		public static function error404(){
 			$layout = GenericElement::layoutInflater("../../system/view/error404.html");
-			file_put_contents("php://output", $layout->toRender());
+			file_put_contents("php://output", $layout);
 			exit;
 		}
 	
