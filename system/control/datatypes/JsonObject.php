@@ -83,7 +83,7 @@
             if($this->size()>0){
                 foreach($this->data as $key => $value){
                     $return .= (is_numeric($value) || $value instanceof ArrayList || $value instanceof JsonObject)?
-                        "$key: $value, ":"$key: '$value', ";
+                        "$key: $value, ":"$key: \"$value\", ";
                 }
                 $return = substr($return, 0, -2);
             }

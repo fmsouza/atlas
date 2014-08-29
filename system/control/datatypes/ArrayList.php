@@ -174,7 +174,7 @@
                 while($iterator->valid()){
                     $value = $iterator->current();
                     $return .= (is_numeric($value) || $value instanceof ArrayObject || $value instanceof JsonObject)?
-                        "$value, ":"'$value', ";
+                        "$value, ":"\"$value\", ";
                     $iterator->next();
                 }
                 $return = substr($return, 0, -2);
