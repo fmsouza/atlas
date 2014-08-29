@@ -69,8 +69,8 @@
 		 * Displays a default 403 error page
 		 * @return void
 		 */
-		public static function error403(){
-			$layout = GenericElement::layoutInflater("../../system/view/error403.html");
+		public static function error403($path="../../system/view/error403.html"){
+			$layout = GenericElement::layoutInflater($path);
 			file_put_contents("php://output", $layout);
 			exit;
 		}
@@ -79,8 +79,8 @@
 		 * Displays a default 404 error page
 		 * @return void
 		 */
-		public static function error404(){
-			$layout = GenericElement::layoutInflater("../../system/view/error404.html");
+		public static function error404($path="../../system/view/error404.html"){
+			$layout = GenericElement::layoutInflater($path);
 			file_put_contents("php://output", $layout);
 			exit;
 		}
