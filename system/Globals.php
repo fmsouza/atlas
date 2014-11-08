@@ -87,8 +87,6 @@
 				self::controlPath()."/database",
 				self::controlPath()."/datatypes",
 				self::controlPath()."/tools",
-				self::controlPath()."/tools/PHPMailer",
-				self::controlPath()."/tools/html2pdf",
 				self::errorPath(),
 				self::viewPath(),
 				self::viewPath()."/HTML"

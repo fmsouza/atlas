@@ -29,7 +29,7 @@
 		 * @example array('userClasses','objectClasses','models','controllers');
 	     * @return array
 	     */
-	    public static function ALL_PACKS(){
-            return array();
+	    public static function paths(){
+            return array("math");
 	    }
 	}
