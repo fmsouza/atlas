@@ -50,7 +50,7 @@
 		 * @return string
 		 */
 		public static function environment(){
-			return self::base()."/application/environment";
+			return self::home()."/environment";
 		}
 		
 		/**
@@ -58,7 +58,7 @@
 		 * @return string
 		 */
 		public static function view(){
-			return self::base()."/application/view";
+			return self::home()."/view";
 		}
 		
 		/**
@@ -66,7 +66,7 @@
 		 * @return string
 		 */
 		public static function source(){
-			return self::base()."/application/src";
+			return self::home()."/src";
 		}
 		
 		public static function addPackagePath($path){
@@ -76,6 +76,10 @@
 		
 		public static function packages(){
 			return self::$packages;
+		}
+		
+		public static function tests(){
+			return self::home()."/tests";
 		}
 		
 		/**
@@ -88,7 +92,8 @@
 				self::home(),
 				self::environment(),
 				self::view(),
-				self::source()
+				self::source(),
+				self::tests()
 			);
 		}
 	}

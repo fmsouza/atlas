@@ -22,9 +22,14 @@
 	 */
 	class Globals{
 		/**
-		 * @var bool $DEBUG Turns debug mode on/off
+		 * @var bool $debug Toggle debug mode on/off
 		 */
 		public static $debug = TRUE;
+		
+		/**
+		 * @var bool $test Toggle Unit Test execution on/off
+		 */
+		public static $test = TRUE;
 		
 		/**
 		 * Application's base path

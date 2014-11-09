@@ -46,6 +46,7 @@
 		 * @ignore
 		 */
 		private function __construct(){
+			if(Globals::$test) $this->runUnitTests();
 			$this->recoverSession();
 		}
 		
@@ -200,6 +201,16 @@
 		 */
 		public static function setToDump($value){
 			self::$dump[] = $value;
+		}
+		
+		public function runUnitTests(){
+			foreach(Config::tests() as $test){
+				$methods = get_class_methods($test);
+				$unit = new $test();
+				foreach($methods as $method){
+					$unit->$method();
+				}	
+			}
 		}
 		
 		/**

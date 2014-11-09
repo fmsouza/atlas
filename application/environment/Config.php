@@ -41,6 +41,12 @@
 		public static function logPath(){
 			return "./errors.log";
 		}
+		
+		public static function tests(){
+			return array(
+				'MainTest'
+			);
+		}
 	    
 	    /**
 	     * Returns an array with the database configuration data.

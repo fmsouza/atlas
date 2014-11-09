@@ -25,7 +25,8 @@
 	include(Globals::errorPath()."/error_handler.php"); // Loads the exception error handler
 	include(Globals::systemPath()."/autoload.php"); // Loads the autoload configuration
 	header("Content-Type: text/html; charset=".Config::encoding);
-    Globals::$debug = TRUE; // toggles error display mode
+    Globals::$debug = true; // toggles error display mode
+    Globals::$test = true; // toggles unit test execution
 	/* -------------------------------------------------------------------------------------------- */
 	/*                                                                                              */
 	/* This is the Main class life cycle, which is written under Singleton Pattern. It grants that  */
@@ -36,10 +37,10 @@
 		ob_start();
 		$errorType=0;
 		if(isset($_SESSION["Error"])){$errorType=1;FATAL_ERROR_CALL();}
-		$APPLICATION=Main::getInstance();	// Instantiates Main
-		$APPLICATION->onStart();		// Prepare Main's environment
-		$APPLICATION->onExecute();		// Runs the application 
-		$APPLICATION->onFinish();		// Prepares the application to stop
+		$app=Main::getInstance();	// Instantiates Main
+		$app->onStart();		// Prepare Main's environment
+		$app->onExecute();		// Runs the application 
+		$app->onFinish();		// Prepares the application to stop
 	}catch(exception $e){
 		ob_end_clean();
 		ob_start();
