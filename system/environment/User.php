@@ -27,6 +27,8 @@
 		 */
 		public static $emailAdmin = "admin@localhost";
 		
+		private static $packages = [];
+		
 		/**
 		 * Base path
 		 * @return string
@@ -65,6 +67,15 @@
 		 */
 		public static function source(){
 			return self::base()."/application/src";
+		}
+		
+		public static function addPackagePath($path){
+			if(!in_array(self::source()."/".$path, self::$packages))
+				array_push(self::$packages,self::source()."/".$path);
+		}
+		
+		public static function packages(){
+			return self::$packages;
 		}
 		
 		/**
