@@ -5,7 +5,7 @@
      * @author Frederico Souza (fredericoamsouza@gmail.com)
      * @author Julio Cesar (thisjulio@gmail.com)
      * @package system
-     * @subpackage control_ERROR
+     * @subpackage control/error
      * 
      * @copyright Copyright 2013 Frederico Souza
      * Licensed under the Apache License, Version 2.0 (the “License”);

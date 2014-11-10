@@ -27,6 +27,9 @@
 		 */
 		public static $emailAdmin = "admin@localhost";
 		
+		/**
+		 * @var array $packages User included package paths to find the user classes.
+		 */
 		private static $packages = [];
 		
 		/**
@@ -69,21 +72,36 @@
 			return self::home()."/src";
 		}
 		
+		/**
+		 * Adds a package path to the autoload inspection paths
+		 *
+		 * @param string $path Package path
+		 * @return void
+		 */
 		public static function addPackagePath($path){
 			if(!in_array(self::source()."/".$path, self::$packages))
 				array_push(self::$packages,self::source()."/".$path);
 		}
 		
+		/**
+		 * Returns user application packages where are located the application
+		 * classes.
+		 * @return array
+		 */
 		public static function packages(){
 			return self::$packages;
 		}
 		
+		/**
+		 * Path to test classes.
+		 * @return string
+		 */
 		public static function tests(){
 			return self::home()."/tests";
 		}
 		
 		/**
-		 * All application main paths
+		 * All application main paths.
 		 * @return array
 		 */
 		public static function paths(){

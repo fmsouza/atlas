@@ -1,5 +1,7 @@
 <?php
     /**
+     * Application bootstrap class
+     *
      * @author Frederico Souza (fredericoamsouza@gmail.com)
      * @author Julio Cesar (thisjulio@gmail.com)
      * 
@@ -15,11 +17,9 @@
      * limitations under the License.
      */
     /**
-     * Application's main controller class<br/>
-     * Method Main::onExecute() must <em>ALWAYS</em> be defined. It'll always be called.<br/><br/>
-     * One of the MVC pillars is the concept of keep markup and logic well separated, in other words,
-     * avoid mixing static and dinamic contents. Therefore all the logic content must be written in the
-     * controller classes and replaced in the HTML through _HTML class and it's applications.
+     * Application's main controller class
+     * 
+     * Method Main::onExecute() must ALWAYS be defined. It'll always be called.
      *
      * @package application
      * @subpackage src

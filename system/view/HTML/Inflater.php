@@ -18,6 +18,7 @@
  */
 /**
  * Implements the Inflater pattern
+ * 
  * @package system
  * @subpackage viewHtml
  */

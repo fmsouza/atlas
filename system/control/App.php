@@ -187,14 +187,6 @@
 		}
 		
 		/**
-		 * Displays the content set to dump
-		 * @return void
-		 */
-		public static function dump(){
-			foreach(self::$dump as $dump) var_dump($dump);
-		}
-		
-		/**
 		 * Pushs the element to the dump List
 		 * @param mixed $value
 		 * @return void
@@ -203,6 +195,18 @@
 			self::$dump[] = $value;
 		}
 		
+		/**
+		 * Displays the content set to dump
+		 * @return void
+		 */
+		public static function dump(){
+			foreach(self::$dump as $dump) var_dump($dump);
+		}
+		
+		/**
+		 * Executes the UnitTest defined routines
+		 * @return void
+		 */
 		public function runUnitTests(){
 			foreach(Config::tests() as $test){
 				$methods = get_class_methods($test);

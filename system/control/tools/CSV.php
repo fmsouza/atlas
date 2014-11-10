@@ -79,6 +79,7 @@
 	    
 	    /**
 	     * Add a new line
+	     * @param mixed $data The data to add to the line
 	     * @return void
 	     */
 	    public function addRow($data){
@@ -87,6 +88,7 @@
 	    
 	    /**
 	     * Writes a full array to the file
+	     * @param mixed $data The array to add to file
 	     * @return void
 	     */
 	    public function addAll(array $data){

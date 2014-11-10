@@ -4,7 +4,7 @@
 	 * Fill this class with data which can help your application flexibility.
 	 * @author Frederico Souza (fredericoamsouza@gmail.com)
 	 *
-	 * @copyright Copyright 2013 Frederico Souza
+	 * @copyright Copyright 2014 Frederico Souza
 	 * Licensed under the Apache License, Version 2.0 (the “License”);
 	 * you may not use this file except in compliance with the License.
 	 * You may obtain a copy of the License at
@@ -23,7 +23,9 @@
 	 * @subpackage environment
 	 */
 	class Config{
-	    
+		/**
+		 * @var string Character encoding
+		 */
 	    const encoding = "UTF-8";
 	    /**
 	     * Web application base path
@@ -42,6 +44,10 @@
 			return "./errors.log";
 		}
 		
+		/**
+		 * Returns all the tests that should be runned before application begins.
+		 * @return array
+		 */
 		public static function tests(){
 			return array(
 				'MainTest'

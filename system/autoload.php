@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * Autoload routine
+	 * Autoload routine to find classes automagically.
 	 * 
 	 * @author Frederico Souza (fredericoamsouza@gmail.com)
 	 * @author Julio Cesar (thisjulio@gmail.com)
@@ -20,7 +20,6 @@
 	/**
 	 * Runs all selected paths trying to find the required class. The class must have the same
 	 * name of the file.
-	 * 
 	 * @param string $classname class name
 	 * @return bool
 	 */
