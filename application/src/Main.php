@@ -17,9 +17,9 @@
      * limitations under the License.
      */
     /**
-     * Application's main controller class
+     * Application's bootstrap class
      * 
-     * Method Main::onExecute() must ALWAYS be defined. It'll always be called.
+     * Method Main::onExecute() must ALWAYS be defined.
      *
      * @package application
      * @subpackage src
