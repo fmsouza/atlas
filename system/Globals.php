@@ -40,6 +40,14 @@
 		}
 		
 		/**
+		 * Environment configuration file path
+		 * @return string
+		 */
+		public static function config(){
+			return User::environment()."/config.json";
+		}
+		
+		/**
 		 * System's directory path
 		 * @return string
 		 */

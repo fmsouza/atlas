@@ -24,9 +24,10 @@
 	require_once("system/Globals.php"); // Loads all the paths
 	include(Globals::errorPath()."/error_handler.php"); // Loads the exception error handler
 	include(Globals::systemPath()."/autoload.php"); // Loads the autoload configuration
-	header("Content-Type: text/html; charset=".Config::encoding);
     Globals::$debug = true; // toggles error display mode
     Globals::$test = true; // toggles unit test execution
+    App::loadConfig();
+	header("Content-Type: text/html; charset=".App::$config->getKey("encoding"));
 	/* -------------------------------------------------------------------------------------------- */
 	/*                                                                                              */
 	/* This is the Main class life cycle, which is written under Singleton Pattern. It grants that  */

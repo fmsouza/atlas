@@ -108,12 +108,13 @@
 	     */
 	    static public function stringInflater($layout){
 			$tmp = new DOMDocument;
+			$encoding = App::$config->getKey("encoding");
 			if(is_null(self::$DOC))
-			    self::$DOC = new DOMDocument("1.0",Config::encoding);
+			    self::$DOC = new DOMDocument("1.0",$encoding);
 			try{
 				// TODO find out the right solution to the problem wih special characters
 				$layout = self::replaceCharacters($layout);
-			    $tmp->loadXML(mb_convert_encoding($layout, 'HTML-ENTITIES', Config::encoding));
+			    $tmp->loadXML(mb_convert_encoding($layout, 'HTML-ENTITIES', $encoding));
 			    $root = self::$DOC->importNode($tmp->firstChild,TRUE);
 			    return self::constructByNode($root);
 			}catch(ErrorException $e){

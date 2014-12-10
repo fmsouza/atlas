@@ -36,6 +36,8 @@
 		 * @var Main Stores Main class Instance
 		 */
 		static private $instance;
+
+		static public $config;
 		
 		/**
 		 * @ignore
@@ -185,6 +187,11 @@
 		public static function display($value){
 			file_put_contents("php://output", $value);
 		}
+
+		public static function loadConfig($path=null){
+			if(is_null($path)) $path = Globals::config();
+			self::$config = new JsonObject(file_get_contents($path));
+		}
 		
 		/**
 		 * Pushs the element to the dump List
@@ -208,7 +215,8 @@
 		 * @return void
 		 */
 		public function runUnitTests(){
-			foreach(Config::tests() as $test){
+			$tests = self::$config->getKey("tests");
+			foreach($tests as $test){
 				$methods = get_class_methods($test);
 				$unit = new $test();
 				foreach($methods as $method){

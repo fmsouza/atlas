@@ -96,6 +96,6 @@
 		 * @return void
 		 */
 		private static function writeLog($errorNumber,$errorType,$errorMsg,$file,$line){
-			file_put_contents(Config::logPath(),"[".date("c")."] {$errorType} ERROR {$errorNumber}: {$errorMsg} in {$file}({$line})\n",FILE_APPEND);
+			file_put_contents(App::$config->getKey("logPath"),"[".date("c")."] {$errorType} ERROR {$errorNumber}: {$errorMsg} in {$file}({$line})\n",FILE_APPEND);
 		}
 	}
