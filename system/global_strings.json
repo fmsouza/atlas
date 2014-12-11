@@ -1,0 +1,12 @@
+{
+	"undefined_service": "Undefined service",
+	"method_not_set": "Method not set",
+	"operation_success": "Operation successful",
+	"operation_not_supported": "Operation not supported",
+	"internal_error": "Internal error",
+	"invalid_resource": "Invalid resource",
+	"success": "success",
+	"error": "error",
+	"type": "type",
+	"message": "message"
+}

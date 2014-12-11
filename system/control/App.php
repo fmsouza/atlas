@@ -36,19 +36,25 @@
 		 * @var Main Stores Main class Instance
 		 */
 		static private $instance;
-
-		static public $config;
 		
 		/**
 		 * @ignore
 		 */
 		static private $dump = array();
+		/**
+		 * @var Toggles debug mode on/off
+		 */
+		static public $debug = true;
+		/**
+		 * @var Toggles unit test execution before application starts on/off
+		 */
+		static public $test = true;
 		
 		/**
 		 * @ignore
 		 */
 		private function __construct(){
-			if(Globals::$test) $this->runUnitTests();
+			if(self::$test) $this->runUnitTests();
 			$this->recoverSession();
 		}
 		
@@ -167,6 +173,11 @@
 				$this->fillSessionData();
 			}else
 				$this->sessionStatus = 0;
+				$this->addToSessionData("globals", Util::loadJsonFromFile(Path::$global->system."/global_strings.json"));
+		}
+
+		public function getGlobal($key){
+			return $this->getSessionData("globals")->getKey($key);
 		}
 		
 		/**
@@ -186,11 +197,6 @@
 		 */
 		public static function display($value){
 			file_put_contents("php://output", $value);
-		}
-
-		public static function loadConfig($path=null){
-			if(is_null($path)) $path = Globals::config();
-			self::$config = new JsonObject(file_get_contents($path));
 		}
 		
 		/**
@@ -215,11 +221,9 @@
 		 * @return void
 		 */
 		public function runUnitTests(){
-			$tests = self::$config->getKey("tests");
-			foreach($tests as $test){
-				$methods = get_class_methods($test);
+			foreach(Path::$config->tests as $test){
 				$unit = new $test();
-				foreach($methods as $method){
+				foreach(get_class_methods($test) as $method){
 					$unit->$method();
 				}	
 			}

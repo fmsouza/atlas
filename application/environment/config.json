@@ -1,4 +1,5 @@
 {
+	"emailAdmin": "admin@localhost",
 	"encoding": "UTF-8",
 	"baseURL": "http://{$_SERVER['SERVER_NAME']}/marvie/",
 	"logPath": "./errors.log",
@@ -13,5 +14,11 @@
 		"tblPrefix": 	"",
 		"charset": 		"",
 		"driver": 		""
-	}
+	},
+	"resources": [
+		{
+			"route":"teste",
+			"handler":"resources/TesteResource"
+		}
+	]
 }

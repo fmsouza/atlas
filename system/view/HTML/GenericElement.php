@@ -108,7 +108,7 @@
 	     */
 	    static public function stringInflater($layout){
 			$tmp = new DOMDocument;
-			$encoding = App::$config->getKey("encoding");
+			$encoding = Path::$config->encoding;
 			if(is_null(self::$DOC))
 			    self::$DOC = new DOMDocument("1.0",$encoding);
 			try{
@@ -129,7 +129,7 @@
 	     * @return string
 	     */
 	    static public function layoutInflater($layout){
-			return self::stringInflater(preg_replace('~\s*(<([^>]*)>[^<]*</\2>|<[^>]*>)\s*~','$1',file_get_contents(User::VIEW()."/".$layout)));
+			return self::stringInflater(preg_replace('~\s*(<([^>]*)>[^<]*</\2>|<[^>]*>)\s*~','$1',file_get_contents(Path::$user->view."/".$layout)));
 	    }
 		
 		/**

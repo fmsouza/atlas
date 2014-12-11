@@ -20,14 +20,13 @@
 	 * 
 	 * @ignore
 	 */
+	define("CONFIG","application/environment/config.json");
 	session_start(); // Starts PHP session
-	require_once("system/Globals.php"); // Loads all the paths
-	include(Globals::errorPath()."/error_handler.php"); // Loads the exception error handler
-	include(Globals::systemPath()."/autoload.php"); // Loads the autoload configuration
-    Globals::$debug = true; // toggles error display mode
-    Globals::$test = true; // toggles unit test execution
-    App::loadConfig();
-	header("Content-Type: text/html; charset=".App::$config->getKey("encoding"));
+	require_once("system/Path.php"); // Loads all the paths
+	Path::bootstrap();
+	header("Content-Type: text/html; charset=".Path::$config->encoding);
+	include("system/autoload.php"); // Loads the autoload configuration
+	include(Path::$global->error."/error_handler.php"); // Loads the exception error handler
 	/* -------------------------------------------------------------------------------------------- */
 	/*                                                                                              */
 	/* This is the Main class life cycle, which is written under Singleton Pattern. It grants that  */

@@ -27,26 +27,25 @@
          */
         private $data = array();
 
-        public function __construct($json){
-        	if(is_string($json)) $json = json_decode($json);
-        	$keyList = get_object_vars($json);
-        	foreach ($keyList as $key => $value) {
-        		if(is_string($value))
-        			$this->setKey($key, $value);
-        		else if(is_object($value))
-        			$this->setKey($key, new JsonObject($value));
-        		else if(is_array($value)){
-        			if(is_string($value[0]))
-        				$this->setKey($key, new ArrayList($value));
-        			else{
-	        			$alist = array();
-	        			foreach ($json as $j) {
-	        				$alist[] = new JsonObject($j);
-	        			}
-	        			$this->setKey($key, new ArrayList($alist));
-        			}
-        		}
-        	}
+        public function __construct(stdClass $json=null){
+            if(!is_null($json)){
+                foreach (get_object_vars($json) as $key => $value) {
+                    if(is_string($value)){
+                        $this->setKey($key, $value);
+                    }
+                    else if(is_object($value)){
+                        $this->setKey($key, new JsonObject($value));
+                    }
+                    else if(is_array($value)){
+                        if(is_string($value[0])){
+                            $this->setKey($key, new ArrayList($value));
+                        }
+                        else{
+                            $this->setKey($key, Util::parseJsonList($value));
+                        }
+                    }
+                }
+            }
         }
         
 		/**

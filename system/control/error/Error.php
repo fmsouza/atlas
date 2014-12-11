@@ -44,7 +44,7 @@
 			
 			$layout = GenericElement::layoutInflater("../../system/view/error_template.html");
 			
-			if(!Globals::$debug){
+			if(!App::$debug){
 				$end_msg = "An error ocurred. Please, contact the administrator: ".User::$emailAdmin;
 				$layout->removeElementById("ERROR_MESSAGE");
 				$layout->removeElementById("stackTrace");
@@ -96,6 +96,6 @@
 		 * @return void
 		 */
 		private static function writeLog($errorNumber,$errorType,$errorMsg,$file,$line){
-			file_put_contents(App::$config->getKey("logPath"),"[".date("c")."] {$errorType} ERROR {$errorNumber}: {$errorMsg} in {$file}({$line})\n",FILE_APPEND);
+			file_put_contents(Path::$config->logPath,"[".date("c")."] {$errorType} ERROR {$errorNumber}: {$errorMsg} in {$file}({$line})\n",FILE_APPEND);
 		}
 	}

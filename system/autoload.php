@@ -25,14 +25,14 @@
 	 */
 	function autoload($classname){
 	    // Search the global paths
-	    foreach (Globals::paths() as $value){
+	    foreach (get_object_vars(Path::$global) as $value){
             if(file_exists("{$value}/{$classname}.php")){
                 require_once("{$value}/{$classname}.php");
                 return true;
             }
 	    }
 	    // Search the application paths
-	    foreach (User::paths() as $value){
+	    foreach (get_object_vars(Path::$user) as $value){
             if(file_exists("{$value}/{$classname}.php")){
                 require_once("{$value}/{$classname}.php");
                 return true;
@@ -40,7 +40,7 @@
 	    }
 	    
 	    // Search the user defined packages
-	    foreach (User::packages() as $value){
+	    foreach (Import::packages() as $value){
             if(file_exists("{$value}/{$classname}.php")){
                 require_once("{$value}/{$classname}.php");
                 return true;
@@ -49,14 +49,3 @@
 	    return false;
 	}
 	spl_autoload_register('autoload'); // register __autoload
-	
-	
-	/**
-	 * Imports a given package
-	 * 
-	 * @param string $path package path from "src" root
-	 * @return void
-	 */
-	function import($path){
-		User::addPackagePath($path);
-	}

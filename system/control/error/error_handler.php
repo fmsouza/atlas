@@ -39,7 +39,7 @@
 		$error = error_get_last();
 		if($error['type'] != 0){
 			$_SESSION['Error'] = base64_encode(serialize((object)$error));
-			header("location: ".App::$config->getKey("baseURL"));
+			header("location: index.php");
 		}
     }
     

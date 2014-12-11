@@ -1,0 +1,7 @@
+{
+	"home":			"application",
+	"environment":	"application/environment",
+	"source":		"application/src",
+	"tests":		"application/tests",
+	"view":			"application/view"
+}

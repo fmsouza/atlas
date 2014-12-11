@@ -36,6 +36,9 @@
         */
         public function onStart(){
             //User::$emailAdmin="exemplo@email.com";
+            //self::$debug=false;
+            //self::$test=false;
+            //$strings = Util::loadJsonFromFile(Path::$user->environment."/strings.json");
             $this->view = GenericElement::layoutInflater("helloMarvie.html");
         }
         
