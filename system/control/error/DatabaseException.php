@@ -22,4 +22,4 @@
      * @package system
      * @subpackage control_ERROR
      */
-    class DatabaseException extends ErrorException{}
+    class DatabaseException extends \ErrorException{}

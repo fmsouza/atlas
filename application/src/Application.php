@@ -24,7 +24,7 @@
     /**
      * Application's bootstrap class
      * 
-     * Method Main::onExecute() must ALWAYS be defined.
+     * Method Application::main() must ALWAYS be defined.
      *
      * @package application
      * @subpackage src
@@ -40,11 +40,8 @@
         * @return void
         */
         public function main(){
-            //User::$emailAdmin="exemplo@email.com";
-            //self::$debug=false;
-            //self::$test=false;
-            //$strings = Util::loadJsonFromFile(Path::$user->environment."/strings.json");
-            $this->view = GenericElement::layoutInflater("helloMarvie.html")
+            //self::getConfig()->emailAdmin="exemplo@email.com";
+            $this->view = GenericElement::layoutInflater("helloMarvie.html");
             self::display($this->view);
             unset($this->view);
         }

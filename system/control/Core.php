@@ -52,10 +52,6 @@
 		 */
 		static private $dump = array();
 		/**
-		 * @var Toggles debug mode on/off
-		 */
-		static public $debug = true;
-		/**
 		 * @var Toggles unit test execution before application starts on/off
 		 */
 		static public $test = true;
@@ -64,7 +60,7 @@
 		 * @ignore
 		 */
 		private function __construct(){
-			if(self::$test) $this->runUnitTests();
+			if(TEST) $this->runUnitTests();
 			$this->recoverSession();
 		}
 		
@@ -127,7 +123,7 @@
 			if($this->getSessionStatus()){
 				try{
 					return base64_decode($this->sessionData[$key]);
-	 			}catch(ErrorException $e){
+	 			}catch(\ErrorException $e){
 	 				$db = debug_backtrace();
 		    		throw new SessionException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line']);
 				}
@@ -178,10 +174,6 @@
 		public static function getConfig(){
 			if(is_null(self::$config)){
 				self::$config = json_decode(file_get_contents(CONFIG));
-				if(is_null(self::$config)){
-					$db = debug_backtrace();
-		    		throw new \ErrorException("JSON error", 0, 0, $db[0]['file'], $db[0]['line']);
-				}
 			}
 			return self::$config;
 		}
@@ -231,9 +223,8 @@
 		 * @return void
 		 */
 		public function runUnitTests(){
-			$testPath = self::getConfig()->tests->path;
-			foreach(self::getConfig()->tests->classes as $test){
-				$test = "{$testPath}\\{$test}";
+			foreach(self::getConfig()->tests as $test){
+				$test = str_replace('.', '\\', $test);
 				$unit = new $test();
 				foreach(get_class_methods($test) as $method){
 					$unit->$method();

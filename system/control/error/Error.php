@@ -36,7 +36,7 @@
 		 * @return array
 		 */		
 		public static function getStack(\exception $e){
-			$error = explode("#", $e->getTraceAsString());
+			$error = explode('#', $e->getTraceAsString());
 			array_shift($error);
 			return $error;
 		}
@@ -49,48 +49,26 @@
 		 */
 		public static function display(\exception $e, $fatal=0){
 			self::writeLog($e->getCode(),get_class($e),$e->getMessage(),$e->getFile(),$e->getLine());
-			
-			$layout = GenericElement::layoutInflater("../../system/view/error_template.html");
-			
-			if(!Core::$debug){
-				$end_msg = "An error ocurred. Please, contact the administrator: ".Core::getConfig()->emailAdmin;
-				$layout->removeElementById("ERROR_MESSAGE");
-				$layout->removeElementById("stackTrace");
+			$layout = GenericElement::layoutInflater('error_template.html','system/view');
+			if(!DEBUG){
+				$end_msg = 'An error ocurred. Please, contact the administrator: '.Core::getConfig()->emailAdmin;
+				$layout->removeElementById('ERROR_MESSAGE');
+				$layout->removeElementById('stackTrace'); 
 			}
 			else{	
-				$end_msg = ($fatal)? "A fatal error ocurred.":
-					"An error ocurred in the system.";
-				$layout->getElementById("ERROR_MESSAGE")->add(GenericElement::stringInflater("<p>".get_class($e)." ".$e->getCode().": ".$e->getMessage()."</p>"));
-				$layout->getElementById("ERROR_MESSAGE")->add(GenericElement::stringInflater("<p>Error ocurred in <strong>line ".$e->getLine()."</strong> of the file <strong>".$e->getFile()."</strong></p>"));
+				$end_msg = ($fatal)? 'A fatal error ocurred.':
+					'An error ocurred in the system.';
+				$layout->getElementById('ERROR_MESSAGE')->add(GenericElement::stringInflater("<p>".get_class($e)." ".$e->getCode().": ".$e->getMessage()."</p>"));
+				$layout->getElementById('ERROR_MESSAGE')->add(GenericElement::stringInflater("<p>Error ocurred in <strong>line ".$e->getLine()."</strong> of the file <strong>".$e->getFile()."</strong></p>"));
 			
 				foreach(self::getStack($e) as $stackline)
-					$layout->getElementById("stackTrace")->add(
+					$layout->getElementById('stackTrace')->add(
 						GenericElement::stringInflater("<p>{$stackline}</p>")
 					);
 			}
-			$layout->getElementById("ERROR_TYPE")->getElement(0)->add(new TextElement($end_msg));
+			$layout->getElementById('ERROR_TYPE')->getElement(0)->add(new TextElement($end_msg));
 			unset($_SESSION[get_class()]);
-			file_put_contents("php://output", $layout);
-		}
-
-		/**
-		 * Displays a default 403 error page
-		 * @return void
-		 */
-		public static function error403($path="../../system/view/error403.html"){
-			$layout = GenericElement::layoutInflater($path);
-			file_put_contents("php://output", $layout);
-			exit;
-		}
-
-		/**
-		 * Displays a default 404 error page
-		 * @return void
-		 */
-		public static function error404($path="../../system/view/error404.html"){
-			$layout = GenericElement::layoutInflater($path);
-			file_put_contents("php://output", $layout);
-			exit;
+			file_put_contents('php://output', $layout);
 		}
 	
 		/**
@@ -110,7 +88,7 @@
 			}
 			catch(\ErrorException $e){}
 			finally{
-				file_put_contents($path,"[".date("c")."] {$errorType} ERROR {$errorNumber}: {$errorMsg} in {$file}({$line})\n",FILE_APPEND);
+				file_put_contents($path,"[".date('c')."] {$errorType} ERROR {$errorNumber}: {$errorMsg} in {$file}({$line})\n",FILE_APPEND);
 			}
 			
 		}
@@ -132,11 +110,10 @@
 	     * Catches fatal errors
 	     * @return void
 	     */
-	    public static function catchFatalError(){
-			$error = error_get_last();
+	    public static function catchFatalError($error){
 			if($error['type'] != 0){
 				$_SESSION['Error'] = base64_encode(serialize((object)$error));
-				header("location: index.php");
+				header('location: index.php');
 			}
 	    }
 	    
@@ -146,16 +123,21 @@
 	     * @throws ErrorException
 	     */
 	    public static function fatalErrorCall(){
-			$error = unserialize(base64_decode($_SESSION["Error"]));
-			unset($_SESSION["Error"]);
+			$error = unserialize(base64_decode($_SESSION['Error']));
+			unset($_SESSION['Error']);
 			throw new \ErrorException($error->message,$error->type,0,"{$error->file}", $error->line);
 	    }
+
+	    public static function listen(){
+			set_error_handler(
+				function($errno, $errstr, $errfile, $errline){
+					Error::errorHandler($errno, $errstr, $errfile, $errline);
+				}
+			);
+			register_shutdown_function(
+				function(){
+					Error::catchFatalError(error_get_last());
+				}
+			);
+	    }
 	}
-
-set_error_handler(function($errno, $errstr, $errfile, $errline){
-	Error::errorHandler($errno, $errstr, $errfile, $errline);
-});
-
-register_shutdown_function(function(){
-	Error::catchFatalError();
-});

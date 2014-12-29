@@ -20,20 +20,27 @@
 	 * 
 	 * @ignore
 	 */
-	
+
+	include('system/autoload.php');
+
 	use application\src\Application;
 	use system\control\error\Error;
 
-	include('system/autoload.php');
 	session_start();
+	Error::listen();
 	define('CONFIG','application/environment/config.json');
-	$errorFlag=0;
+	define('DEBUG',true);
+	define('TEST',TRUE);
 	try{
-		header("Content-Type: text/html; charset={Application::getConfig()->encoding}");
 		ob_start();
-		if(isset($_SESSION["Error"])){$errorFlag=1;Error::fatalErrorCall();}
+		$errorFlag=0;
+		header("Content-Type: text/html; charset={Application::getConfig()->encoding}");
+		if(isset($_SESSION["Error"])){
+			$errorFlag=1;
+			Error::fatalErrorCall();
+		}
 		Application::getInstance()->main();
-	}catch(\exception $e){
+	}catch(exception $e){
 		ob_end_clean();
 		ob_start();
 		Error::display($e,$errorFlag);

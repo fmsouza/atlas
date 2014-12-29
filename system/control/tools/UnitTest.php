@@ -87,6 +87,6 @@
          * @throws Exception
          */
         private function failed(){
-            throw new Exception("Test failed in ".get_class($this));
+            throw new \Exception("Test failed in ".get_class($this));
         }
     }

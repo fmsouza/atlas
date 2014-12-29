@@ -133,8 +133,9 @@
 	     * @param string $layout HTML file path stored in application/view
 	     * @return string
 	     */
-	    static public function layoutInflater($file){
-			return self::stringInflater(preg_replace('~\s*(<([^>]*)>[^<]*</\2>|<[^>]*>)\s*~','$1',file_get_contents(Core::getConfig()->viewPath.'/'.$file)));
+	    static public function layoutInflater($file, $path=''){
+	    	if(empty($path)) $path = Core::getConfig()->viewPath;
+			return self::stringInflater(preg_replace('~\s*(<([^>]*)>[^<]*</\2>|<[^>]*>)\s*~','$1',file_get_contents($path.'/'.$file)));
 	    }
 		
 		/**
@@ -147,6 +148,11 @@
 				'%' => '&#37;',
 				'&' => '&#38;',
 				'@' => '&#64;',
+				'£' => '&#163;',
+				'¥' => '&#165;',
+				'©' => '&#169;',
+				'®' => '&#174;',
+				'€' => '&#8364;'
 			);
 		}
 		

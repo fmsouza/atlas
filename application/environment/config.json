@@ -3,12 +3,9 @@
 	"encoding": "UTF-8",
 	"baseURL": "http://{$_SERVER['SERVER_NAME']}/marvie/",
 	"logPath": "./errors.log",
-	"tests": {
-		"path": "application\\tests",
-		"classes": [
-			"MainTest"
-		]
-	},
+	"tests": [
+		"application.tests.MainTest"
+	],
 	"database": {
 		"host": 		"",
 		"user": 		"",

@@ -24,4 +24,4 @@
      * @package system
      * @subpackage control_ERROR
      */
-    class SessionException extends ErrorException{}
+    class SessionException extends \ErrorException{}
