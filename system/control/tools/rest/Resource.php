@@ -55,9 +55,9 @@
         
         public function processRequest($request){
             if(!$this->request)
-                throw new InvalidArgumentException(Core::$strings->getKey("undefined_service"));
+                throw new InvalidArgumentException('Undefined service');
             elseif(!self::$method)
-                throw new InvalidArgumentException(Core::$strings->getKey("method_not_set"));
+                throw new InvalidArgumentException('Method not set');
             elseif($request==$this->request)
                 return $this->answerRequest(self::$method);
             elseif(!is_null($this->successor))
@@ -109,19 +109,19 @@
         }
         
         protected function success($msg=null){
-            if(is_null($msg)) $msg = Core::$strings->getKey("operation_success");
-            return $this->message(Core::$strings->getKey("success"),$msg);
+            if(is_null($msg)) $msg = 'Operation success';
+            return $this->message('success',$msg);
         }
         
         protected function error($msg=null){
-            if(is_null($msg)) $msg = Core::$strings->getKey("internal_error");
-            return $this->message(Core::$strings->getKey("error"),$msg);
+            if(is_null($msg)) $msg = 'Internal Error';
+            return $this->message('error',$msg);
         }
         
         protected function message($type,$msg){
             $json = new JsonObject();
-            $json->setKey(Core::$strings->getKey("type"),$type);
-            $json->setKey(Core::$strings->getKey("message"),$msg);
+            $json->setKey('type',$type);
+            $json->setKey('message',$msg);
             return $json;
         }
     }

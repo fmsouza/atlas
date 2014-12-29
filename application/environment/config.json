@@ -17,8 +17,8 @@
 	},
 	"resources": [
 		{
-			"route":"teste",
-			"handler":"resources/TesteResource"
+			"route":"hello",
+			"handler":"application.src.resources.TesteResource"
 		}
 	],
 	"viewPath": "application/view"

@@ -30,19 +30,21 @@
      * @subpackage src
      */
     class Application extends Core{
-        /**
-        * @ignore
-        */
-        public $view;
         
         /**
         * Main execution instructions
         * @return void
         */
         public function main(){
-            //self::getConfig()->emailAdmin="exemplo@email.com";
-            $this->view = GenericElement::layoutInflater("helloMarvie.html");
-            self::display($this->view);
-            unset($this->view);
+            self::display(GenericElement::layoutInflater("helloMarvie.html"));
+
+            // or maybe you would like to make an API
+            // 
+            // In this case, just add 'use system\control\tools\rest\RESTful;' in the import section
+            // and uncomment the following lines:
+            // 
+            // $rest = new RESTful();
+            // $rest->serve();
+            // self::display($rest->getResponse());
         }
     }

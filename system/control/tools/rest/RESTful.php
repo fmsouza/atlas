@@ -3,6 +3,7 @@
     namespace system\control\tools\rest;
 
     use system\control\tools\rest\Resource;
+    use system\control\Core;
 
 	class RESTful{
 
@@ -10,25 +11,23 @@
         private $response = "";
 
         public function __construct($resources=null){
-        	if(is_null($resources)) $resources = Path::$config->resources;
+        	if(is_null($resources)) $resources = Core::getConfig()->resources;
         	$this->resources = $this->prepareResources($resources);
         }
         
         private function prepareResources($resources){
             if(!count($resources)) return false;
-            $path = explode("/",$resources[0]->handler);
-            $handler = array_pop($path);
-            Import::package(implode("/",$path));
-            $resource = new $handler($resources[0]->route);
-            $current = $resource;
-            for($i=1; $i<count($resources); $i++){
-                $tmp = $resources[$i];
-                if(!($tmp instanceof Resource))
-                    throw new InvalidArgumentException(Main::$strings->invalid_resource);
-                $current->setSuccessor($tmp);
-                $current = $tmp;
+            $last = NULL;
+            $current = NULL;
+            foreach ($resources as $resource){
+                $handler = str_replace('.', '\\', $resource->handler);
+                $current = new $handler($resource->route);
+                if(!($current instanceof Resource))
+                    throw new \InvalidArgumentException('Invalid resource');
+                if(!is_null($last)) $current->setSuccessor($last);
+                $last = $current;
             }
-            return $resource;
+            return $current;
         }
 
 		public function serve(){
