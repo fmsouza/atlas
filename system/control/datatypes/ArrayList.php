@@ -16,6 +16,9 @@
 	 * See the License for the specific language governing permissions and
 	 * limitations under the License.
 	 */
+    
+    namespace system\control\datatypes;
+    use system\control\datatypes\JsonObject;
 	/**
 	 * Implements the ArrayList data type to do the manipulation with every
 	 * kind of data in a list.
@@ -23,7 +26,7 @@
 	 * @package system
 	 * @subpackage control/datatypes
 	 */
-    class ArrayList extends ArrayObject{
+    class ArrayList extends \ArrayObject{
         
 		/**
 		 * @var Uses as standard array
@@ -68,7 +71,7 @@
 		/**
 		 * @ignore
 		 */
-        public function __construct($value=array(), $pattern=ArrayObject::STD_PROP_LIST){
+        public function __construct($value=array(), $pattern=\ArrayObject::STD_PROP_LIST){
             parent::__construct($value, $pattern);
         }
 		

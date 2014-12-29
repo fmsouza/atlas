@@ -15,6 +15,8 @@
 	 * See the License for the specific language governing permissions and
 	 * limitations under the License.
 	 */
+    
+    namespace system\control\database;
 	/**
 	 * Represents the result of a query run by a DatabaseDriver.
 	 * @package system

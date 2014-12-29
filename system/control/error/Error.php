@@ -15,6 +15,12 @@
 	 * See the License for the specific language governing permissions and
 	 * limitations under the License.
 	 */
+	
+	namespace system\control\error;
+
+	use system\view\html\GenericElement;
+	use system\view\html\TextElement;
+	use system\control\Core;
 	/**
 	 * Error class handles the display of errors and exceptions.
 	 * 
@@ -22,12 +28,14 @@
 	 * @subpackage control_ERROR
 	 */
 	class Error{
+
+		private static $logPath = 'errors.log';
 		/**
 		 * Returns the stack trace as array
 		 * @param exception $e
 		 * @return array
 		 */		
-		public static function getStack(exception $e){
+		public static function getStack(\exception $e){
 			$error = explode("#", $e->getTraceAsString());
 			array_shift($error);
 			return $error;
@@ -39,13 +47,13 @@
 		 * @param int $fatal Greater than zero if it was a fatal error (default: 0)
 		 * @return string
 		 */
-		public static function display(exception $e, $fatal=0){
+		public static function display(\exception $e, $fatal=0){
 			self::writeLog($e->getCode(),get_class($e),$e->getMessage(),$e->getFile(),$e->getLine());
 			
 			$layout = GenericElement::layoutInflater("../../system/view/error_template.html");
 			
-			if(!App::$debug){
-				$end_msg = "An error ocurred. Please, contact the administrator: ".User::$emailAdmin;
+			if(!Core::$debug){
+				$end_msg = "An error ocurred. Please, contact the administrator: ".Core::getConfig()->emailAdmin;
 				$layout->removeElementById("ERROR_MESSAGE");
 				$layout->removeElementById("stackTrace");
 			}
@@ -96,6 +104,58 @@
 		 * @return void
 		 */
 		private static function writeLog($errorNumber,$errorType,$errorMsg,$file,$line){
-			file_put_contents(Path::$config->logPath,"[".date("c")."] {$errorType} ERROR {$errorNumber}: {$errorMsg} in {$file}({$line})\n",FILE_APPEND);
+			$path = self::$logPath;
+			try{
+				$path = Core::getConfig()->logPath;
+			}
+			catch(\ErrorException $e){}
+			finally{
+				file_put_contents($path,"[".date("c")."] {$errorType} ERROR {$errorNumber}: {$errorMsg} in {$file}({$line})\n",FILE_APPEND);
+			}
+			
 		}
+
+	    /**
+	     * Handles exceptions
+	     * 
+	     * @param int $errno Error number
+	     * @param string $errstr Error message
+	     * @param string $errfile Error file
+	     * @param $errline Error line
+	     * @throws ErrorException
+	     */
+	    public static function errorHandler($errno, $errstr, $errfile, $errline){
+			throw new \ErrorException($errstr, $errno, 0, $errfile, $errline);
+	    }
+	    
+	    /**
+	     * Catches fatal errors
+	     * @return void
+	     */
+	    public static function catchFatalError(){
+			$error = error_get_last();
+			if($error['type'] != 0){
+				$_SESSION['Error'] = base64_encode(serialize((object)$error));
+				header("location: index.php");
+			}
+	    }
+	    
+	    /**
+	     * Throws exceptions when fatal error occurs
+	     * @return void
+	     * @throws ErrorException
+	     */
+	    public static function fatalErrorCall(){
+			$error = unserialize(base64_decode($_SESSION["Error"]));
+			unset($_SESSION["Error"]);
+			throw new \ErrorException($error->message,$error->type,0,"{$error->file}", $error->line);
+	    }
 	}
+
+set_error_handler(function($errno, $errstr, $errfile, $errline){
+	Error::errorHandler($errno, $errstr, $errfile, $errline);
+});
+
+register_shutdown_function(function(){
+	Error::catchFatalError();
+});

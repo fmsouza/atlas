@@ -16,13 +16,17 @@
 	 * See the License for the specific language governing permissions and
 	 * limitations under the License.
 	 */
+	
+	namespace system\view\html;
+
+	use system\view\html\TextElement;
 	/**
 	 * The Element class is the smallest unit on the HTML objects abstraction tree.
 	 * 
 	 * @package system
 	 * @subpackage viewHtml
 	 */
-	abstract class Element {
+	abstract class Element{
 		/**
 		 * @var DOMDocument $DOC Stores the output
 		 */
@@ -37,7 +41,7 @@
 		 */
 		public function __construct(){
 			if(is_null(self::$DOC))
-				self::$DOC = new DOMDocument;
+				self::$DOC = new \DOMDocument;
 		}
 		
 		/**
@@ -51,7 +55,7 @@
 		/**
 		 * @ignore
 		 */
-		protected static function getAttributesDOMtoArray(DOMElement $node){
+		protected static function getAttributesDOMtoArray(\DOMElement $node){
 			$return = array();
 			foreach($node->attributes as $att) $return[$att->name]=$att->value;
 			return $return;
@@ -60,7 +64,7 @@
 		/**
 		 * @ignore
 		 */ 
-		static protected function constructTextByNode(DOMText $text){
+		static protected function constructTextByNode(\DOMText $text){
 			return new TextElement(NULL,$text);
 		}
 		

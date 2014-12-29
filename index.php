@@ -20,29 +20,21 @@
 	 * 
 	 * @ignore
 	 */
-	define("CONFIG","application/environment/config.json");
-	session_start(); // Starts PHP session
-	require_once("system/Path.php"); // Loads all the paths
-	Path::bootstrap();
-	header("Content-Type: text/html; charset=".Path::$config->encoding);
-	include("system/autoload.php"); // Loads the autoload configuration
-	include(Path::$global->error."/error_handler.php"); // Loads the exception error handler
-	/* -------------------------------------------------------------------------------------------- */
-	/*                                                                                              */
-	/* This is the Main class life cycle, which is written under Singleton Pattern. It grants that  */
-	/* the application will only be initialized once throughout the execution.                      */
-	/*                                                                                              */
-	/* -------------------------------------------------------------------------------------------- */
+	
+	use application\src\Application;
+	use system\control\error\Error;
+
+	include('system/autoload.php');
+	session_start();
+	define('CONFIG','application/environment/config.json');
+	$errorFlag=0;
 	try{
+		header("Content-Type: text/html; charset={Application::getConfig()->encoding}");
 		ob_start();
-		$errorType=0;
-		if(isset($_SESSION["Error"])){$errorType=1;FATAL_ERROR_CALL();}
-		$app=Main::getInstance();	// Instantiates Main
-		$app->onStart();		// Prepare Main's environment
-		$app->onExecute();		// Runs the application 
-		$app->onFinish();		// Prepares the application to stop
-	}catch(exception $e){
+		if(isset($_SESSION["Error"])){$errorFlag=1;Error::fatalErrorCall();}
+		Application::getInstance()->main();
+	}catch(\exception $e){
 		ob_end_clean();
 		ob_start();
-		Error::display($e,$errorType);		// Render the errors
+		Error::display($e,$errorFlag);
 	}

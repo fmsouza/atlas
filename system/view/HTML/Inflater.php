@@ -16,18 +16,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * Implements the Inflater pattern
- * 
- * @package system
- * @subpackage viewHtml
- */
-interface Inflater{
-		
-    /**
-     * Inflates an Element tree from a file
+	
+	namespace system\view\html;
+	/**
+	 * Implements the Inflater pattern
 	 * 
-     * @param string $layout HTML file path stored in application/view
-     */
-    static public function layoutInflater($layout);
-}
+	 * @package system
+	 * @subpackage viewHtml
+	 */
+	interface Inflater{
+			
+	    /**
+	     * Inflates an Element tree from a file
+		 * 
+	     * @param string $layout HTML file path stored in application/view
+	     */
+	    static public function layoutInflater($layout);
+	}

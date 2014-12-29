@@ -16,6 +16,8 @@
      * See the License for the specific language governing permissions and
      * limitations under the License.
      */
+    
+    namespace system\control\error;
     /**
      * SessionErrorException type. It is thrown in case of session errors
      * 

@@ -16,6 +16,11 @@
 	 * See the License for the specific language governing permissions and
 	 * limitations under the License.
 	 */
+	
+	namespace system\view\html;
+
+	use system\view\html\Element;
+	use system\view\html\GenericElementsComposition;
 	/**
 	 * Contains the HTML template controller
 	 * 

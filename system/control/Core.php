@@ -16,6 +16,11 @@
 	 * See the License for the specific language governing permissions and
 	 * limitations under the License.
 	 */
+	
+	namespace system\control;
+
+	use system\control\Singleton;
+	use system\control\tools\Util;
 	/**
 	 * The App class implements the lifecycle. 
 	 * 
@@ -23,7 +28,7 @@
 	 * @subpackage control
 	 * @abstract
 	 */
-	abstract class App implements Singleton{
+	abstract class Core implements Singleton{
 		/**
 		 * @var bool Session status
 		 */
@@ -36,6 +41,11 @@
 		 * @var Main Stores Main class Instance
 		 */
 		static private $instance;
+
+		/**
+		 * @var json Application configuration data
+		 */
+		static protected $config = NULL;
 		
 		/**
 		 * @ignore
@@ -59,28 +69,18 @@
 		}
 		
 		/**
-		 * @ignore
-		 */
-		public function onStart(){}
-		
-		/**
 		 * Runs the application main instructions
 		 * @abstract
 		 * @return void
 		 */
-		abstract public function onExecute();
-		
-		/**
-		 * @ignore
-		 */
-		public function onFinish(){}
+		abstract public function main();
 		
 		/**
 		 * Returns Main instance
 		 * @return Main
 		 */
 		static public function getInstance(){
-			$className = (function_exists('get_called_class'))?get_called_class():"Main";
+			$className = (function_exists('get_called_class'))?get_called_class():"Application";
 			if(is_null(self::$instance))
 				self::$instance = new $className();
 			return self::$instance;
@@ -173,7 +173,17 @@
 				$this->fillSessionData();
 			}else
 				$this->sessionStatus = 0;
-				$this->addToSessionData("globals", Util::loadJsonFromFile(Path::$global->system."/global_strings.json"));
+		}
+
+		public static function getConfig(){
+			if(is_null(self::$config)){
+				self::$config = json_decode(file_get_contents(CONFIG));
+				if(is_null(self::$config)){
+					$db = debug_backtrace();
+		    		throw new \ErrorException("JSON error", 0, 0, $db[0]['file'], $db[0]['line']);
+				}
+			}
+			return self::$config;
 		}
 
 		public function getGlobal($key){
@@ -221,7 +231,9 @@
 		 * @return void
 		 */
 		public function runUnitTests(){
-			foreach(Path::$config->tests as $test){
+			$testPath = self::getConfig()->tests->path;
+			foreach(self::getConfig()->tests->classes as $test){
+				$test = "{$testPath}\\{$test}";
 				$unit = new $test();
 				foreach(get_class_methods($test) as $method){
 					$unit->$method();

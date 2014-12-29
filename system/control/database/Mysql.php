@@ -15,6 +15,12 @@
 	 * See the License for the specific language governing permissions and
 	 * limitations under the License.
 	 */
+    
+    namespace system\control\database;
+    
+    use system\control\database\DatabaseDriver;
+    use system\control\database\DatabaseResult;
+    use system\control\error\DatabaseException;
 	/**
 	 * MySQL connection driver
 	 * @package system

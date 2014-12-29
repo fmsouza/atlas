@@ -24,28 +24,11 @@
 	 * @return bool
 	 */
 	function autoload($classname){
-	    // Search the global paths
-	    foreach (get_object_vars(Path::$global) as $value){
-            if(file_exists("{$value}/{$classname}.php")){
-                require_once("{$value}/{$classname}.php");
-                return true;
-            }
-	    }
-	    // Search the application paths
-	    foreach (get_object_vars(Path::$user) as $value){
-            if(file_exists("{$value}/{$classname}.php")){
-                require_once("{$value}/{$classname}.php");
-                return true;
-            }
-	    }
-	    
-	    // Search the user defined packages
-	    foreach (Import::packages() as $value){
-            if(file_exists("{$value}/{$classname}.php")){
-                require_once("{$value}/{$classname}.php");
-                return true;
-            }
-	    }
+		$classname = str_replace('\\', '/', $classname);
+		if(file_exists("{$classname}.php")){
+            require_once("{$classname}.php");
+            return true;
+        }
 	    return false;
 	}
 	spl_autoload_register('autoload'); // register __autoload

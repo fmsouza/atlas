@@ -16,6 +16,11 @@
 	 * See the License for the specific language governing permissions and
 	 * limitations under the License.
 	 */
+	
+	namespace system\view\html;
+
+	use system\view\html\ElementsComposition;
+	use system\control\Core;
 	/**
 	 * Represents a generic element, which can be any HTML element
 	 * @package system
@@ -27,7 +32,7 @@
 	     * @param string $elementName Element name
 	     * @param array $elementAttributes Element attributes
 	     */
-	    public function __construct($elementName,$elementAttributes=array(),DOMElement $e=NULL){
+	    public function __construct($elementName,$elementAttributes=array(),\DOMElement $e=NULL){
 			parent::__construct();
 			$this->elements = array();
 			if($e==NULL){
@@ -90,12 +95,12 @@
 	    /**
 	     * @ignore
 	     */
-	    static private function constructByNode(DOMElement $node){
+	    static private function constructByNode(\DOMElement $node){
 			$GE = new GenericElement(NULL,NULL,$node);
 			foreach($node->childNodes as $child){
-			    if($child instanceof DOMElement)
+			    if($child instanceof \DOMElement)
 			    	$GE->fill(self::constructByNode($child));
-			    elseif($child instanceof DOMText)
+			    elseif($child instanceof \DOMText)
 					$GE->fill(self::constructTextByNode($child));
 			}
 			return $GE;
@@ -107,19 +112,19 @@
 	     * @return DOMDocument
 	     */
 	    static public function stringInflater($layout){
-			$tmp = new DOMDocument;
-			$encoding = Path::$config->encoding;
+			$tmp = new \DOMDocument;
+			$encoding = Core::getConfig()->encoding;
 			if(is_null(self::$DOC))
-			    self::$DOC = new DOMDocument("1.0",$encoding);
+			    self::$DOC = new \DOMDocument("1.0",$encoding);
 			try{
 				// TODO find out the right solution to the problem wih special characters
 				$layout = self::replaceCharacters($layout);
 			    $tmp->loadXML(mb_convert_encoding($layout, 'HTML-ENTITIES', $encoding));
 			    $root = self::$DOC->importNode($tmp->firstChild,TRUE);
 			    return self::constructByNode($root);
-			}catch(ErrorException $e){
+			}catch(\ErrorException $e){
 			    $db = debug_backtrace();
-			    throw new ErrorException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
+			    throw new \ErrorException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
 			}
 	    }
 		
@@ -128,8 +133,8 @@
 	     * @param string $layout HTML file path stored in application/view
 	     * @return string
 	     */
-	    static public function layoutInflater($layout){
-			return self::stringInflater(preg_replace('~\s*(<([^>]*)>[^<]*</\2>|<[^>]*>)\s*~','$1',file_get_contents(Path::$user->view."/".$layout)));
+	    static public function layoutInflater($file){
+			return self::stringInflater(preg_replace('~\s*(<([^>]*)>[^<]*</\2>|<[^>]*>)\s*~','$1',file_get_contents(Core::getConfig()->viewPath.'/'.$file)));
 	    }
 		
 		/**

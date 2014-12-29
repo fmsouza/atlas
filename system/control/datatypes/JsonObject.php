@@ -15,6 +15,11 @@
 	 * See the License for the specific language governing permissions and
 	 * limitations under the License.
 	 */
+    
+    namespace system\control\datatypes;
+
+    use system\control\datatypes\ArrayList;
+    use system\control\tools\Util;
 	/**
 	 * Constructs dynamically a JSON Object
 	 * @package system
@@ -27,7 +32,7 @@
          */
         private $data = array();
 
-        public function __construct(stdClass $json=null){
+        public function __construct(\stdClass $json=null){
             if(!is_null($json)){
                 foreach (get_object_vars($json) as $key => $value) {
                     if(is_string($value)){

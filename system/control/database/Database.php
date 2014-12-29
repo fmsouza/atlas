@@ -15,6 +15,11 @@
 	 * See the License for the specific language governing permissions and
 	 * limitations under the License.
 	 */
+    
+    namespace system\control\database;
+    
+    use system\control\database\DatabaseDriver;
+    use system\control\error\DatabaseException;
 	/**
 	 * Configures the database interaction implementing Singleton Design Pattern
 	 * @package system

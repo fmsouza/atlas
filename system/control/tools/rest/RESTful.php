@@ -1,5 +1,9 @@
 <?php
 
+    namespace system\control\tools\rest;
+
+    use system\control\tools\rest\Resource;
+
 	class RESTful{
 
 		private $resources;
