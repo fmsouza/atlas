@@ -19,13 +19,14 @@
 	namespace system\view\html;
 
 	use system\view\html\Element;
+
 	/**
 	 * Represents a text string inside of an element as an element
-	 * @package system
-	 * @subpackage viewHtml
+	 * @package system\view\html
 	 */
 	
 	class TextElement extends Element{
+		
 	    /**
 	     * Generates a new element
 	     * @param string $text Text value

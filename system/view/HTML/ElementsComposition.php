@@ -22,14 +22,14 @@
 	use system\view\html\Element;
 	use system\view\html\GenericElement;
 	use system\view\html\Inflater;
+
 	/**
 	 * This is a representation of the HTML trees and compositions. This is the type of those
 	 * elements which holds other elements.
-	 * 
-	 * @package system
-	 * @subpackage viewHtml
+	 * @package system\view\html
 	 */
 	abstract class ElementsComposition extends Element implements Inflater{
+		
 		/**
 		 * @var array $elements Contains the child elements
 		 */	

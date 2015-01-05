@@ -18,17 +18,15 @@
  */
 	
 	namespace system\view\html;
+
 	/**
 	 * Implements the Inflater pattern
-	 * 
-	 * @package system
-	 * @subpackage viewHtml
+	 * @package system\view\html
 	 */
 	interface Inflater{
 			
 	    /**
 	     * Inflates an Element tree from a file
-		 * 
 	     * @param string $layout HTML file path stored in application/view
 	     */
 	    static public function layoutInflater($layout);

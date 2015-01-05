@@ -19,11 +19,13 @@
 	namespace application\tests;
 
 	use system\control\tools\UnitTest;
+	
 	/**
-	 * Contains a sample test routine.
+	 * Contains a sample test routine
+	 *
+	 * The tests are executed ONLY if global TEST == true if defined in the index.php file.
 	 * 
-	 * @package application
-	 * @subpackage tests
+	 * @package application\tests
 	 */
 	class MainTest extends UnitTest{
 	    
