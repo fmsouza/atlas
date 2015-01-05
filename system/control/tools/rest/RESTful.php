@@ -1,7 +1,6 @@
 <?php
 /**
  * Contains RESTful class
- * @author Frederico Souza (fredericoamsouza@gmail.com)
  * 
  * @copyright Copyright 2014 Marvie
  * Licensed under the Apache License, Version 2.0 (the “License”);

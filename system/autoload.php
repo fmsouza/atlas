@@ -2,11 +2,7 @@
 /**
  * Autoload routine to find classes automagically.
  * 
- * @author Frederico Souza (fredericoamsouza@gmail.com)
- * @author Julio Cesar (thisjulio@gmail.com)
- * @package system
- * 
- * @copyright Copyright 2013 Frederico Souza
+ * @copyright Copyright 2013 Marvie
  * Licensed under the Apache License, Version 2.0 (the “License”);
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,6 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * @package system
  */
 
 	/**

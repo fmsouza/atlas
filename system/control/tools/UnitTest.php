@@ -1,7 +1,6 @@
 <?php
 /**
  * Contains the UnitTest class.
- * 
  *
  * @copyright Copyright 2014 Marvie
  * Licensed under the Apache License, Version 2.0 (the ÒLicenseÓ);
