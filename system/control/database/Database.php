@@ -18,6 +18,7 @@
     
     use system\control\database\DatabaseDriver;
     use system\control\error\DatabaseException;
+	use system\control\Singleton;
     
 	/**
 	 * Configures the database interaction implementing Singleton Design Pattern
