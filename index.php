@@ -21,25 +21,25 @@
 	 * @ignore
 	 */
 
+	ob_start('ob_gzhandler');
 	include('system/autoload.php');
 
-	use application\src\Application;
+	use application\src\App;
 	use system\control\error\Error;
 
 	session_start();
-	Error::listen();
+	Error::showAs(Error::HTML_ERROR);
 	define('CONFIG','application/environment/config.json');
 	define('DEBUG',true);
 	define('TEST',TRUE);
 	try{
-		ob_start();
 		$errorFlag=0;
-		header("Content-Type: text/html; charset={Application::getConfig()->encoding}");
+		header("Content-Type: text/html; charset={Core::getConfig()->encoding}");
 		if(isset($_SESSION["Error"])){
 			$errorFlag=1;
 			Error::fatalErrorCall();
 		}
-		Application::getInstance()->main();
+		App::main();
 	}catch(exception $e){
 		ob_end_clean();
 		ob_start();

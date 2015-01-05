@@ -28,7 +28,7 @@
 	 * @subpackage control
 	 * @abstract
 	 */
-	abstract class Core implements Singleton{
+	class Core implements Singleton{
 		/**
 		 * @var bool Session status
 		 */
@@ -65,20 +65,13 @@
 		}
 		
 		/**
-		 * Runs the application main instructions
-		 * @abstract
-		 * @return void
-		 */
-		abstract public function main();
-		
-		/**
 		 * Returns Main instance
 		 * @return Main
 		 */
 		static public function getInstance(){
-			$className = (function_exists('get_called_class'))?get_called_class():"Application";
+			//$className = (function_exists('get_called_class'))?get_called_class():"Application";
 			if(is_null(self::$instance))
-				self::$instance = new $className();
+				self::$instance = new Core();
 			return self::$instance;
 		}
 		

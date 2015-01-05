@@ -21,6 +21,8 @@
 	use system\view\html\GenericElement;
 	use system\view\html\TextElement;
 	use system\control\Core;
+	use system\control\datatypes\JsonObject;
+	use system\control\datatypes\ArrayList;
 	/**
 	 * Error class handles the display of errors and exceptions.
 	 * 
@@ -30,6 +32,11 @@
 	class Error{
 
 		private static $logPath = 'errors.log';
+
+		const HTML_ERROR = 1;
+		const JSON_ERROR = 0;
+		private static $errorMode;
+
 		/**
 		 * Returns the stack trace as array
 		 * @param exception $e
@@ -49,6 +56,19 @@
 		 */
 		public static function display(\exception $e, $fatal=0){
 			self::writeLog($e->getCode(),get_class($e),$e->getMessage(),$e->getFile(),$e->getLine());
+			$content = "";
+			switch (self::$errorMode) {
+				case Error::HTML_ERROR:
+					$content = self::displayAsHtml($e, $fatal);
+					break;
+				case Error::JSON_ERROR:
+					$content = self::displayAsJson($e, $fatal);
+					break;
+			}
+			Core::display($content);
+		}
+
+		private static function displayAsHtml(\exception $e, $fatal){
 			$layout = GenericElement::layoutInflater('error_template.html','system/view');
 			if(!DEBUG){
 				$end_msg = 'An error ocurred. Please, contact the administrator: '.Core::getConfig()->emailAdmin;
@@ -68,7 +88,28 @@
 			}
 			$layout->getElementById('ERROR_TYPE')->getElement(0)->add(new TextElement($end_msg));
 			unset($_SESSION[get_class()]);
-			file_put_contents('php://output', $layout);
+			return $layout;
+		}
+
+		private static function displayAsJson(\exception $e, $fatal){
+			$json = new JsonObject();
+			if(!DEBUG){
+				$json->setKey("message", 'An error ocurred. Please, contact the administrator: '.Core::getConfig()->emailAdmin);
+			}
+			else{
+				$json->setKey('message', $e->getMessage());
+				$json->setKey('type', get_class($e));
+				$json->setKey('code', $e->getCode());
+				$json->setKey('line', $e->getLine());
+				$json->setKey('file', $e->getFile());
+				$trace = new ArrayList();
+				$json->setKey('trace', $trace);
+
+				foreach(self::getStack($e) as $stackline){
+					$trace->push($stackline);
+				}
+			}
+			return $json;
 		}
 	
 		/**
@@ -128,7 +169,9 @@
 			throw new \ErrorException($error->message,$error->type,0,"{$error->file}", $error->line);
 	    }
 
-	    public static function listen(){
+	    public static function showAs($errorMode){
+	    	self::$errorMode = $errorMode;
+
 			set_error_handler(
 				function($errno, $errstr, $errfile, $errline){
 					Error::errorHandler($errno, $errstr, $errfile, $errline);

@@ -1,7 +1,7 @@
 {
 	"emailAdmin": "admin@localhost",
 	"encoding": "UTF-8",
-	"baseURL": "http://{$_SERVER['SERVER_NAME']}/marvie/",
+	"baseURL": "http://localhost/marvie/",
 	"logPath": "./errors.log",
 	"tests": [
 		"application.tests.MainTest"

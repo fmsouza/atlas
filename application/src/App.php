@@ -29,14 +29,14 @@
      * @package application
      * @subpackage src
      */
-    class Application extends Core{
+    class App{
         
         /**
         * Main execution instructions
         * @return void
         */
-        public function main(){
-            self::display(GenericElement::layoutInflater("helloMarvie.html"));
+        public static function main(){
+            Core::display(GenericElement::layoutInflater("helloMarvie.html"));
 
             // or maybe you would like to make an API
             // 
@@ -46,5 +46,7 @@
             // $rest = new RESTful();
             // $rest->serve();
             // self::display($rest->getResponse());
+            // 
+            // and configure the routes controllers in the 'environment/config.json' file.
         }
     }
