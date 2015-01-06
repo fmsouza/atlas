@@ -34,7 +34,7 @@
         * @return void
         */
         protected function get($data){
-            $this->success('Hello World!');
+            return $this->success('Hello World!');
         }
         
         /**

@@ -16,10 +16,7 @@
 		"driver": 		""
 	},
 	"resources": [
-		{
-			"route":"hello",
-			"handler":"application.src.resources.TesteResource"
-		}
+		"application.src.resources.TesteResource"
 	],
 	"viewPath": "application/view"
 }

@@ -51,4 +51,13 @@
 				return self::parseJsonList($json);
 			}
 		}
+        
+        /**
+         * Converts an array to stdObject
+         * @param array $list Data list
+         * @return stdObject
+         */
+		public static function listToObject($list){
+			return json_decode(json_encode($list), FALSE);
+		}
 	}

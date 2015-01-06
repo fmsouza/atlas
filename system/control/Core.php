@@ -57,7 +57,6 @@
 		 * @ignore
 		 */
 		private function __construct(){
-			if(TEST) $this->runUnitTests();
 			$this->recoverSession();
 		}
 		
@@ -212,7 +211,7 @@
 		 * Executes the UnitTest defined routines
 		 * @return void
 		 */
-		public function runUnitTests(){
+		public static function runUnitTests(){
 			foreach(self::getConfig()->tests as $test){
 				$test = str_replace('.', '\\', $test);
 				$unit = new $test();
