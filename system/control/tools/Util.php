@@ -60,4 +60,10 @@
 		public static function listToObject($list){
 			return json_decode(json_encode($list), FALSE);
 		}
+
+		public static function getInbetweenStrings($start, $end, $str){
+			$matches = array();
+			preg_match_all("/$start([a-zA-Z0-9_]*)$end/", $str, $matches);
+			return $matches;
+		}
 	}

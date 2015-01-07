@@ -22,7 +22,7 @@
      * TesteResource class
      * 
      * It's a sample class which handles RESTful requests as
-     * described in the config.json file to '/hello' route.
+     * described in the config.json file.
      *
      * @package application\src\resources
      */
@@ -30,37 +30,41 @@
         
         /**
         * Handles the GET request
+        * @route(path: 'teste/get', method: 'GET');
         * @param json $data Data provided
         * @return void
         */
-        protected function get($data){
+        public function getMethod($data){
             return $this->success('Hello World!');
         }
         
         /**
         * Handles the POST request
+        * @route(path: 'teste/post', method: 'POST');
         * @param json $data Data provided
         * @return void
         */
-        protected function post($data){
+        public function postMethod($data){
             return $this->error('Operation not supported');
         }
         
         /**
         * Handles the PUT request
+        * @route(path: 'teste/put', method: 'PUT');
         * @param json $data Data provided
         * @return void
         */
-        protected function put($data){
+        public function putMethod($data){
             return $this->error('Operation not supported');
         }
         
         /**
         * Handles the DELETE request
+        * @route(path: 'teste/delete', method: 'DELETE');
         * @param json $data Data provided
         * @return void
         */
-        protected function delete($data){
+        public function deleteMethod($data){
             return $this->error('Operation not supported');
         }
     }

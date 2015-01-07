@@ -18,6 +18,7 @@
 
     use system\control\Core;
     use system\view\html\GenericElement;
+    use system\control\tools\rest\RESTful;
 
     /**
      * Application's main class
@@ -29,20 +30,42 @@
     class App{
         
         /**
+        * Docblock test
+        * @bar='foo';
+        * @route(path: 'hello/world', method: 'GET');
+        * @test='bla bla';
+        */
+        public function testMethod(){
+            exit("World");
+        }
+        
+        /**
+        * Docblock test
+        * @foo='bar';
+        * @route(path: 'hello/jack', method: 'GET');
+        */
+        public function anotherMethod(){
+            exit("Hello pal!");
+        }
+        
+        /**
         * Write here your application's logic
+        * @testing(any: 'some value');
         * @return void
         */
         public static function main(){
-            Core::display(GenericElement::layoutInflater("helloMarvie.html"));
+            //$ann = new RESTfulAnnotation(new App);
+            //$ann->proccess();
+            //Core::display(GenericElement::layoutInflater("helloMarvie.html"));
 
             // or maybe you would like to make an API
             // 
             // In this case, just add 'use system\control\tools\rest\RESTful;' in the import section
             // and uncomment the following lines:
             // 
-            // $rest = new RESTful();
-            // $rest->serve();
-            // self::display($rest->getResponse());
+            $rest = new RESTful();
+            $rest->serve();
+            Core::display($rest->getResponse());
             // 
             // and configure the routes controllers in the 'environment/config.json' file.
         }

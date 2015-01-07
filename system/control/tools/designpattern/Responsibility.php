@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-	namespace system\control\tools\rest;
+	namespace system\control\tools\designpattern;
 
 	/**
 	 * Contains Responsibility interface
-	 * @package system\control\tools\rest
+	 * @package system\control\tools\designpattern
 	 */
     interface Responsibility{
 	    

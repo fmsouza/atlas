@@ -142,7 +142,7 @@
 		static private function specialCharacters(){
 			return array(
 				//'#' => '&#35;',
-				'$' => '&#36;',
+				//'$' => '&#36;',
 				'%' => '&#37;',
 				'&' => '&#38;',
 				'@' => '&#64;',

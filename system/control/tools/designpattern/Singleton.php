@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 	
-	namespace system\control;
+	namespace system\control\tools\designpattern;
 
 	/**
 	 * Implements Singleton Design Pattern
-	 * @package system\control
+	 * @package system\control\tools\designpattern
 	 */
 	interface Singleton{
 		

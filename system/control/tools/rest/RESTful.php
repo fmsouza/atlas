@@ -16,8 +16,9 @@
 
     namespace system\control\tools\rest;
 
-    use system\control\tools\rest\Resource;
     use system\control\Core;
+    use system\control\tools\rest\Resource;
+    use system\control\tools\rest\RESTfulAnnotation;
 
     /**
      * Contains RESTful class
@@ -28,7 +29,7 @@
         /**
          * @ignore
          */
-		private $resources;
+        private $annotations = [];
 
         /**
          * @ignore
@@ -39,8 +40,9 @@
          * @ignore
          */
         public function __construct($resources=null){
-        	if(is_null($resources)) $resources = Core::getConfig()->resources;
-        	$this->resources = $this->prepareResources($resources);
+        	if(is_null($resources))
+                $resources = Core::getConfig()->resources;
+        	$this->prepareResources($resources);
         }
 
         /**
@@ -51,14 +53,12 @@
             $last = NULL;
             $current = NULL;
             foreach ($resources as $resource){
-                $handler = str_replace('.', '\\', $resource->handler);
-                $current = new $handler($resource->route);
-                if(!($current instanceof Resource))
+                $handler = str_replace('.', '\\', $resource);
+                $annotation = new RESTfulAnnotation(new $handler(''));
+                if(!($annotation->getSourceObject() instanceof Resource))
                     throw new \InvalidArgumentException('Invalid resource');
-                if(!is_null($last)) $current->setSuccessor($last);
-                $last = $current;
+                $this->annotations[] = $annotation;
             }
-            return $current;
         }
 
         /**
@@ -66,9 +66,16 @@
          * @return void
          */
 		public function serve(){
-			Resource::setMethod($_SERVER['REQUEST_METHOD']);
-            $request = (isset($_SERVER['PATH_INFO']))? explode("/", substr($_SERVER['PATH_INFO'], 1)) : false;
-            $this->response = $this->resources->processRequest($request[0]);
+            RESTfulAnnotation::$urlPath = $_SERVER['PATH_INFO'];
+            RESTfulAnnotation::$request = $_SERVER['REQUEST_METHOD'];
+            $this->response = $this->annotations[0]->getSourceObject()->error();
+            foreach ($this->annotations as $ann) {
+                $response = $ann->proccess();
+                if($response){
+                    $this->response = $response;
+                    break;
+                }
+            }
 		}
 
         /**

@@ -18,28 +18,12 @@
 
     use system\control\Core;
     use system\control\datatypes\JsonObject;
-    use system\control\tools\rest\Responsibility;
 
     /**
      * Contains Resource class
      * @package system\control\tools\rest
      */
-    abstract class Resource implements Responsibility{
-
-        /**
-         * @ignore
-         */
-        protected $successor     = null;
-
-        /**
-         * @ignore
-         */
-        protected static $method = false;
-
-        /**
-         * @ignore
-         */
-        protected $request       = false;
+    abstract class Resource{
 
         /**
          * @var constant GET method selector
@@ -72,13 +56,6 @@
         const OPTIONS   = 'OPTIONS';
 
         /**
-         * @ignore
-         */
-        public function __construct($request){
-            $this->request = $request;
-        }
-
-        /**
          * Deals with the request to the specified method
          * @param constant $method The method to be handled
          * @return string
@@ -86,20 +63,20 @@
         public function answerRequest($method){
             switch($method){
                 case self::GET:
-                    return $this->get(json_decode(json_encode($_GET), FALSE));
+                    return json_decode(json_encode($_GET), FALSE);
                     break;
                 case self::POST:
-                    return $this->post(json_decode(json_encode($_POST), FALSE));
+                    return json_decode(json_encode($_POST), FALSE);
                     break;
                 case self::PUT:
                     $data = "";
                     parse_str(file_get_contents('php://input'), $data);
-                    return $this->put($data);
+                    return $data;
                     break;
                 case self::DELETE:
                     $data = "";
                     parse_str(file_get_contents('php://input'), $data);
-                    return $this->delete($data);
+                    return $data;
                     break;
                 case self::HEAD:
                     return $this->head();
@@ -112,68 +89,6 @@
                     break;
             }
         }
-
-        /**
-         * Tries to process the request
-         * @param string $request The requested route
-         * @return string
-         */
-        public function processRequest($request){
-            if(!$this->request)
-                throw new InvalidArgumentException('Undefined service');
-            elseif(!self::$method)
-                throw new InvalidArgumentException('Method not set');
-            elseif($request==$this->request)
-                return $this->answerRequest(self::$method);
-            elseif(!is_null($this->successor))
-                return $this->successor->processRequest($request);
-            else
-                return $this->error();
-        }
-
-        /**
-         * Set the request method
-         * @param string $method The method to be handled
-         * @return void
-         */
-        public static function setMethod($method){
-            self::$method = $method;
-        }
-
-        /**
-         * Returns the request method set
-         * @return void
-         */
-        public static function getMethod(){
-            return self::$method;
-        }
-
-        /**
-         * @ignore
-         */
-        public function setSuccessor(Responsibility $request){
-            $this->successor = $request;
-        }
-
-        /**
-         * @ignore
-         */
-        abstract protected function get($data);
-
-        /**
-         * @ignore
-         */
-        abstract protected function post($data);
-
-        /**
-         * @ignore
-         */
-        abstract protected function put($data);
-
-        /**
-         * @ignore
-         */
-        abstract protected function delete($data);
 
         /**
          * @ignore
@@ -211,7 +126,7 @@
          * @param string $msg Message to be shown
          * @return JsonObject
          */
-        protected function success($msg=null){
+        public function success($msg=null){
             if(is_null($msg)) $msg = 'Operation success';
             return $this->message('success',$msg);
         }
@@ -221,7 +136,7 @@
          * @param string $msg Message to be shown
          * @return JsonObject
          */
-        protected function error($msg=null){
+        public function error($msg=null){
             if(is_null($msg)) $msg = 'Internal Error';
             return $this->message('error',$msg);
         }

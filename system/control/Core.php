@@ -16,7 +16,7 @@
 	
 	namespace system\control;
 
-	use system\control\Singleton;
+	use system\control\tools\designpattern\Singleton;
 	use system\control\tools\Util;
 
 	/**
