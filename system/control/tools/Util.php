@@ -62,8 +62,8 @@
 		}
 
 		public static function getInbetweenStrings($start, $end, $str){
-			$matches = array();
-			preg_match_all("/$start([a-zA-Z0-9_]*)$end/", $str, $matches);
-			return $matches;
+			$matches = null;
+			preg_match_all("/{$start}(.*){$end}/", $str, $matches);
+			return preg_replace(array("/{$start}/", "/{$end}/"), '', $matches[0]);
 		}
 	}

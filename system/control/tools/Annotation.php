@@ -14,6 +14,9 @@
 		private $methodDelimiter;
 		private $methodArgSeparator;
 		private $annProcessed = [];
+		const CLASSL = 'class';
+		const PARAML = 'params';
+		const METHODL = 'methods';
 
 		public function __construct($obj, $identifier='@', $lineDelimiter=';', $varDelimiter='=', $methodDelimiter=':', $methodArgSeparator=','){
 			$this->reflection = new \ReflectionClass(get_class($obj));
@@ -42,25 +45,12 @@
 		}
 
 		protected function parse(){
-			/* 
-				TODO: 
-				Use Util::getInBetweenStrings($start, $end, $string) to clean this code
-			*/
             $reflection = $this->reflection;
-            $result = array();
-
             foreach ($reflection->getMethods() as $method) {
-            	$doc = $method->getDocComment();
-	            if(!strstr($doc, $this->identifier)) continue;
-	            $doc = preg_replace(array('/\/\*/', '/\*\//', '/\*/'), '', $doc); // removing the docblock delimiters
-	            $doc = explode($this->lineDelimiter, $doc); // splitting the annotations
+	            $doc = Util::getInbetweenStrings($this->identifier, $this->lineDelimiter, $method->getDocComment());
+	            if(!$doc) continue;
                 for($i=0; $i<count($doc); $i++){
-                	if(empty(trim($doc[$i])) || is_null($doc[$i])){
-                		continue;
-                	}
-                	$data = strstr($doc[$i], $this->identifier);
-                	$data = preg_replace("/^{$this->identifier}*/", '', $data); // removing the identifier from the query
-
+                	$data = $doc[$i];
                 	if(strstr($data, $this->varDelimiter)){
                 		$this->parseVar($data, $method->name);
                 	} elseif (strstr($data, '(')) {
@@ -72,20 +62,18 @@
 
 		private function parseVar($arg, $method){
     		list($key, $value) = explode($this->varDelimiter, $arg);
-    		$this->annProcessed[$method]['vars'][$key] = str_replace('\'', '', $value);
+    		$this->annProcessed[$method][self::PARAML][$key] = str_replace('\'', '', $value);
 		}
 
 		private function parseMethod($arg, $method){
-			list($key, $value) = explode('(', $arg);
-			$data = str_replace(')', '', $value);
-			$data = explode($this->methodArgSeparator, $data);
-
+			$key = Util::getInbetweenStrings('^','\(',$arg)[0];
+			$value = Util::getInbetweenStrings('\(','\)',$arg)[0];
+			$data = explode($this->methodArgSeparator, $value);
 			$tmp = array();
 			foreach ($data as $d) {
-				if(!strstr($d, $this->methodDelimiter)) continue;
 				list($k, $v) = explode($this->methodDelimiter, $d);
 				$tmp[trim($k)] = trim(str_replace('\'', '', $v));
 			}
-			$this->annProcessed[$method]['methods'][$key] = $tmp;
+			$this->annProcessed[$method][self::METHODL][$key] = $tmp;
 		}
 	}
