@@ -24,13 +24,17 @@
      * It's a sample class which handles RESTful requests as
      * described in the config.json file.
      *
+     * You don't need to follow a naming pattern to the methods.
+     * The only rule still is that you can't name equally more than
+     * one method.
+     *
      * @package application\src\resources
      */
     class TesteResource extends Resource{
         
         /**
         * Handles the GET request
-        * @route(path: 'teste/get', method: 'GET');
+        * @route(path: 'teste/hello', method: 'GET');
         * @param json $data Data provided
         * @return void
         */
