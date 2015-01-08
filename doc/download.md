@@ -21,6 +21,6 @@ so you will update your copy to the latest development version.
 Download latest unstable source
 -------------------------------
 
-You can download directly your copy of the code int the following link:
+You can download directly your copy of the code in the following link:
 
 [Development version (Latest code)](https://github.com/fmsouza/marvie/archive/master.zip)
