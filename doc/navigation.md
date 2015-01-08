@@ -2,8 +2,6 @@
 
 [About](index.md)
 
-[Changelog](changelog.md)
-
 [API Documentation](../api)
 
 [Download](download.md)

@@ -1,4 +1,0 @@
-Changelog
-=========
-
-Under construction.
