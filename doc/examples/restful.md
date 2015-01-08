@@ -47,7 +47,7 @@ Great. We have a REST service up and running! But how to say how will I deal wit
 
 Note: you must ever write the keys and the values in the JSON file between quotes ("...") off if the value is numeric, in this case the value must be written directly.
 
-Now the system knows that it'll serve a REST service and the class that will manage it's requests can be found in the file ```application/src/resources/TesteResource.php``. Now you only have to write the class.
+Now the system knows that it'll serve a REST service and the class that will manage it's requests can be found in the file ```application/src/resources/TesteResource.php```. Now you only have to write the class.
 
 The class must extend the ```Resource``` class, which gives it some resources to help the service to do it's job, otherwise an ```Exception``` will be launched.
 
@@ -76,7 +76,7 @@ class TestResource extends Resource{
 ```
 Note: the annotation line must begin with a '@' and end with a ';'.
 
-This code tells that, when the url ```http://www.yourwebhost.com/index.php/path/to/service``` is accessed through a ```GET``` request, ```TestResource::getMethod``` is called and executes all it's routine. In that case, the routine only return a ```JSON``` success string with the message "Hello World!".
+This code tells that, when the url ```http://www.web-host.com/index.php/path/to/service``` is accessed through a ```GET``` request, ```TestResource::getMethod``` is called and executes all it's routine. In that case, the routine only return a ```JSON``` success string with the message "Hello World!".
 
 ```json
 {"type": "success", "message": "Hello World!"}
