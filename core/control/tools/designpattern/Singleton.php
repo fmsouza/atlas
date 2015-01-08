@@ -11,4 +11,9 @@ interface Singleton{
 	 * @ignore
 	 */
     static public function getInstance();
+	
+	/**
+	 * @ignore
+	 */
+    public function __clone();
 }

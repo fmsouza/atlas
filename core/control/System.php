@@ -12,20 +12,24 @@ use core\control\tools\Util;
 class System implements Singleton{
 	
 	/**
-	 * @var bool Session status
+	 * Session status
+	 * @var bool
 	 */
 	protected $sessionStatus;
 	/**
-	 * @var array Session data
+	 * Session data
+	 * @var array
 	 */
 	protected $sessionData;
 	/**
-	 * @var Main Stores Main class Instance
+	 * Stores Main class Instance
+	 * @var Main
 	 */
 	static private $instance;
 
 	/**
-	 * @var json Application configuration data
+	 * Application configuration data
+	 * @var json
 	 */
 	static protected $config = NULL;
 	
@@ -34,7 +38,8 @@ class System implements Singleton{
 	 */
 	static private $dump = array();
 	/**
-	 * @var Toggles unit test execution before application starts on/off
+	 * Toggles unit test execution before application starts on/off
+	 * @var boolean
 	 */
 	static public $test = true;
 	
@@ -46,8 +51,8 @@ class System implements Singleton{
 	}
 	
 	/**
-	 * Returns Main instance
-	 * @return Main
+	 * Gets a System instance
+	 * @return System
 	 */
 	static public function getInstance(){
 		if(is_null(self::$instance))
@@ -143,14 +148,22 @@ class System implements Singleton{
 		}else
 			$this->sessionStatus = 0;
 	}
-
+	
+	/**
+	 * Get the configuration data
+	 * @return stdObject
+	 */
 	public static function getConfig(){
 		if(is_null(self::$config)){
 			self::$config = json_decode(file_get_contents(CONFIG));
 		}
 		return self::$config;
 	}
-
+	
+	/**
+	 * Get global data in the session
+	 * @return mixed
+	 */
 	public function getGlobal($key){
 		return $this->getSessionData("globals")->getKey($key);
 	}
