@@ -18,8 +18,8 @@ If you are any commit behind the latest commit, you may run
 
 so you will update your copy to the latest development version.
 
-Download last unstable source
------------------------------
+Download latest unstable source
+-------------------------------
 
 You can download directly your copy of the code int the following link:
 
