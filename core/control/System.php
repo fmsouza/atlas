@@ -1,37 +1,33 @@
 <?php
 namespace core\control;
 
+use application\src\App;
+use core\control\error\Error;
 use core\control\tools\designpattern\Singleton;
-use core\control\tools\Util;
 
 /**
- * The App class implements the lifecycle.
+ * System class deals with core control operations.
  * @package core\control
  * @abstract
  */
 class System implements Singleton{
-	
 	/**
-	 * Session status
-	 * @var bool
-	 */
-	protected $sessionStatus;
-	/**
-	 * Session data
-	 * @var array
-	 */
-	protected $sessionData;
-	/**
-	 * Stores Main class Instance
-	 * @var Main
+	 * Self Instance
+	 * @var System
 	 */
 	static private $instance;
 
 	/**
 	 * Application configuration data
-	 * @var json
+	 * @var string
 	 */
 	static protected $config = NULL;
+
+	/**
+	 * Application configuration source file path
+	 * @var string
+	 */
+	static protected $configPath = 'application/environment/config.json';
 	
 	/**
 	 * @ignore
@@ -44,109 +40,13 @@ class System implements Singleton{
 	static public $test = true;
 	
 	/**
-	 * @ignore
-	 */
-	private function __construct(){
-		$this->recoverSession();
-	}
-	
-	/**
-	 * Gets a System instance
+	 * Gets a self instance
 	 * @return System
 	 */
 	static public function getInstance(){
 		if(is_null(self::$instance))
-			self::$instance = new Core();
+			self::$instance = new System();
 		return self::$instance;
-	}
-	
-	/**
-	 * Verifies if the session is opened or not
-	 * @return boolean
-	 */
-	public function getSessionStatus(){
-		return (bool)$this->sessionStatus;
-	}
-	
-	/**
-	 * Open the session
-	 * @return void
-	 */
-	public function openSession(){
-		if(!$this->getSessionStatus()){
-			$this->sessionStatus = 1;
-			$_SESSION[get_class()]['sessionStatus'] = 1;
-			$_SESSION[get_class()]['data'] = array();
-		}
-	}
-	
-	/**
-	 * Closes the session
-	 * @return void
-	 */
-	public function closeSession(){
-		if($this->getSessionStatus()){
-			session_destroy();
-			$this->sessionStatus = 0;
-			unset($this->sessionData);
-		}
-	}
-	
-	/**
-	 * Returns some data stored in session
-	 * @param string $key
-	 * @return string
-	 */
-	public function getSessionData($key){
-		if($this->getSessionStatus()){
-			try{
-				return base64_decode($this->sessionData[$key]);
- 			}catch(\ErrorException $e){
- 				$db = debug_backtrace();
-	    		throw new SessionException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line']);
-			}
-		}
-	}
-
-	/**
-	 * Returns all the application data stored in session
-	 * @return array
-	 */
-	public function getSession(){
-		return $this->sessionData;
-	}
-	
-	/**
-	 * @ignore
-	 */
-	private function fillSessionData(){
-		if($this->getSessionStatus() && isset($_SESSION[get_class()]['data'])){
-			$this->sessionData = $_SESSION[get_class()]['data'];
-		}
-	}
-	
-	/**
-	 * Add/update the data set in session
-	 * @param string $key nome do campo
-	 * @param mixed $value dado a ser armazenado
-	 * @return void
-	 */
-	public function addToSessionData($key,$value){
-		if($this->getSessionStatus()){
-			$this->sessionData[$key] = base64_encode($value);
-		}
-	}
-	
-	/**
-	 * Recover last execution's session if set
-	 * @return void
-	 */
-	private function recoverSession(){
-		if(isset($_SESSION[get_class()])){
-			$this->sessionStatus = 1;
-			$this->fillSessionData();
-		}else
-			$this->sessionStatus = 0;
 	}
 	
 	/**
@@ -155,27 +55,14 @@ class System implements Singleton{
 	 */
 	public static function getConfig(){
 		if(is_null(self::$config)){
-			self::$config = json_decode(file_get_contents(CONFIG));
+			self::$config = json_decode(file_get_contents(self::$configPath));
 		}
 		return self::$config;
 	}
-	
-	/**
-	 * Get global data in the session
-	 * @return mixed
-	 */
-	public function getGlobal($key){
-		return $this->getSessionData("globals")->getKey($key);
-	}
-	
-	/**
-	 * Updates PHP session with the application session data
-	 * @return void
-	 */
-	private function writeSessionData(){
-		if($this->getSessionStatus()){
-			$_SESSION[get_class()]['data'] = $this->sessionData;
-		}
+
+	public static function changeConfigPath($path){
+		self::$configPath = $path;
+		self::$config = NULL;
 	}
 	
 	/**
@@ -217,17 +104,33 @@ class System implements Singleton{
 			}	
 		}
 	}
+
+	/**
+	 * Init the application
+	 * @return void
+	 */
+	public static function start(){
+		try{
+			session_start();
+			Error::showAs(Error::HTML_ERROR);
+			$errorFlag=0;
+			$config = self::getConfig();
+			header("Content-Type: text/html; charset={$config->encoding}");
+			if(isset($_SESSION['Error'])){
+				$errorFlag=1;
+				Error::fatalErrorCall();
+			}
+			if($config->runTest) self::runUnitTests();
+			App::main();
+		}catch(exception $e){
+			ob_end_clean();
+			ob_start();
+			Error::display($e,$errorFlag);
+		}
+	}
 	
 	/**
 	 * @ignore
 	 */
 	public function __clone(){}
-	
-	/**
-	 * @ignore
-	 */
-	public function __destruct(){
-		$this->writeSessionData();
-		self::$instance = NULL;
-	}
 }

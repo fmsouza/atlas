@@ -13,33 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 ob_start('ob_gzhandler');
 include('core/autoload.php');
-
-use application\src\App;
 use core\control\System;
-use core\control\error\Error;
-
-session_start();
-Error::showAs(Error::HTML_ERROR);
-define('CONFIG','application/environment/config.json');
-define('DEBUG',TRUE);
-define('TEST',TRUE);
-
-
-try{
-	$errorFlag=0;
-	$config = System::getConfig();
-	header("Content-Type: text/html; charset={$config->encoding}");
-	if(isset($_SESSION['Error'])){
-		$errorFlag=1;
-		Error::fatalErrorCall();
-	}
-	if($config->runTest) System::runUnitTests();
-	App::main();
-}catch(exception $e){
-	ob_end_clean();
-	ob_start();
-	Error::display($e,$errorFlag);
-}
+System::start();
