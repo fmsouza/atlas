@@ -3,6 +3,8 @@
 	"encoding": "UTF-8",
 	"baseURL": "http://localhost/marvie/",
 	"logPath": "./errors.log",
+  	"debugMode": true,
+  	"runTest": true,
 	"tests": [
 		"application.tests.MainTest"
 	],
@@ -15,8 +17,6 @@
 		"charset": 		"",
 		"driver": 		""
 	},
-	"resources": [
-		"application.src.resources.TesteResource"
-	],
+	"resources": [],
 	"viewPath": "application/view"
 }

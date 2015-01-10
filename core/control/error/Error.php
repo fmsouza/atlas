@@ -76,8 +76,9 @@ class Error{
 	 */
 	private static function displayAsHtml(\exception $e, $fatal){
 		$layout = GenericElement::layoutInflater('error_template.html','core/view');
-		if(!DEBUG){
-			$end_msg = 'An error ocurred. Please, contact the administrator: '.System::getConfig()->emailAdmin;
+		$config = System::getConfig();
+		if(!$config->debugMode){
+			$end_msg = 'An error ocurred. Please, contact the administrator: '.$config->emailAdmin;
 			$layout->removeElementById('ERROR_MESSAGE');
 			$layout->removeElementById('stackTrace'); 
 		}
@@ -105,8 +106,9 @@ class Error{
 	 */
 	private static function displayAsJson(\exception $e, $fatal){
 		$json = new JsonObject();
-		if(!DEBUG){
-			$json->setKey("message", 'An error ocurred. Please, contact the administrator: '.System::getConfig()->emailAdmin);
+		$config = System::getConfig();
+		if(!$config->debugMode){
+			$json->setKey("message", 'An error ocurred. Please, contact the administrator: '.$config->emailAdmin);
 		}
 		else{
 			$json->setKey('message', $e->getMessage());

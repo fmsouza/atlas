@@ -26,14 +26,17 @@ Error::showAs(Error::HTML_ERROR);
 define('CONFIG','application/environment/config.json');
 define('DEBUG',TRUE);
 define('TEST',TRUE);
+
+
 try{
 	$errorFlag=0;
-	header("Content-Type: text/html; charset={System::getConfig()->encoding}");
+	$config = System::getConfig();
+	header("Content-Type: text/html; charset={$config->encoding}");
 	if(isset($_SESSION['Error'])){
 		$errorFlag=1;
 		Error::fatalErrorCall();
 	}
-	if(TEST) System::runUnitTests();
+	if($config->runTest) System::runUnitTests();
 	App::main();
 }catch(exception $e){
 	ob_end_clean();
