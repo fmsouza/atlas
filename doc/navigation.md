@@ -4,9 +4,6 @@
 
 [API Documentation](../api)
 
+[Tutorials](tutorials.md)
+
 [Download](download.md)
-
-[Examples]()
-
-  * [RESTful API](examples/restful.md)
-  * [Database connection](examples/database.md)
