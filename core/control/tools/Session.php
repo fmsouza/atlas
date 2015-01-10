@@ -1,6 +1,6 @@
 <?php
 
-namespace core\control;
+namespace core\control\tools;
 
 use core\control\error\SessionException;
 use core\control\tools\designpattern\Singleton;

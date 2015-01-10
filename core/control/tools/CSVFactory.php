@@ -6,7 +6,7 @@ namespace core\control\tools;
  * 
  * @package core\control\tools
  */
-class CSV{
+class CSVFactory{
     /**
      * Exported file name
      * @var string
