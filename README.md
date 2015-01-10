@@ -2,8 +2,8 @@ Marvie
 ======
 
 Marvie is an open sou PHP Framework with a simple concept: you are free to write your code your own way.
-It provides an Object-oriented infrastructure to develop your apps.
+It provides an Object-oriented PHP infrastructure to develop your back-end software.
 
-Check our [documentation](http://fmsouza.github.io/marvie/api) for more information.
+Check the [documentation](http://fmsouza.github.io/marvie) for more information.
 
-* Unfortunately we still lack a tutorial of how to use the tool, it's under construction.
+Marvie is an Open-source software and is licensed under [Apache License v2.0](https://github.com/fmsouza/marvie/blob/master/LICENSE.txt).
