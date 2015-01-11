@@ -1,8 +1,7 @@
 <?php
-	namespace core\control\tools\rest;
+	namespace core\tools\rest;
 
-	use core\control\tools\Annotation;
-	use core\control\tools\rest\Resource;
+	use core\tools\Annotation;
 
 	class RESTfulAnnotation extends Annotation{
 

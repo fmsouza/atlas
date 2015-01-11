@@ -1,5 +1,5 @@
 <?php
-namespace core\control\tools\designpattern;
+namespace core\tools\designpattern;
 
 /**
  * Implements Singleton Design Pattern

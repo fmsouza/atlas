@@ -1,9 +1,8 @@
 <?php
 
-namespace core\control\tools;
+namespace core\tools\session;
 
-use core\control\error\SessionException;
-use core\control\tools\designpattern\Singleton;
+use core\tools\designpattern\Singleton;
 
 /**
  * Session class deals with session specific functions.

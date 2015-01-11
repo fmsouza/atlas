@@ -46,6 +46,14 @@ class Util{
 		return json_decode(json_encode($list), FALSE);
 	}
 
+	/**
+	 * Gets all the ocurrences between two patterns in a string.
+	 * Each pattern may be regex or string
+	 * @param string $start Start pattern
+	 * @param string $end End pattern
+	 * @param string $str The string to be searched
+	 * @return stdObject
+	 */
 	public static function getInbetweenStrings($start, $end, $str){
 		$matches = null;
 		preg_match_all("/{$start}(.*){$end}/", $str, $matches);

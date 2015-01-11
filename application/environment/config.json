@@ -1,8 +1,8 @@
 {
 	"emailAdmin": "admin@localhost",
 	"encoding": "UTF-8",
-	"baseURL": "http://localhost/marvie/",
-	"logPath": "./errors.log",
+	"baseURL": "http://dev/marvie/",
+	"logPath": "errors.log",
   	"debugMode": true,
   	"runTest": true,
 	"tests": [

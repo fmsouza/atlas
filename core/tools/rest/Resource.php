@@ -1,8 +1,8 @@
 <?php
-namespace core\control\tools\rest;
+namespace core\tools\rest;
 
-use core\control\System;
-use core\control\datatypes\JsonObject;
+use core\System;
+use core\datatypes\JsonObject;
 
 /**
  * Contains Resource class

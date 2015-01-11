@@ -1,5 +1,5 @@
 <?php
-namespace core\control\error;
+namespace core\control\database;
 
 /**
  * DatabaseErrorException exception

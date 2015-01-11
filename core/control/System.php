@@ -2,8 +2,10 @@
 namespace core\control;
 
 use application\src\App;
-use core\control\error\Error;
-use core\control\tools\designpattern\Singleton;
+use core\control\error\ExceptionHandler;
+use core\control\error\RuntimeErrorScheduler;
+use core\tools\designpattern\Singleton;
+use core\tools\test\TestNotFoundException;
 
 /**
  * System class deals with core control operations.
@@ -94,14 +96,20 @@ class System implements Singleton{
 	/**
 	 * Executes the UnitTest defined routines
 	 * @return void
+	 * @throws TestNotFoundException
 	 */
 	public static function runUnitTests(){
 		foreach(self::getConfig()->tests as $test){
 			$test = str_replace('.', '\\', $test);
-			$unit = new $test();
-			foreach(get_class_methods($test) as $method){
-				$unit->$method();
-			}	
+			try{
+				$unit = new $test();
+				foreach(get_class_methods($test) as $method){
+					$unit->$method();
+				}
+			} catch(\ErrorException $e){
+				$db = debug_backtrace();
+				throw new TestNotFoundException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
+			}
 		}
 	}
 
@@ -110,22 +118,21 @@ class System implements Singleton{
 	 * @return void
 	 */
 	public static function start(){
+		$handler = new ExceptionHandler();
+		$handler->setErrorTemplate('error_template.html', 'core/view');
+		$scheduler = RuntimeErrorScheduler::getInstance();
+		$scheduler->setExceptionHandler($handler);
+		$scheduler->beginSchedule();
 		try{
 			session_start();
-			Error::showAs(Error::HTML_ERROR);
-			$errorFlag=0;
 			$config = self::getConfig();
 			header("Content-Type: text/html; charset={$config->encoding}");
-			if(isset($_SESSION['Error'])){
-				$errorFlag=1;
-				Error::fatalErrorCall();
-			}
 			if($config->runTest) self::runUnitTests();
 			App::main();
-		}catch(exception $e){
-			ob_end_clean();
-			ob_start();
-			Error::display($e,$errorFlag);
+		}catch(\ErrorException $e){
+			ob_end_clean(); // cleans the output buffer
+			ob_start();		// inits again the output buffer
+			$scheduler->scheduleException($e);
 		}
 	}
 	

@@ -1,5 +1,5 @@
 <?php
-namespace core\control\tools;
+namespace core\tools\datatypes;
 
 /**
  * Converts array to CSV and works with a CSV file object.

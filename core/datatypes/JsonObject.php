@@ -1,8 +1,7 @@
 <?php
-namespace core\control\datatypes;
+namespace core\datatypes;
 
-use core\control\datatypes\ArrayList;
-use core\control\tools\Util;
+use core\tools\Util;
 
 /**
  * Constructs dynamically a JSON Object
@@ -101,6 +100,6 @@ class JsonObject{
             }
             $return = substr($return, 0, -2);
         }
-        return "{{$return}}";
+        return '{'.$return.'}';
     }
 }

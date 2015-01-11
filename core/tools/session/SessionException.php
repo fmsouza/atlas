@@ -1,5 +1,5 @@
 <?php
-    namespace core\control\error;
+    namespace core\tools\session;
     
     /**
      * SessionErrorException type. It is thrown in case of session errors

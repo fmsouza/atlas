@@ -1,7 +1,5 @@
 <?php
-namespace core\control\datatypes;
-
-use core\control\datatypes\JsonObject;
+namespace core\datatypes;
 
 /**
  * Implements the ArrayList data type to do the manipulation with every

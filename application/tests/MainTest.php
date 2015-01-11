@@ -1,7 +1,7 @@
 <?php
 namespace application\tests;
 
-use core\control\tools\UnitTest;
+use core\tools\test\UnitTest;
 
 /**
  * Contains a sample test routine

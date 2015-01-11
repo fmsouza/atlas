@@ -1,9 +1,7 @@
 <?php
 namespace core\view\html;
 
-use core\view\html\Element;
-use core\view\html\GenericElement;
-use core\control\tools\designpattern\Inflater;
+use core\tools\designpattern\Inflater;
 
 /**
  * This is a representation of the HTML trees and compositions. This is the type of those

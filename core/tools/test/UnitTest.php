@@ -1,5 +1,5 @@
 <?php
-namespace core\control\tools;
+namespace core\tools\test;
 
 /**
  * Contains the test action methods.
