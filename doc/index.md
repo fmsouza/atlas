@@ -5,7 +5,7 @@ __Marvie__ is the PHP Framework focused in help you to write code doing what Obj
 
 It was born from the necessity of transfer code between PHP frameworks, which can't be accomplished in most Frameworks out there. Firstly it was just a simple MVC Framework where you could simple create your classes and freely define your lifecycle as you wish. But it grew up and became a platform to write Object-Oriented code with the help of every PHP resource.
 
-the source code is hosted in [Github](https://github.com/fmsouza/marvie)
+The source code can be found in [Github](https://github.com/fmsouza/marvie).
 
 Features
 --------
