@@ -9,7 +9,7 @@ If you are writing a REST service, for example, probably you'd call your service
 
 However, it doesn't points the necessary PHP file that loads your application's code. How to solve it? Using .htaccess rewriting rules.
 
-The .htaccess is a file you place in every directory you want to rewrite the access rules. Taking the REST example, we can easily solve the URL issue by writing a .htaccess file with some rules dependent on the Apache's ```mod_rewrite``` and tell it how to understand the path.
+The .htaccess is a file you place in every directory you want to rewrite the access rules. Taking the REST example, we can easily solve the URL issue by writing a .htaccess file with some rules dependent on the Apache's ```mod_rewrite``` and tell it how to understand the path. This file must be placed in the same folder of ```index.php```.
 
 ```
 <IfModule mod_rewrite.c>
