@@ -18,5 +18,5 @@
 		"driver": 		""
 	},
 	"resources": [],
-	"viewPath": "application/view"
+	"viewPath": "static"
 }

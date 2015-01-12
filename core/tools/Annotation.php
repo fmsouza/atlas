@@ -1,7 +1,5 @@
 <?php
-namespace core\control\tools;
-
-use core\control\tools\Util;
+namespace core\tools;
 
 /**
  * Implements Annotation support for the application through the DocBlocks.

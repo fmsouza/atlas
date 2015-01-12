@@ -1,8 +1,8 @@
 <?php
-namespace core\control\tools;
+namespace core\tools;
 
-use core\control\datatypes\JsonObject;
-use core\control\datatypes\ArrayList;
+use core\datatypes\JsonObject;
+use core\datatypes\ArrayList;
 
 /**
  * Contains functions to help dealing with data.

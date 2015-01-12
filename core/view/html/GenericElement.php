@@ -100,9 +100,7 @@ class GenericElement extends ElementsComposition{
 		if(is_null(self::$DOC))
 		    self::$DOC = new \DOMDocument("1.0",$encoding);
 		try{
-			// TODO find out the right solution to the problem wih special characters
-			$layout = self::replaceCharacters($layout);
-		    $tmp->loadXML(mb_convert_encoding($layout, 'HTML-ENTITIES', $encoding));
+			$tmp->loadXML($layout);
 		    $root = self::$DOC->importNode($tmp->firstChild,TRUE);
 		    return self::constructByNode($root);
 		}catch(\ErrorException $e){
@@ -120,31 +118,4 @@ class GenericElement extends ElementsComposition{
     	if(empty($path)) $path = System::getConfig()->viewPath;
 		return self::stringInflater(preg_replace('~\s*(<([^>]*)>[^<]*</\2>|<[^>]*>)\s*~','$1',file_get_contents($path.'/'.$file)));
     }
-	
-	/**
-	 * @ignore
-	 */
-	static private function specialCharacters(){
-		return array(
-			//'#' => '&#35;',
-			//'$' => '&#36;',
-			'%' => '&#37;',
-			'&' => '&#38;',
-			'@' => '&#64;',
-			'£' => '&#163;',
-			'¥' => '&#165;',
-			'©' => '&#169;',
-			'®' => '&#174;',
-			'€' => '&#8364;'
-		);
-	}
-	
-	/**
-	 * @ignore
-	 */
-	static private function replaceCharacters($string){
-		foreach(self::specialCharacters() as $key => $value)
-			$string = str_replace($key, $value, $string);
-		return $string;
-	}
 }
