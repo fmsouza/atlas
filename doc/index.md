@@ -1,7 +1,7 @@
 About
 =====
 
-__Marvie__ is the PHP Framework focused in help you to write code doing what Object-Orientation has to offer you.
+__Atlas__ is the PHP Framework focused in help you to write code doing what Object-Orientation has to offer you.
 
 It was born from the necessity of transfer code between PHP frameworks, which can't be accomplished in most Frameworks out there. Firstly it was just a simple MVC Framework where you could simple create your classes and freely define your lifecycle as you wish. But it grew up and became a platform to write Object-Oriented code with the help of every PHP resource.
 
@@ -43,7 +43,7 @@ and it should load.
 Credits
 -------
 
-Marvie is an Open-source project created by [Fred Souza][fs] and made possible by
+Atlas is an Open-source project created by [Fred Souza][fs] and made possible by
 
   * [PHP](http://php.net/)
   * [Github](http://github.com/)
@@ -55,6 +55,6 @@ Marvie is an Open-source project created by [Fred Souza][fs] and made possible b
 License
 -------
 
-Marvie is licensed under [Apache License v2.0][license].
+Atlas is licensed under [Apache License v2.0][license].
 
-  [license]: https://github.com/fmsouza/marvie/blob/master/LICENSE.txt
+  [license]: https://github.com/fmsouza/atlas/blob/master/LICENSE.txt

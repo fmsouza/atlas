@@ -1,7 +1,7 @@
 How-to's
 ========
 
-You can see below a list of topics explaining how to apply PHP's most modern and useful updates over Marvie's infrastructure.
+You can see below a list of topics explaining how to apply PHP's most modern and useful updates over Atlas' infrastructure.
 
 1. [Classes](examples/classes.md)
 2. [Functions](examples/functions.md)

@@ -1,14 +1,14 @@
 Download
 ========
 
-Actually Marvie is under heavy development with huge changes. You can checkout it's code from github to stay up-to-date with the updates or just download the source directly.
+Actually Atlas is under heavy development with huge changes. You can checkout it's code from github to stay up-to-date with the updates or just download the source directly.
 
 Repository
 ----------
 
 You can checkout the source from the repository by running the command
 
-	git clone https://github.com/fmsouza/marvie.git
+	git clone https://github.com/fmsouza/atlas.git
 
 This way you can make pull requests to help improving the source, so it can fit better everyone's needs.
 
@@ -23,4 +23,4 @@ Download latest unstable source
 
 You can download directly your copy of the code in the following link:
 
-[Development version (Latest code)](https://github.com/fmsouza/marvie/archive/master.zip)
+[Development version (Latest code)](https://github.com/fmsouza/atlas/archive/master.zip)

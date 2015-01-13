@@ -1,7 +1,7 @@
 Creating a RESTful service
 ==========================
 
-Marvie turns creating a webservice so simple that you almost won't have to write code.
+Atlas turns creating a webservice so simple that you almost won't have to write any code.
 
 Firstly, you have to load the ```RESTful``` class in your application by loading it's ```namespace``` in the file's import section and instantiate the class to call the service.
 
