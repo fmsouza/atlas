@@ -17,7 +17,7 @@ class RESTful{
     /**
      * @ignore
      */
-    private $response = "";
+    private $response;
 
     /**
      * Creates a RESTful service
@@ -37,30 +37,32 @@ class RESTful{
      */
     private function prepareResources($resources){
         if(!count($resources)) return false;
-        $last = NULL;
-        $current = NULL;
         foreach ($resources as $resource){
             $handler = str_replace('.', '\\', $resource);
-            $annotation = new RESTfulAnnotation(new $handler(''));
-            if(!($annotation->getSourceObject() instanceof Resource))
+            $resource = new $handler();
+            if(!$resource instanceof Resource)
                 throw new \InvalidArgumentException('Invalid resource');
-            $this->annotations[] = $annotation;
+
+            $this->annotations[] = new RESTfulAnnotation($resource);
         }
     }
 
     /**
      * Starts to deal to the requests and serves the response
      * @return void
+     * @throws \ErrorException
      */
 	public function serve(){
+        if(!isset($_SERVER['PATH_INFO'])) throw new \ErrorException('Undefined service');
         RESTfulAnnotation::$urlPath = $_SERVER['PATH_INFO'];
         RESTfulAnnotation::$request = $_SERVER['REQUEST_METHOD'];
-        $this->response = $this->annotations[0]->getSourceObject()->error();
         foreach ($this->annotations as $ann) {
-            $response = $ann->proccess();
+            $response = $ann->process();
             if($response){
                 $this->response = $response;
                 break;
+            }elseif(is_null($this->response)){
+                $this->response = $ann->getSourceObject()->error();
             }
         }
 	}

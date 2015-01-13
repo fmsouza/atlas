@@ -119,7 +119,7 @@ class System implements Singleton{
 	 */
 	public static function start(){
 		$handler = new ExceptionHandler();
-		$handler->setErrorTemplate('error_template.html', 'core/view');
+		$handler->setErrorTemplate('error_template.html', 'core/static');
 		$scheduler = RuntimeErrorScheduler::getInstance();
 		$scheduler->setExceptionHandler($handler);
 		$scheduler->beginSchedule();

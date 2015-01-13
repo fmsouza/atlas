@@ -1,7 +1,7 @@
 <?php
 namespace core\tools\rest;
 
-use core\System;
+use core\control\System;
 use core\datatypes\JsonObject;
 
 /**
@@ -92,11 +92,11 @@ abstract class Resource{
             'redirect'          => 10, // stop after 10 redirects
             'referer'           => "http://www.google.com"
         );
-        $request = new \HttpRequest(System::$config->baseURL);
+        $request = new \HttpRequest(System::getConfig()->baseURL);
         $request->setOptions($options);
         try{
             $request->send();
-            return $r->getResponseBody();
+            return $request->getResponseBody();
         } catch(\HttpException $e){
             $this->error($e->getMessage());
         }

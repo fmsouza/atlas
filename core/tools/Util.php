@@ -54,9 +54,9 @@ class Util{
 	 * @param string $str The string to be searched
 	 * @return stdObject
 	 */
-	public static function getInbetweenStrings($start, $end, $str){
+	public static function getInBetweenStrings($start, $end, $str){
 		$matches = null;
-		preg_match_all("/{$start}(.*){$end}/", $str, $matches);
+		preg_match_all("~{$start}(.*){$end}~", $str, $matches);
 		return preg_replace(array("/{$start}/", "/{$end}/"), '', $matches[0]);
 	}
 }
