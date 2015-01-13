@@ -133,6 +133,7 @@ class System implements Singleton{
 			ob_end_clean(); // cleans the output buffer
 			ob_start();		// inits again the output buffer
 			$scheduler->scheduleException($e);
+			ExceptionHandler::writeLog(get_class($e), $e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
 		}
 	}
 	

@@ -110,4 +110,18 @@ class ExceptionHandler {
         return $layout;
     }
 
+    /**
+     * Writes the exception information to the log file
+     *
+     * @param int $errorNumber Error number
+     * @param string $errorType Error type
+     * @param string $errorMsg Error message
+     * @param string $file Error file
+     * @param int $line Error line
+     * @return void
+     */
+    public static function writeLog($errorType,$errorNumber,$errorMsg,$file,$line){
+        file_put_contents(System::getConfig()->logPath,"[".date("c")."] {$errorType} ERROR {$errorNumber}: {$errorMsg} in {$file}({$line})\n",FILE_APPEND);
+    }
+
 }

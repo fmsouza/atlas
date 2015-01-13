@@ -3,8 +3,6 @@ namespace application\src;
 
 use core\control\System;
 use core\tools\rest\Resource;
-use core\tools\rest\RESTful;
-use core\tools\rest\RESTfulAnnotation;
 use core\view\html\GenericElement;
 
 /**
