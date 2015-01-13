@@ -10,4 +10,4 @@ You can see below a list of topics explaining how to apply PHP's most modern and
 5. [Creating annotations](examples/annotations.md)
 6. [Unit tests](examples/tests.md)
 7. [Configuring environment](examples/configuration.md)
-8. [Using .htaccess](examples/htaccess.md)
+8. [Using .htaccess in Apache server](examples/htaccess.md)
