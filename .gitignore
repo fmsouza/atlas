@@ -2,3 +2,4 @@
 *.komodoproject
 *.log
 gh-pages/
+.idea
