@@ -3,7 +3,7 @@ namespace core\control\database;
 
 use core\control\database\DatabaseDriver;
 use core\control\error\DatabaseException;
-use core\control\tools\designpattern\Singleton;
+use core\tools\designpattern\Singleton;
 
 /**
  * Configures the database interaction implementing Singleton Design Pattern
