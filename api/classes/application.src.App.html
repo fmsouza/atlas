@@ -43,8 +43,8 @@
                             </a>
                             <ul class="dropdown-menu">
                                                                     <li><a>Namespaces</a></li>
-                                                                        <li><a href="../namespaces/application.html">application</a></li>
                                                                         <li><a href="../namespaces/core.html">core</a></li>
+                                                                        <li><a href="../namespaces/application.html">application</a></li>
                                                                                                                                 </ul>
                         </li>
                         <li class="dropdown" id="charts-menu">
@@ -120,9 +120,27 @@
         <li class="nav-header">
             <i class="icon-custom icon-method"></i> Methods
             <ul>
-                                                                                                    <li class="method public">
+                                                                                                    <li class="method public inherited">
+        <a href="#method_answerRequest" title="answerRequest :: Deals with the request to the specified method">
+            <span class="description">Deals with the request to the specified method</span><pre>answerRequest</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_error" title="error :: Returns a error message">
+            <span class="description">Returns a error message</span><pre>error</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
         <a href="#method_main" title="main :: Write here your application&#039;s logic">
             <span class="description">Write here your application&#039;s logic</span><pre>main</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_success" title="success :: Returns a success message">
+            <span class="description">Returns a success message</span><pre>success</pre>
         </a>
     </li>
 
@@ -130,15 +148,45 @@
         </li>
         <li class="nav-header protected">» Protected
             <ul>
-                                                                                </ul>
+                                                                                                                                                                                            </ul>
         </li>
         <li class="nav-header private">» Private
             <ul>
-                                                                                </ul>
+                                                                                                                                                                                            </ul>
         </li>
         <li class="nav-header">
             <i class="icon-custom icon-constant"></i> Constants
             <ul>
+                                <li class="constant ">
+                    <a href="#constant_DELETE" title="DELETE :: constant DELETE method selector">
+                        <span class="description">constant DELETE method selector</span><pre>DELETE</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_GET" title="GET :: constant GET method selector">
+                        <span class="description">constant GET method selector</span><pre>GET</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_HEAD" title="HEAD :: constant HEAD method selector">
+                        <span class="description">constant HEAD method selector</span><pre>HEAD</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_OPTIONS" title="OPTIONS :: constant OPTIONS method selector">
+                        <span class="description">constant OPTIONS method selector</span><pre>OPTIONS</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_POST" title="POST :: constant POST method selector">
+                        <span class="description">constant POST method selector</span><pre>POST</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_PUT" title="PUT :: constant PUT method selector">
+                        <span class="description">constant PUT method selector</span><pre>PUT</pre>
+                    </a>
+                </li>
                             </ul>
         </li>
     </ul>
@@ -150,11 +198,13 @@
             <div class="element class">
                 <h1>App</h1>
                 <small style="display: block; text-align: right">
+                                            Extends <a href="../classes/core.tools.rest.Resource.html">\core\tools\rest\Resource</a>
                                                         </small>
-                <p class="short_description">Application&#039;s main class</p>
+                <p class="short_description">Application&#039;s main class
+Method App::main() must always exist.</p>
                 <div class="details">
                     <div class="long_description">
-                        <p>Method App::main() must always exist.</p>
+                        
                     </div>
                     <table class="table table-bordered">
                                                                                     <tr>
@@ -169,7 +219,61 @@
                                                                                                                                                                                 </table>
 
                     <h3><i class="icon-custom icon-method"></i> Methods</h3>
-                                                                <a id="method_main"></a>
+                                                                <a id="method_answerRequest"></a>
+                        <div class="element clickable method public  method_answerRequest inherited" data-toggle="collapse" data-target=".method_answerRequest .collapse">
+                            <h2>Deals with the request to the specified method</h2>
+                            <pre>answerRequest(\core\tools\rest\constant $method) : string</pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$method</h4>
+                                                <code>\core\tools\rest\constant</code><p><p>The method to be handled</p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>string</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_error"></a>
+                        <div class="element clickable method public  method_error inherited" data-toggle="collapse" data-target=".method_error .collapse">
+                            <h2>Returns a error message</h2>
+                            <pre>error(string $msg = null) : \core\datatypes\JsonObject</pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$msg</h4>
+                                                <code>string</code><p><p>Message to be shown</p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/core.datatypes.JsonObject.html">\core\datatypes\JsonObject</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_main"></a>
                         <div class="element clickable method public  method_main" data-toggle="collapse" data-target=".method_main .collapse">
                             <h2>Write here your application&#039;s logic</h2>
                             <pre>main() : void</pre>
@@ -196,8 +300,168 @@
                             </div>
 
                         </div>
+                                            <a id="method_success"></a>
+                        <div class="element clickable method public  method_success inherited" data-toggle="collapse" data-target=".method_success .collapse">
+                            <h2>Returns a success message</h2>
+                            <pre>success(string $msg = null) : \core\datatypes\JsonObject</pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$msg</h4>
+                                                <code>string</code><p><p>Message to be shown</p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/core.datatypes.JsonObject.html">\core\datatypes\JsonObject</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
                     
-                    
+                                            <h3><i class="icon-custom icon-constant"></i> Constants</h3>
+                                                    <a id="constant_GET"> </a>
+                            <div class="element clickable constant  constant_GET inherited" data-toggle="collapse" data-target=".constant_GET .collapse">
+                                <h2>constant GET method selector</h2>
+                                <pre>GET</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_POST"> </a>
+                            <div class="element clickable constant  constant_POST inherited" data-toggle="collapse" data-target=".constant_POST .collapse">
+                                <h2>constant POST method selector</h2>
+                                <pre>POST</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_PUT"> </a>
+                            <div class="element clickable constant  constant_PUT inherited" data-toggle="collapse" data-target=".constant_PUT .collapse">
+                                <h2>constant PUT method selector</h2>
+                                <pre>PUT</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_DELETE"> </a>
+                            <div class="element clickable constant  constant_DELETE inherited" data-toggle="collapse" data-target=".constant_DELETE .collapse">
+                                <h2>constant DELETE method selector</h2>
+                                <pre>DELETE</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_HEAD"> </a>
+                            <div class="element clickable constant  constant_HEAD inherited" data-toggle="collapse" data-target=".constant_HEAD .collapse">
+                                <h2>constant HEAD method selector</h2>
+                                <pre>HEAD</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_OPTIONS"> </a>
+                            <div class="element clickable constant  constant_OPTIONS inherited" data-toggle="collapse" data-target=".constant_OPTIONS .collapse">
+                                <h2>constant OPTIONS method selector</h2>
+                                <pre>OPTIONS</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                            
                                                         </div>
             </div>
             <a id="\application\src\App"></a>
@@ -220,7 +484,7 @@
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
             generated on 
 Warning: date_default_timezone_get(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected the timezone 'UTC' for now, but please set date.timezone to select your timezone. in /usr/lib/php/pear/phpDocumentor/vendor/twig/twig/lib/Twig/Extension/Core.php on line 89
-Sat, 10 Jan 2015 17:54:30 +0000.<br/>
+Tue, 13 Jan 2015 02:31:36 +0000.<br/>
     </footer>
     </body>
 </html>
