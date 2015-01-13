@@ -19,11 +19,6 @@ class App extends Resource{
     * @return void
     */
     public static function main(){
-        $rest = new RESTful(array('application.src.TestResource'));
-        $rest->serve();
-        System::display($rest->getResponse());
-
-        //System::display(GenericElement::layoutInflater("helloMarvie.html"));
-
+        System::display(GenericElement::layoutInflater("helloMarvie.html"));
     }
 }
