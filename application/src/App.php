@@ -6,7 +6,6 @@ use core\view\html\GenericElement;
 /**
  * Application's main class
  * Method App::main() must always exist.
- * @package application\src
  */
 class App{
     
