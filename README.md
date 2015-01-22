@@ -6,4 +6,4 @@ It provides an Object-oriented PHP infrastructure to develop your back-end softw
 
 Check the [documentation](http://fmsouza.github.io/atlas) for more information.
 
-Marvie is an Open-source software and is licensed under [Apache License v2.0](https://github.com/fmsouza/atlas/blob/master/LICENSE.txt).
+Atlas is an Open-source software and is licensed under [Apache License v2.0](https://github.com/fmsouza/atlas/blob/master/LICENSE.txt).
