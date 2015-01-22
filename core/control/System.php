@@ -1,7 +1,7 @@
 <?php
 namespace core\control;
 
-use application\src\App;
+use App;
 use core\control\error\ExceptionHandler;
 use core\control\error\RuntimeErrorScheduler;
 use core\tools\designpattern\Singleton;
