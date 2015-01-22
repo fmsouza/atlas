@@ -12,7 +12,6 @@ One of the most adopted development practices to create good code is the TDD (Te
 An example Test code is:
 
 ```php
-<?php
 namespace application\tests;
 
 use core\tools\test\UnitTest;
@@ -43,4 +42,4 @@ class MainTest extends UnitTest{
 }
 ```
 
-Note: For more information about testing assertions, check the [API reference](../../api).
+Note: For more information about testing assertions, check [UnitTest - API reference](../../api/classes/core.tools.test.UnitTest.html).
