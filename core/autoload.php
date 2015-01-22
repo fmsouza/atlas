@@ -12,6 +12,11 @@ spl_autoload_register(
             require_once("{$classname}.php");
             return true;
         }
+		$classname = "application/src/{$classname}";
+		if(file_exists("{$classname}.php")){
+			require_once("{$classname}.php");
+			return true;
+		}
 	    return false;
 	}
 );

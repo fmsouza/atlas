@@ -2,7 +2,6 @@
 namespace application\src;
 
 use core\control\System;
-use core\tools\rest\Resource;
 use core\view\html\GenericElement;
 
 /**
@@ -10,7 +9,7 @@ use core\view\html\GenericElement;
  * Method App::main() must always exist.
  * @package application\src
  */
-class App extends Resource{
+class App{
     
     /**
     * Write here your application's logic
