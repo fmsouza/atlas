@@ -36,7 +36,7 @@ Just [download](download.md) the source code in your computer and place in the A
 
 Then you can just access it by typing it's path in the server address in the browser, like
 
-	http://localhost/marvie
+	http://localhost/atlas
 	
 and it should load.
 
