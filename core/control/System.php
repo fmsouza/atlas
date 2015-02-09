@@ -98,7 +98,7 @@ class System implements Singleton{
 	 * @return void
 	 * @throws TestNotFoundException
 	 */
-	public static function runUnitTests(){
+	public static function runTests(){
 		foreach(self::getConfig()->tests as $test){
 			$test = str_replace('.', '\\', $test);
 			try{
@@ -127,7 +127,7 @@ class System implements Singleton{
 			session_start();
 			$config = self::getConfig();
 			header("Content-Type: text/html; charset={$config->encoding}");
-			if($config->runTest) self::runUnitTests();
+			if($config->runTest) self::runTests();
 			App::main();
 		}catch(\ErrorException $e){
 			ob_end_clean(); // cleans the output buffer
