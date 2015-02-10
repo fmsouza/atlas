@@ -68,7 +68,7 @@ class Database implements Singleton{
 			try{
 				self::$instance = new Database(new self::$selectDriver(self::$connInf));
 				self::$instance->selectDatabase(self::$connInf['dbName']);
-			}catch(ErrorException $e){
+			}catch(\ErrorException $e){
 				$db = debug_backtrace();
 	    		throw new DatabaseException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
 			}
@@ -125,4 +125,6 @@ class Database implements Singleton{
 	public function affectedRows(){
 		return $this->driver->affectedRows();
 	}
+
+	public function __clone(){}
 }
