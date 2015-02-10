@@ -70,12 +70,25 @@ class File extends \SplFileObject{
     /**
      * @param $fileName The file to read
      * @param string $openMode The mode in which to open the file
+     * @throws FileNotFoundException
      * @throws \RuntimeException
      * @return File
      */
     public function __construct($fileName, $openMode=self::MODE_READ){
+        if(!file_exists($fileName)) throw new FileNotFoundException("'$fileName' not found.");
         parent::__construct($fileName, $openMode);
+        $this->prepareBuffer();
+    }
 
+    private function prepareBuffer(){
+        if($this->count()>0){
+            $ib = new InputBuffer();
+            while(!$this->isEndOfFile()){
+                $ib->add($this->readLine());
+            }
+            $this->seek(0);
+            $this->inputBuffer = $ib;
+        }
     }
 
     /**
@@ -84,7 +97,11 @@ class File extends \SplFileObject{
      * return void
      */
     public function readBuffer(InputBuffer $buffer){
-        $this->inputBuffer = $buffer;
+        if(is_null($this->inputBuffer)){
+            $this->inputBuffer = $buffer;
+        } else {
+
+        }
     }
 
     /**

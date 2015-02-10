@@ -6,7 +6,7 @@ namespace core\control\filesystem;
  * Class OutputBuffer encapsulates the buffered data in the file.
  * @package core\control\filesystem
  */
-class OutputBuffer {
+class OutputBuffer extends Buffer{
 
     /**
      * @ignore
