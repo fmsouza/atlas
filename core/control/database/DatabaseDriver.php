@@ -17,15 +17,15 @@ interface DatabaseDriver{
      * Execute a SQL query
      * @param string $sql SQL query string
      * @return bool|DatabaseResult
-     * @throws DatabaseError
+     * @throws DatabaseException
      */
     public function query($sql);
     
     /**
      * Selects the Database
-     * @param $dbName Name of the database
+     * @param string $dbName Name of the database
      * @return bool
-     * @throws DatabaseError
+     * @throws DatabaseException
      */
     public function selectDatabase($dbName);
     

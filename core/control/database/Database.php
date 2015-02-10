@@ -1,8 +1,6 @@
 <?php
 namespace core\control\database;
 
-use core\control\database\DatabaseDriver;
-use core\control\error\DatabaseException;
 use core\tools\designpattern\Singleton;
 
 /**
@@ -45,7 +43,7 @@ class Database implements Singleton{
 	 * Selects a database
 	 * @param string $dbName Database name
 	 * @return bool
-	 * @throws DatabaseError
+	 * @throws DatabaseException
 	 */
 	public function selectDatabase($dbName){
 		return $this->driver->selectDatabase($dbName);
@@ -54,6 +52,7 @@ class Database implements Singleton{
 	/**
 	 * Returns an instance of Database object
 	 * @return Database
+	 * @throws DatabaseException
 	 */
 	static public function getInstance(){
 		if(empty(self::$selectDriver))
@@ -80,7 +79,7 @@ class Database implements Singleton{
 	 * Execute a SQL query
 	 * @param string $sql SQL query string
 	 * @return bool|DatabaseResult
-	 * @throws DatabaseError
+	 * @throws DatabaseException
 	 */
 	public function query($sql){
 		return $this->driver->query($sql);

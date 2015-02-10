@@ -37,7 +37,7 @@ class DatabaseResult{
 	
 	/**
 	 * Returns a new data row
-	 * @return stdClass|NULL
+	 * @return \stdClass|NULL
 	 */
 	public function getRow(){
 		$this->cursor = ($this->cursor<$this->getNumRows()) ? $this->cursor+1 : $this->cursor; 
@@ -53,8 +53,8 @@ class DatabaseResult{
 	}
 	
 	/**
-	 * Points the cursor to the especified line
-	 * @param int
+	 * Points the cursor to the given line
+	 * @param int $i Line index
 	 * @return void
 	 */
 	public function seek($i){
