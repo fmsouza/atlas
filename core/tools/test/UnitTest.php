@@ -6,6 +6,17 @@ namespace core\tools\test;
  * @package core\control\tools
  */
 abstract class UnitTest{
+
+    private static $method;
+
+    private function setMethod($method){
+        self::$method = $method;
+    }
+
+    public function call($method){
+        $this->setMethod($method);
+        $this->$method();
+    }
     
     /**
      * Compare the expressions and continue if they're equal
@@ -69,6 +80,6 @@ abstract class UnitTest{
      * @throws Exception
      */
     private function failed(){
-        throw new \Exception("Test failed in ".get_class($this));
+        throw new TestFailedException("Test failed in ".get_class($this)."::".self::$method);
     }
 }

@@ -75,6 +75,7 @@ class File extends \SplFileObject{
      */
     public function __construct($fileName, $openMode=self::MODE_READ){
         parent::__construct($fileName, $openMode);
+
     }
 
     /**

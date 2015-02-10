@@ -101,15 +101,13 @@ class System implements Singleton{
 	public static function runTests(){
 		foreach(self::getConfig()->tests as $test){
 			$test = str_replace('.', '\\', $test);
-			try{
 				$unit = new $test();
 				foreach(get_class_methods($test) as $method){
-					$unit->$method();
+					if($method!='call'){
+						$unit->call($method);
+					}
 				}
-			} catch(\ErrorException $e){
-				$db = debug_backtrace();
-				throw new TestNotFoundException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
-			}
+
 		}
 	}
 

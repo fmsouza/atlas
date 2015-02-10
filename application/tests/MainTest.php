@@ -6,8 +6,6 @@ use core\tools\test\UnitTest;
 /**
  * Contains a sample test routine
  *
- * The tests are executed ONLY if global TEST == true if defined in the index.php file.
- * 
  * @package application\tests
  */
 class MainTest extends UnitTest{
@@ -21,5 +19,4 @@ class MainTest extends UnitTest{
     public function testIfTrue(){
         return $this->assertTrue(true);
     }
-    
 }

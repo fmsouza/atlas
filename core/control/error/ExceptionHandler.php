@@ -121,6 +121,7 @@ class ExceptionHandler {
      * @return void
      */
     public static function writeLog($errorType,$errorNumber,$errorMsg,$file,$line){
+        date_default_timezone_set("America/Los_Angeles");
         file_put_contents(System::getConfig()->logPath,"[".date("c")."] {$errorType} ERROR {$errorNumber}: {$errorMsg} in {$file}({$line})\n",FILE_APPEND);
     }
 
