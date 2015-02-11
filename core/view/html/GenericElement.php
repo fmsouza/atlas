@@ -92,7 +92,8 @@ class GenericElement extends ElementsComposition{
     /**
      * Inflates an Element from a string
      * @param string $layout
-     * @return DOMDocument
+     * @return \DOMDocument
+	 * @throws \ErrorException
      */
     static public function stringInflater($layout){
 		$tmp = new \DOMDocument;
@@ -108,12 +109,14 @@ class GenericElement extends ElementsComposition{
 		    throw new \ErrorException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
 		}
     }
-	
-    /**
-     * Inflates an Element tree from a file
-     * @param string $layout HTML file path stored in application/view
-     * @return string
-     */
+
+	/**
+	 * Inflates an Element tree from a file
+	 * @param string $file HTML file path stored in application/view
+	 * @param string $path The path from the project root to find the file
+	 * @return string
+	 * @throws \ErrorException
+	 */
     static public function layoutInflater($file, $path=''){
     	if(empty($path)) $path = System::getConfig()->viewPath;
 		return self::stringInflater(preg_replace('~\s*(<([^>]*)>[^<]*</\2>|<[^>]*>)\s*~','$1',file_get_contents($path.'/'.$file)));
