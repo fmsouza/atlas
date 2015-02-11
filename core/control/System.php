@@ -1,7 +1,7 @@
 <?php
 namespace core\control;
 
-use App;
+use application\src\App;
 use core\control\error\ExceptionHandler;
 use core\control\error\RuntimeErrorScheduler;
 use core\tools\designpattern\Singleton;
@@ -103,9 +103,8 @@ class System implements Singleton{
 			$test = str_replace('.', '\\', $test);
 				$unit = new $test();
 				foreach(get_class_methods($test) as $method){
-					if($method!='call'){
-						$unit->call($method);
-					}
+					if($method=='call') continue;
+					$unit->call($method);
 				}
 
 		}

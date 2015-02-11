@@ -1,20 +1,17 @@
 <?php
 /**
- * Runs all selected paths trying to find the required class. The class must have the same
- * name of the file.
+ * Autoloads the classes following PSR-0 autoloading rules.
  * @param string $classname class name
  * @return bool
  */
 spl_autoload_register(
-	function($classname){
-		$classname = str_replace('\\', '/', $classname);
-		if(file_exists("{$classname}.php")){
-            require_once("{$classname}.php");
+	function($className){
+		$className = str_replace('\\', '/', $className);
+		if(file_exists("{$className}.php")){
+            require_once("{$className}.php");
             return true;
-        }
-		$classname = "application/src/{$classname}";
-		if(file_exists("{$classname}.php")){
-			require_once("{$classname}.php");
+        } elseif(file_exists("../{$className}.php")) {
+			require_once("../{$className}.php");
 			return true;
 		}
 	    return false;

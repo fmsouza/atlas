@@ -1,5 +1,7 @@
 <?php
 
+namespace application\src;
+
 use core\control\System;
 use core\view\html\GenericElement;
 
