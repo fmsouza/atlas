@@ -29,7 +29,7 @@ class JsonObject{
                     $this->setKey($key, new JsonObject($value));
                 }
                 else if(is_array($value)){
-                    if(is_string($value[0])){
+                    if(isset($value[0]) && is_string($value[0])){
                         $this->setKey($key, new ArrayList($value));
                     }
                     else{
@@ -73,11 +73,7 @@ class JsonObject{
 	 * @return array
 	 */
     public function keys(){
-        $return = array();
-        foreach($this->data as $key => $value){
-            $return[] = $key;
-        }
-        return $return;
+        return array_keys($this->data);
     }
     
 	/**
@@ -88,10 +84,20 @@ class JsonObject{
         return count($this->data);
     }
 
+    /**
+     * @param $key
+     * @return mixed
+     * @ignore
+     */
     public function __get($key){
         return (isset($this->data[$key]))? $this->data[$key] : null;
     }
 
+    /**
+     * @param $key
+     * @param $value
+     * @ignore
+     */
     public function __set($key, $value){
         $this->data[$key] = $value;
     }

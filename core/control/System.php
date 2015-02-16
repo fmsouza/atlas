@@ -5,6 +5,7 @@ namespace core\control;
 use application\src\App;
 use core\control\error\ExceptionHandler;
 use core\control\error\RuntimeErrorScheduler;
+use core\datatypes\JsonObject;
 use core\tools\designpattern\ISingleton;
 use core\tools\test\TestNotFoundException;
 use core\tools\test\UnitTest;
@@ -55,11 +56,12 @@ class System implements ISingleton{
 	
 	/**
 	 * Get the configuration data
-	 * @return \stdClass
+	 * @return JsonObject
 	 */
 	public static function getConfig(){
 		if(is_null(self::$config)){
-			self::$config = json_decode(file_get_contents(self::$configPath));
+			$tmp = json_decode(file_get_contents(self::$configPath));
+			self::$config = new JsonObject($tmp);
 		}
 		return self::$config;
 	}
@@ -136,7 +138,7 @@ class System implements ISingleton{
 		$scheduler->beginSchedule();
 		try{
 			session_start();
-			$config = self::getConfig();
+			$config = System::getConfig();
 			header("Content-Type: text/html; charset={$config->encoding}");
 			if($config->runTest) self::runTests();
 			App::main();
