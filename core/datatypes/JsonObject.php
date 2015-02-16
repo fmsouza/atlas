@@ -87,6 +87,14 @@ class JsonObject{
     public function size(){
         return count($this->data);
     }
+
+    public function __get($key){
+        return (isset($this->data[$key]))? $this->data[$key] : null;
+    }
+
+    public function __set($key, $value){
+        $this->data[$key] = $value;
+    }
     
     /**
      * @ignore
@@ -96,7 +104,7 @@ class JsonObject{
         if($this->size()>0){
             foreach($this->data as $key => $value){
                 $return .= (is_numeric($value) || $value instanceof ArrayList || $value instanceof JsonObject)?
-                    "$key: $value, ":"$key: \"$value\", ";
+                    "$key: $value, " : "$key: \"$value\", ";
             }
             $return = substr($return, 0, -2);
         }
