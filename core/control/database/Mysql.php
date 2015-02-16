@@ -55,6 +55,7 @@ class Mysql implements DatabaseDriver{
 	public function query($sql){
 		try{
 			$r = $this->db->query($sql);
+			// TODO: this is weird. If it's not \mysqli_result you just return? Check it later.
 			if($r instanceof \mysqli_result){
 				$tmp = new DatabaseResult();
 				while($tmp->setRow((array)$r->fetch_assoc()));
