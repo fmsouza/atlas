@@ -6,6 +6,7 @@ use core\control\error\ExceptionHandler;
 use core\control\error\RuntimeErrorScheduler;
 use core\tools\designpattern\ISingleton;
 use core\tools\test\TestNotFoundException;
+use core\tools\test\UnitTest;
 
 /**
  * System class deals with core control operations.
@@ -102,6 +103,9 @@ class System implements ISingleton{
 		foreach(self::getConfig()->tests as $test){
 			$test = str_replace('.', '\\', $test);
 				$unit = new $test();
+				if(!($unit instanceof UnitTest)){
+					throw new TestNotFoundException(get_class($unit).' is not an instance of core\tools\test\UnitTest.');
+				}
 				foreach(get_class_methods($test) as $method){
 					if($method=='call') continue;
 					$unit->call($method);
