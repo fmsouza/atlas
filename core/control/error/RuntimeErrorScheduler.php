@@ -2,13 +2,13 @@
 
 namespace core\control\error;
 
-use core\tools\designpattern\Singleton;
+use core\tools\designpattern\ISingleton;
 
 /**
  * The class RuntimeErrorScheduler is responsible for preparing the Exceptions to be handled
  * @package core\control\error
  */
-class RuntimeErrorScheduler implements Singleton{
+class RuntimeErrorScheduler implements ISingleton{
 
     /**
      * Self Instance

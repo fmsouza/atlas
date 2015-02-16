@@ -42,6 +42,7 @@ class Logger {
      * @param $LEVEL string Level of the log record message
      * @param $CLASS string Class where the notice happened
      * @param $MESSAGE string Message to be written in the log
+     * @param $FILE string File to write the data
      * @throws IOException
      */
     public static function log($LEVEL, $CLASS, $MESSAGE, $FILE="atlas.log"){

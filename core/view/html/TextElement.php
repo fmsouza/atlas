@@ -13,13 +13,11 @@ class TextElement extends Element{
     /**
      * Generates a new element
      * @param string $text Text value
+     * @param \DOMText $t
      */
-    public function __construct($text,\DOMText $t=NULL){
+    public function __construct($text, \DOMText $t=NULL){
 		parent::__construct();
-		if($t==NULL)
-		    $this->domNode = self::$DOC->createTextNode($text);
-		else
-		    $this->domNode = $t;
+        $this->domNode = (is_null($t))? self::$DOC->createTextNode($text) : $t;
     }
     
     /**
@@ -40,6 +38,7 @@ class TextElement extends Element{
     
     /**
      * Changes the text value
+     * @param string $text
      * @return void
      */
     public function setText($text){

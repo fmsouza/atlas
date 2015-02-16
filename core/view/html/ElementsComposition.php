@@ -1,14 +1,14 @@
 <?php
 namespace core\view\html;
 
-use core\tools\designpattern\Inflater;
+use core\tools\designpattern\IInflater;
 
 /**
  * This is a representation of the HTML trees and compositions. This is the type of those
  * elements which holds other elements.
  * @package core\view\html
  */
-abstract class ElementsComposition extends Element implements Inflater{
+abstract class ElementsComposition extends Element implements IInflater{
 	
 	/**
 	 * @var array $elements Contains the child elements
@@ -25,6 +25,7 @@ abstract class ElementsComposition extends Element implements Inflater{
 	}
 	
 	/**
+	 * @param Element $e
 	 * @ignore
 	 */
 	protected function fill(Element $e){
@@ -32,7 +33,7 @@ abstract class ElementsComposition extends Element implements Inflater{
 	}
 	
 	/**
-	 * Exchange the Element on the especified index for a new one
+	 * Exchange the Element on the specified index for a new one
 	 * @param Element $e New Element
 	 * @param int $index Element index
 	 */
@@ -69,7 +70,7 @@ abstract class ElementsComposition extends Element implements Inflater{
 	}
 	
 	/**
-	 * Returns a child element in the especified position
+	 * Returns a child element in the specified position
 	 * @param int $index Element index
 	 * @return Element
 	 */
@@ -118,11 +119,12 @@ abstract class ElementsComposition extends Element implements Inflater{
 	/**
 	 * Returns all the Elements which has certain class
 	 * @param string $class Element class
+	 * @param array $return
 	 * @return GenericElement
 	 * 
 	 * TODO Fix it. Actually it is working equal to getElementById()
 	 */
-	public function getElementByClass($class,$return = array()){
+	public function getElementByClass($class, $return = array()){
 		foreach($this->elements as $element){
 			if($element instanceof GenericElement){
 				if(strpos($element->domNode->getAttribute("class"),$class) !== false)

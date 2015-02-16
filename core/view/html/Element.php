@@ -1,7 +1,6 @@
 <?php
-namespace core\view\html;
 
-use core\view\html\TextElement;
+namespace core\view\html;
 
 /**
  * The Element class is the smallest unit on the HTML objects abstraction tree.
@@ -10,11 +9,11 @@ use core\view\html\TextElement;
 abstract class Element{
 	
 	/**
-	 * @var DOMDocument $DOC Stores the output
+	 * @var \DOMDocument $DOC Stores the output
 	 */
 	protected static $DOC = NULL;
 	/**
-	 * @var DOMElement $domElement DOM default element
+	 * @var \DOMElement $domElement DOM default element
 	 */
 	protected $domNode;
 	
@@ -35,6 +34,8 @@ abstract class Element{
 	}
 	
 	/**
+	 * @param \DOMElement $node
+	 * @return array
 	 * @ignore
 	 */
 	protected static function getAttributesDOMtoArray(\DOMElement $node){

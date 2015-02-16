@@ -1,7 +1,6 @@
 <?php
 namespace core\view\html;
 
-use core\view\html\ElementsComposition;
 use core\control\System;
 
 /**
@@ -76,6 +75,8 @@ class GenericElement extends ElementsComposition{
     }
     
     /**
+	 * @param \DOMElement $node
+	 * @return GenericElement
      * @ignore
      */
     static private function constructByNode(\DOMElement $node){

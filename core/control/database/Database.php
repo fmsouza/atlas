@@ -2,13 +2,14 @@
 
 namespace core\control\database;
 
-use core\tools\designpattern\Singleton;
+use core\control\database\driver\DatabaseDriver;
+use core\tools\designpattern\ISingleton;
 
 /**
  * Configures the database interaction implementing Singleton Design Pattern
  * @package core\control\database
  */
-class Database implements Singleton{
+class Database implements ISingleton{
 
 	/** 
 	 * Driver name

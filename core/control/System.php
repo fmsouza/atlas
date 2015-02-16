@@ -4,7 +4,7 @@ namespace core\control;
 use application\src\App;
 use core\control\error\ExceptionHandler;
 use core\control\error\RuntimeErrorScheduler;
-use core\tools\designpattern\Singleton;
+use core\tools\designpattern\ISingleton;
 use core\tools\test\TestNotFoundException;
 
 /**
@@ -12,7 +12,7 @@ use core\tools\test\TestNotFoundException;
  * @package core\control
  * @abstract
  */
-class System implements Singleton{
+class System implements ISingleton{
 	/**
 	 * Self Instance
 	 * @var System
@@ -53,7 +53,7 @@ class System implements Singleton{
 	
 	/**
 	 * Get the configuration data
-	 * @return stdObject
+	 * @return \stdObject
 	 */
 	public static function getConfig(){
 		if(is_null(self::$config)){

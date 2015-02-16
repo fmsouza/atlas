@@ -2,14 +2,14 @@
 
 namespace core\tools\session;
 
-use core\tools\designpattern\Singleton;
+use core\tools\designpattern\ISingleton;
 
 /**
  * Session class deals with session specific functions.
  * @package core\control
  * @abstract
  */
-class Session implements Singleton{
+class Session implements ISingleton{
 
     /**
      * Session status

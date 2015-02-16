@@ -2,10 +2,10 @@
 namespace core\tools\designpattern;
 
 /**
- * Implements Singleton Design Pattern
+ * Implements ISingleton Design Pattern
  * @package core\control\tools\designpattern
  */
-interface Singleton{
+interface ISingleton{
 	
 	/**
 	 * @ignore

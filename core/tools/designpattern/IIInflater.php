@@ -5,7 +5,7 @@ namespace core\tools\designpattern;
  * Implements the Inflater pattern
  * @package core\control\tools\designpattern
  */
-interface Inflater{
+interface IInflater{
 		
     /**
      * Inflates an Element tree from a file
