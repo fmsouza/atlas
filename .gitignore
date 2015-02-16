@@ -1,7 +1,5 @@
 .DS_Store
-*.komodoproject
 *.log
-gh-pages/
 .idea
 application/src/
 application/tests/
