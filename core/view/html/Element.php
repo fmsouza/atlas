@@ -45,6 +45,8 @@ abstract class Element{
 	}
 	
 	/**
+	 * @param \DOMText $text
+	 * @return TextElement
 	 * @ignore
 	 */ 
 	static protected function constructTextByNode(\DOMText $text){

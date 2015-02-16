@@ -48,7 +48,7 @@ abstract class Resource{
 
     /**
      * Deals with the request to the specified method
-     * @param constant $method The method to be handled
+     * @param string $method The method to be handled
      * @return string
      */
     public function answerRequest($method){
@@ -133,12 +133,15 @@ abstract class Resource{
     }
 
     /**
+     * @param string $type
+     * @param string $msg
+     * @return JsonObject
      * @ignore
      */
-    protected function message($type,$msg){
+    protected function message($type, $msg){
         $json = new JsonObject();
-        $json->setKey('type',$type);
-        $json->setKey('message',$msg);
+        $json->setKey('type', $type);
+        $json->setKey('message', $msg);
         return $json;
     }
 }

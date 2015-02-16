@@ -1,4 +1,5 @@
 <?php
+
 namespace core\tools\rest;
 
 use core\control\System;

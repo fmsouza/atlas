@@ -42,10 +42,10 @@ class CSVFactory{
      * CSV object constructor
 	 * 
      * @param string $filename File name
-     * @param $string $charset Character encoding
+     * @param string $charset Character encoding
      * @param int $memoryAmount Memory size available in MegaBytes
      * @param string $disposition How to send the output file
-     * @return CSV
+     * @return CSVFactory
      */
     public function __construct($filename, $charset, $memoryAmount = 2, $disposition = 'attachment'){
         $this->fileName = $filename;
@@ -57,7 +57,7 @@ class CSVFactory{
     
     /**
      * Open a new temporary CSV instance
-     * @throws ErrorException
+     * @throws \ErrorException
      * @return void
      */
     private function open(){
@@ -91,7 +91,7 @@ class CSVFactory{
     /**
      * Prepares the header and the data to be sent
      * @return void
-     * @throws ErrorException
+     * @throws \ErrorException
      */
     private function prepare(){
         header('Content-Type: text/csv; charset='.$this->charset);
@@ -101,7 +101,7 @@ class CSVFactory{
             rewind($this->buffer);
             $this->output = stream_get_contents($this->buffer);
         }
-        catch(ErrorException $e){
+        catch(\ErrorException $e){
             $db = debug_backtrace();
             throw new \ErrorException("Error preparing file to be sent.",$e->getCode(),0,$db[1]['file'],$db[1]['line']);
         }
@@ -110,14 +110,14 @@ class CSVFactory{
     /**
      * File output
      * @return string
-	 * @throws ErrorException
+	 * @throws \ErrorException
      */
     public function generate(){
     	try{
 	        $this->prepare();
 	        return $this->output;
 		}
-		catch(ErrorException $e){
+		catch(\ErrorException $e){
             $db = debug_backtrace();
             throw new \ErrorException("Error in the CSV file output.",$e->getCode(),0,$db[1]['file'],$db[1]['line']);
 		}

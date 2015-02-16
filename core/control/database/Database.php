@@ -127,5 +127,8 @@ class Database implements ISingleton{
 		return $this->driver->affectedRows();
 	}
 
+	/**
+	 * @ignore
+	 */
 	public function __clone(){}
 }

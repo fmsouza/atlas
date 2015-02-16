@@ -1,7 +1,6 @@
 <?php
-namespace core\view\html;
 
-use core\view\html\Element;
+namespace core\view\html;
 
 /**
  * Represents a text string inside of an element as an element
@@ -14,6 +13,7 @@ class TextElement extends Element{
      * Generates a new element
      * @param string $text Text value
      * @param \DOMText $t
+     * @return TextElement
      */
     public function __construct($text, \DOMText $t=NULL){
 		parent::__construct();
@@ -25,7 +25,7 @@ class TextElement extends Element{
      * @return string
      */
     public function getText(){
-	return $this->domNode->data;
+	    return $this->domNode->data;
     }
     
     /**
@@ -33,7 +33,7 @@ class TextElement extends Element{
      * @return int
      */
     public function getLength(){
-	return $this->domNode->length;
+	    return $this->domNode->length;
     }
     
     /**
@@ -42,6 +42,6 @@ class TextElement extends Element{
      * @return void
      */
     public function setText($text){
-	$this->domNode->data = $text;
+	    $this->domNode->data = $text;
     }
 }

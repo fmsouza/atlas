@@ -1,4 +1,5 @@
 <?php
+
 namespace core\control;
 
 use application\src\App;
@@ -54,7 +55,7 @@ class System implements ISingleton{
 	
 	/**
 	 * Get the configuration data
-	 * @return \stdObject
+	 * @return \stdClass
 	 */
 	public static function getConfig(){
 		if(is_null(self::$config)){
@@ -63,6 +64,10 @@ class System implements ISingleton{
 		return self::$config;
 	}
 
+	/**
+	 * Sets the new path to the config file
+	 * @param string $path New path to config file
+	 */
 	public static function changeConfigPath($path){
 		self::$configPath = $path;
 		self::$config = NULL;
@@ -119,6 +124,7 @@ class System implements ISingleton{
 	 * @return void
 	 */
 	public static function start(){
+
 		$handler = new ExceptionHandler();
 		$handler->setErrorTemplate('error_template.html');
 		$scheduler = RuntimeErrorScheduler::getInstance();

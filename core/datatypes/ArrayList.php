@@ -79,7 +79,7 @@ class ArrayList extends \ArrayObject{
 	/**
 	 * Returns the content set on the index
 	 * @param int $index
-	 * @return mixed|boolean
+	 * @return mixed
 	 */
     public function get($index){
         return ($this->hasIndex($index))? $this->offsetGet($index):false;
@@ -98,7 +98,7 @@ class ArrayList extends \ArrayObject{
     /**
      * Overwrite the object with an data array
      * @param array $data
-     * return void
+     * @return void
      */
     public function overwrite($data){
         $this->exchangeArray($data);
@@ -107,7 +107,7 @@ class ArrayList extends \ArrayObject{
     /**
      * Adds the element to the end of the List
      * @param mixed $value
-     * return void
+     * @return void
      */
     public function push($value){
         $this->append($value);
@@ -115,7 +115,7 @@ class ArrayList extends \ArrayObject{
     
     /**
      * Removes and returns the last element of the List
-     * return mixed
+     * @return mixed
      */
     public function pop(){
         $index = $this->size()-1;
@@ -127,7 +127,7 @@ class ArrayList extends \ArrayObject{
     /**
      * Removes the content set on the index
      * @param int $index
-     * return void
+     * @return void
      */
     public function remove($index){
         if($this->hasIndex($index))
@@ -136,7 +136,7 @@ class ArrayList extends \ArrayObject{
     
     /**
      * Returns the List size
-     * return int
+     * @return int
      */
     public function size(){
         return $this->count();
@@ -145,7 +145,7 @@ class ArrayList extends \ArrayObject{
     /**
      * Set the type of the list
      * @param int $pattern List type flag
-     * return void
+     * @return void
      */
     public function setAccessPattern($pattern){
         $this->setFlags($pattern);
@@ -155,7 +155,7 @@ class ArrayList extends \ArrayObject{
      * Sort the list with the chosen algorithm
      * @param int $type Algorithm selector
      * @param string $callback Callback function name to sort
-     * return void
+     * @return void
      */
     public function sort($type, $callback=""){
         switch($type){

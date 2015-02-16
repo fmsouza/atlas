@@ -25,7 +25,7 @@ class InputBuffer extends Buffer{
 
     /**
      * Override the list of lines to write.
-     * @param array $arr List of lines
+     * @param \Iterator $arr List of lines
      */
     public function addArray(\Iterator $arr){
         foreach($arr as $a){
@@ -72,6 +72,10 @@ class InputBuffer extends Buffer{
         return $this->bytes;
     }
 
+    /**
+     * Merges a buffer object to the current buffer
+     * @param Buffer $buffer
+     */
     public function mergeBuffer(Buffer $buffer){
         $this->addArray($buffer);
     }

@@ -1,27 +1,64 @@
 <?php
+
 namespace core\tools\rest;
 
 use core\control\Annotation;
 use core\tools\Util;
 
+/**
+ * The class RESTfulAnnotation is responsible for parsing the annotations found in the RESTful Resource classes.
+ * @package core\tools\rest
+ */
 class RESTfulAnnotation extends Annotation{
 
+	/**
+	 * @var string $path
+	 */
 	private $path;
+
+	/**
+	 * @var string $pathVariableIdentifier
+	 */
 	private $pathVariableIdentifier;
+
+	/**
+	 * @var string $urlPath
+	 */
 	public static $urlPath;
+
+	/**
+	 * @var string $request
+	 */
 	public static $request;
 
+	/**
+	 * Creates an instance of RESTfulAnnotation
+	 * @param Resource $obj
+	 * @param string $pathVariableIdentifier
+	 * @return RESTfulAnnotation
+	 */
 	public function __construct(Resource $obj, $pathVariableIdentifier='#'){
 		$this->pathVariableIdentifier = $pathVariableIdentifier;
 		parent::__construct($obj);
 	}
 
+	/**
+	 * Parses the route annotation (@route)
+	 * @param string $method
+	 * @param string $requestMethod
+	 * @param array $urlData
+	 * @return string
+	 */
 	protected function route($method, $requestMethod, $urlData=array()){
 		$obj = $this->getSourceObject();
 		$args = $obj->answerRequest($requestMethod);
 		return $obj->$method($args, $urlData);
 	}
 
+	/**
+	 * Processes the request
+	 * @return string
+	 */
 	public function process(){
 		$this->parse();
 		foreach ($this->getAnnotations() as $method => $annotations) {
@@ -41,9 +78,14 @@ class RESTfulAnnotation extends Annotation{
 				}
 			}
 		}
-		return false;
+		return null;
 	}
 
+	/**
+	 * Get the data contained in the URL
+	 * @param string $urlVars
+	 * @return array
+	 */
 	private function getUrlData($urlVars){
 		$labels = Util::getInBetweenStrings($this->pathVariableIdentifier, $this->pathVariableIdentifier, $urlVars);
 		$labels = explode('/',$labels[0]);
@@ -61,6 +103,11 @@ class RESTfulAnnotation extends Annotation{
 		return $tmp;
 	}
 
+	/**
+	 * Extracts the base URI from the URL
+	 * @param $url
+	 * @return string
+	 */
 	private function extractBaseServiceUrl($url){
 		return explode($this->pathVariableIdentifier, $url)[0];
 	}

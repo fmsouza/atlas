@@ -7,12 +7,24 @@ namespace core\tools\test;
  */
 abstract class UnitTest{
 
+    /**
+     * @var string $method
+     */
     private static $method;
 
+    /**
+     * Set the last called method
+     * @param $method
+     * @ignore
+     */
     private function setMethod($method){
         self::$method = $method;
     }
 
+    /**
+     * Calls the testing routine
+     * @param string $method
+     */
     public function call($method){
         $this->setMethod($method);
         $this->$method();
@@ -77,7 +89,7 @@ abstract class UnitTest{
     /**
      * Stop the tests and exit the application once the test fails.
      * @ignore
-     * @throws Exception
+     * @throws TestFailedException
      */
     private function failed(){
         throw new TestFailedException("Test failed in ".get_class($this)."::".self::$method);

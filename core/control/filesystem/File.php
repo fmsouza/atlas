@@ -80,6 +80,9 @@ class File extends \SplFileObject{
         $this->prepareBuffer();
     }
 
+    /**
+     * @ignore
+     */
     private function prepareBuffer(){
         if($this->count()>0){
             $ib = new InputBuffer();

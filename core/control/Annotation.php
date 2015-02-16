@@ -1,5 +1,7 @@
 <?php
+
 namespace core\control;
+
 use core\tools\Util;
 
 /**
@@ -17,7 +19,7 @@ abstract class Annotation{
 	
 	/**
 	 * Reflection of the given object
-	 * @var ReflectionClass
+	 * @var \ReflectionClass
 	 */
 	private $reflection;
 	
@@ -68,14 +70,14 @@ abstract class Annotation{
 
 	/**
 	 * Creates an Annotation instance for some object
-	 * @param $obj
+	 * @param \stdClass $obj
 	 * @param string $identifier
 	 * @param string $lineDelimiter
 	 * @param string $methodDelimiter
 	 * @param string $methodArgSeparator
 	 * @return Annotation
 	 */
-	public function __construct($obj, $identifier='@', $lineDelimiter='\n', $methodDelimiter=':', $methodArgSeparator=','){
+	public function __construct(\stdClass $obj, $identifier='@', $lineDelimiter='\n', $methodDelimiter=':', $methodArgSeparator=','){
 		$this->reflection = new \ReflectionClass(get_class($obj));
 		$this->object = $obj;
 		$this->identifier = $identifier;
@@ -129,8 +131,8 @@ abstract class Annotation{
 
 	/**
 	 * Parses an annotation simple markup variable
-	 * @param $arg
-	 * @param $method
+	 * @param string $arg
+	 * @param string $method
 	 * @return void
 	 */
 	private function parseVar($arg, $method){
@@ -139,8 +141,8 @@ abstract class Annotation{
 
 	/**
 	 * Parses an annotation function
-	 * @param $arg
-	 * @param $method
+	 * @param string $arg
+	 * @param string $method
 	 */
 	private function parseFunction($arg, $method){
 		$key = lcfirst(Util::getInBetweenStrings('^','\(',$arg)[0]);

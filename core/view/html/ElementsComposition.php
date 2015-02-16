@@ -1,4 +1,5 @@
 <?php
+
 namespace core\view\html;
 
 use core\tools\designpattern\IInflater;

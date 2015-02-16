@@ -38,7 +38,7 @@ class DatabaseResult{
 	
 	/**
 	 * Returns a new data row
-	 * @return \stdClass|NULL
+	 * @return \stdClass
 	 */
 	public function getRow(){
 		$this->cursor = ($this->cursor<$this->getNumRows()) ? $this->cursor+1 : $this->cursor; 
