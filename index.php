@@ -15,5 +15,4 @@
  */
 ob_start('ob_gzhandler');
 include('core/autoload.php');
-use core\control\System;
-System::start();
+core\control\System::start();

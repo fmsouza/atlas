@@ -40,7 +40,7 @@ class Util{
     /**
      * Converts an array to stdObject
      * @param array $list Data list
-     * @return stdObject
+     * @return \stdObject
      */
 	public static function listToObject($list){
 		return json_decode(json_encode($list), FALSE);
@@ -52,7 +52,7 @@ class Util{
 	 * @param string $start Start pattern
 	 * @param string $end End pattern
 	 * @param string $str The string to be searched
-	 * @return stdObject
+	 * @return \stdObject
 	 */
 	public static function getInBetweenStrings($start, $end, $str){
 		$matches = null;

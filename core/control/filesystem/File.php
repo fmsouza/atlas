@@ -68,7 +68,7 @@ class File extends \SplFileObject{
     private $inputBuffer;
 
     /**
-     * @param $fileName The file to read
+     * @param string $fileName The file to read
      * @param string $openMode The mode in which to open the file
      * @throws FileNotFoundException
      * @throws \RuntimeException
