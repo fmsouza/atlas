@@ -47,7 +47,7 @@ class ExceptionHandler {
      * @param string $path
      * @return void
      */
-    public function setErrorTemplate($template, $path){
+    public function setErrorTemplate($template, $path=''){
         $tmp = new ArrayList();     // workaround to import the classes needed for show the error
         $tmp = new JsonObject();    // as Json. TODO: fix it ASAP, it's too ugly
         $this->errorScreen = GenericElement::layoutInflater($template,$path);
@@ -104,21 +104,21 @@ class ExceptionHandler {
         $layout = $this->errorScreen;
         if(!$config->debugMode){
             $end_msg = 'An error ocurred. Please, contact the administrator: '.$config->emailAdmin;
-            $layout->removeElementById('ERROR_MESSAGE');
+            $layout->removeElementById('errorMessage');
             $layout->removeElementById('stackTrace');
         }
         else{
             $end_msg = ($fatal)? 'A fatal error ocurred.':
                 'An error ocurred in the system.';
-            $layout->getElementById('ERROR_MESSAGE')->add(GenericElement::stringInflater("<p>".get_class($e)." ".$e->getCode().": ".$e->getMessage()."</p>"));
-            $layout->getElementById('ERROR_MESSAGE')->add(GenericElement::stringInflater("<p>Error ocurred in <strong>line ".$e->getLine()."</strong> of the file <strong>".$e->getFile()."</strong></p>"));
+            $layout->getElementById('errorMessage')->add(GenericElement::stringInflater("<p>".get_class($e)." ".$e->getCode().": ".$e->getMessage()."</p>"));
+            $layout->getElementById('errorMessage')->add(GenericElement::stringInflater("<p>Error ocurred in <strong>line ".$e->getLine()."</strong> of the file <strong>".$e->getFile()."</strong></p>"));
 
             foreach(self::getStack($e) as $stackline)
                 $layout->getElementById('stackTrace')->add(
                     GenericElement::stringInflater("<p>{$stackline}</p>")
                 );
         }
-        $layout->getElementById('ERROR_TYPE')->getElement(0)->add(
+        $layout->getElementById('errorType')->getElement(0)->add(
             GenericElement::stringInflater("<p>{$end_msg}</p>")
         );
         return $layout;

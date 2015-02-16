@@ -41,7 +41,7 @@ class RuntimeErrorScheduler implements Singleton{
             throw new \ErrorException($message, $code, 0, $file, $line);
         });
         // handles the Exceptions that weren't catched
-        set_exception_handler(function($e){
+        set_exception_handler(function(\ErrorException $e){
             throw new \ErrorException($e->getMessage(), $e->getCode(), 0, $e->getFile(), $e->getLine());
         });
         // deals with the exceptions ate the end of script
