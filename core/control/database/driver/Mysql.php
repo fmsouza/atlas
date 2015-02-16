@@ -1,5 +1,10 @@
 <?php
-namespace core\control\database;
+
+namespace core\control\database\driver;
+
+use core\control\database\DatabaseException;
+use core\control\database\Database;
+use core\control\database\DatabaseResult;
 
 /**
  * MySQL connection driver

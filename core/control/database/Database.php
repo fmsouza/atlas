@@ -1,4 +1,5 @@
 <?php
+
 namespace core\control\database;
 
 use core\tools\designpattern\Singleton;

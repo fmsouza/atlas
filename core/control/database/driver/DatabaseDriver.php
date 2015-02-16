@@ -1,5 +1,9 @@
 <?php
-namespace core\control\database;
+
+namespace core\control\database\driver;
+
+use core\control\database\DatabaseResult;
+use core\control\database\DatabaseException;
 
 /**
  * DatabaseDriver interface
