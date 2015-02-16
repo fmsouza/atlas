@@ -4,6 +4,7 @@
 	"baseURL": "http://localhost/atlas/",
 	"logPath": "errors.log",
   	"debugMode": true,
+  	"errorMode": "HTML",
   	"runTest": true,
 	"tests": [
 		"application.tests.MainTest"

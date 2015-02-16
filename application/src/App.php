@@ -16,6 +16,6 @@ class App{
     * @return void
     */
     public static function main(){
-        System::display(GenericElement::layoutInflater("helloMarvie.html"));
+        System::display(GenericElement::layoutInflater("hello.html"));
     }
 }

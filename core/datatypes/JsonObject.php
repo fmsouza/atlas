@@ -5,7 +5,7 @@ use core\tools\Util;
 
 /**
  * Constructs dynamically a JSON Object
- * @package core\control\datatypes
+ * @package core\datatypes
  */
 class JsonObject{
     

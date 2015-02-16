@@ -4,6 +4,8 @@ namespace core\control\error;
 
 
 use core\control\System;
+use core\datatypes\ArrayList;
+use core\datatypes\JsonObject;
 use core\view\html\GenericElement;
 
 /**
@@ -46,6 +48,8 @@ class ExceptionHandler {
      * @return void
      */
     public function setErrorTemplate($template, $path){
+        $tmp = new ArrayList();     // workaround to import the classes needed for show the error
+        $tmp = new JsonObject();    // as Json. TODO: fix it ASAP, it's too ugly
         $this->errorScreen = GenericElement::layoutInflater($template,$path);
     }
 
@@ -70,13 +74,24 @@ class ExceptionHandler {
 
     /**
      * Renders the error data
-     * @param \ErrorException $e Thrown exception object
-     * @param bool $fatal Greater than zero if it was a fatal error (default: 0)
      * @return string
      */
     public function display(){
-        if(!is_null($this->exception))
-            System::display($this->displayAsHtml($this->exception, $this->isFatal));
+        if(!is_null($this->exception)){
+            $config = System::getConfig();
+            $errorMode = (isset($config->errorMode))? $config->errorMode : null;
+            switch($errorMode){
+                case 'JSON':
+                    $response = $this->displayAsJson($this->exception, $this->isFatal, $config);
+                    break;
+                case 'HTML':
+                default:
+                    $response = $this->displayAsHtml($this->exception, $this->isFatal, $config);
+                    break;
+            }
+            System::display($response);
+        }
+
     }
 
     /**
@@ -85,9 +100,8 @@ class ExceptionHandler {
      * @param int $fatal Greater than zero if it was a fatal error (default: 0)
      * @return string
      */
-    private function displayAsHtml(\ErrorException $e, $fatal){
+    private function displayAsHtml(\ErrorException $e, $fatal, $config){
         $layout = $this->errorScreen;
-        $config = System::getConfig();
         if(!$config->debugMode){
             $end_msg = 'An error ocurred. Please, contact the administrator: '.$config->emailAdmin;
             $layout->removeElementById('ERROR_MESSAGE');
@@ -108,6 +122,27 @@ class ExceptionHandler {
             GenericElement::stringInflater("<p>{$end_msg}</p>")
         );
         return $layout;
+    }
+
+    private function displayAsJson(\ErrorException $e, $fatal, $config){
+        $response = new JsonObject();
+        if(!$config->debugMode){
+            $response->setKey("type", "ErrorException");
+            $response->setKey("message", 'An error ocurred. Please, contact the administrator: '.$config->emailAdmin);
+        } else {
+            $response->setKey("type", get_class($e));
+            $response->setKey("code", $e->getCode());
+            $response->setKey("message", $e->getMessage());
+            $response->setKey("file", $e->getFile());
+            $response->setKey("line", $e->getLine());
+            $stackTrace = new ArrayList();
+            $response->setKey("stacktrace", $stackTrace);
+
+            foreach(self::getStack($e) as $stackline){
+                $stackTrace->push($stackline);
+            }
+        }
+        return $response;
     }
 
     /**

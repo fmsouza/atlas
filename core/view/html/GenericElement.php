@@ -92,7 +92,7 @@ class GenericElement extends ElementsComposition{
     /**
      * Inflates an Element from a string
      * @param string $layout
-     * @return \DOMDocument
+     * @return GenericElement
 	 * @throws \ErrorException
      */
     static public function stringInflater($layout){
