@@ -119,6 +119,10 @@ class System implements ISingleton{
 		}
 	}
 
+	public static function getEnvironmentData(){
+		return $_SERVER;
+	}
+
 	/**
 	 * Init the application
 	 * @return void

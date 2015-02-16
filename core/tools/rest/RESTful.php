@@ -37,7 +37,7 @@ class RESTful{
      * @return void
      */
     private function prepareResources($resources){
-        if(!count($resources)) return false;
+        if(!count($resources)) return;
         foreach ($resources as $resource){
             $handler = str_replace('.', '\\', $resource);
             $resource = new $handler();
@@ -51,12 +51,13 @@ class RESTful{
     /**
      * Starts to deal to the requests and serves the response
      * @return void
-     * @throws \ErrorException
+     * @throws WebServiceNotFoundException
      */
 	public function serve(){
-        if(!isset($_SERVER['PATH_INFO'])) throw new \ErrorException('Undefined service');
-        RESTfulAnnotation::$urlPath = $_SERVER['PATH_INFO'];
-        RESTfulAnnotation::$request = $_SERVER['REQUEST_METHOD'];
+        $environmentData = System::getEnvironmentData();
+        if(!isset($environmentData['PATH_INFO'])) throw new WebServiceNotFoundException('Undefined service');
+        RESTfulAnnotation::$urlPath = $environmentData['PATH_INFO'];
+        RESTfulAnnotation::$request = $environmentData['REQUEST_METHOD'];
         foreach ($this->annotations as $ann) {
             $response = $ann->process();
             if($response){
