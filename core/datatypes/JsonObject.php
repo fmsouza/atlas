@@ -22,7 +22,7 @@ class JsonObject{
     public function __construct(\stdClass $json=null){
         if(!is_null($json)){
             foreach (get_object_vars($json) as $key => $value) {
-                if(is_string($value)){
+                if(is_string($value) || is_numeric($value) || is_bool($value)){
                     $this->setKey($key, $value);
                 }
                 else if(is_object($value)){
@@ -46,7 +46,11 @@ class JsonObject{
 	 * @return mixed
 	 */
     public function getKey($key){
-        return $this->data[$key];
+        return ($this->exists($key))? $this->data[$key] : null;
+    }
+
+    public function exists($key){
+        return isset($this->data[$key]);
     }
     
 	/**
@@ -90,7 +94,7 @@ class JsonObject{
      * @ignore
      */
     public function __get($key){
-        return (isset($this->data[$key]))? $this->data[$key] : null;
+        return $this->getKey($key);
     }
 
     /**

@@ -15,6 +15,21 @@ use core\view\html\GenericElement;
 class ExceptionHandler {
 
     /**
+     * @var string MODE_HTML Flag to show errors as HTML
+     */
+    const MODE_HTML = 'HTML';
+
+    /**
+     * @var string MODE_HTML Flag to show errors as JSON
+     */
+    const MODE_JSON = 'JSON';
+
+    /**
+     * @var string MODE_HTML Flag to show errors as Console Log
+     */
+    const MODE_CONSOLE = 'CONSOLE';
+
+    /**
      * The Error
      * @var \ErrorException
      */
@@ -48,8 +63,6 @@ class ExceptionHandler {
      * @return void
      */
     public function setErrorTemplate($template, $path=''){
-        $tmp = new ArrayList();     // workaround to import the classes needed for show the error
-        $tmp = new JsonObject();    // as Json. TODO: fix it ASAP, it's too ugly
         $this->errorScreen = GenericElement::layoutInflater($template,$path);
     }
 
@@ -79,12 +92,14 @@ class ExceptionHandler {
     public function display(){
         if(!is_null($this->exception)){
             $config = System::getConfig();
-            $errorMode = (isset($config->errorMode))? $config->errorMode : null;
-            switch($errorMode){
-                case 'JSON':
+            switch($config->errorMode){
+                case self::MODE_JSON:
                     $response = $this->displayAsJson($this->exception, $this->isFatal, $config);
                     break;
-                case 'HTML':
+                case self::MODE_CONSOLE:
+                    $response = $this->displayAsConsoleLog($this->exception, $this->isFatal, $config);
+                    break;
+                case self::MODE_HTML:
                 default:
                     $response = $this->displayAsHtml($this->exception, $this->isFatal, $config);
                     break;
@@ -98,9 +113,10 @@ class ExceptionHandler {
      * Returns the error screen data as HTML
      * @param \ErrorException $e Thrown exception object
      * @param int $fatal Greater than zero if it was a fatal error (default: 0)
+     * @param JsonObject $config Application configuration data
      * @return string
      */
-    private function displayAsHtml(\ErrorException $e, $fatal, $config){
+    private function displayAsHtml(\ErrorException $e, $fatal, JsonObject $config){
         $layout = $this->errorScreen;
         if(!$config->debugMode){
             $end_msg = 'An error ocurred. Please, contact the administrator: '.$config->emailAdmin;
@@ -124,7 +140,14 @@ class ExceptionHandler {
         return $layout;
     }
 
-    private function displayAsJson(\ErrorException $e, $fatal, $config){
+    /**
+     * Returns the error screen data as JSON
+     * @param \ErrorException $e Thrown exception object
+     * @param int $fatal Greater than zero if it was a fatal error (default: 0)
+     * @param JsonObject $config Application configuration data
+     * @return string
+     */
+    private function displayAsJson(\ErrorException $e, $fatal, JsonObject $config){
         $response = new JsonObject();
         if(!$config->debugMode){
             $response->setKey("type", "ErrorException");
@@ -146,6 +169,31 @@ class ExceptionHandler {
     }
 
     /**
+     * Returns the error screen data as Console Log
+     * @param \ErrorException $e Thrown exception object
+     * @param int $fatal Greater than zero if it was a fatal error (default: 0)
+     * @param JsonObject $config Application configuration data
+     * @return string
+     */
+    private function displayAsConsoleLog(\ErrorException $e, $fatal, JsonObject $config){
+        if(!$config->debugMode){
+            return "ErrorException: An error ocurred. Please, contact the administrator: $config->emailAdmin";
+        } else {
+            $message = $e->getMessage()."\n";
+            $message .= "Type: ".get_class($e)."\n";
+            $message .= "Code: {$e->getCode()}\n";
+            $message .= "File: {$e->getFile()}\n";
+            $message .= "Line: {$e->getLine()}\n\n";
+            $message .= "Stacktrace:\n\n";
+
+            foreach(self::getStack($e) as $stackline){
+                $message .= "$stackline";
+            }
+            return $message;
+        }
+    }
+
+    /**
      * Writes the exception information to the log file
      *
      * @param int $errorNumber Error number
@@ -153,10 +201,11 @@ class ExceptionHandler {
      * @param string $errorMsg Error message
      * @param string $file Error file
      * @param int $line Error line
+     * @param string $timezone Timezone configuration
      * @return void
      */
-    public static function writeLog($errorType,$errorNumber,$errorMsg,$file,$line){
-        date_default_timezone_set("America/Los_Angeles");
+    public static function writeLog($errorType, $errorNumber, $errorMsg, $file, $line, $timezone){
+        date_default_timezone_set($timezone);
         file_put_contents(System::getConfig()->logPath,"[".date("c")."] {$errorType} ERROR {$errorNumber}: {$errorMsg} in {$file}({$line})\n",FILE_APPEND);
     }
 

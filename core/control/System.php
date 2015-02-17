@@ -136,9 +136,9 @@ class System implements ISingleton{
 		$scheduler = RuntimeErrorScheduler::getInstance();
 		$scheduler->setExceptionHandler($handler);
 		$scheduler->beginSchedule();
+		$config = self::getConfig();
 		try{
 			session_start();
-			$config = System::getConfig();
 			header("Content-Type: text/html; charset={$config->encoding}");
 			if($config->runTest) self::runTests();
 			App::main();
@@ -146,7 +146,7 @@ class System implements ISingleton{
 			ob_end_clean(); // cleans the output buffer
 			ob_start();		// inits again the output buffer
 			$scheduler->scheduleException($e);
-			ExceptionHandler::writeLog(get_class($e), $e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
+			ExceptionHandler::writeLog(get_class($e), $e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine(), $config->timezone);
 		}
 	}
 	
