@@ -1,4 +1,5 @@
 <?php
+
 namespace core\datatypes;
 
 /**
@@ -7,31 +8,31 @@ namespace core\datatypes;
  * 
  * @package core\control\datatypes
  */
-class ArrayList extends \ArrayObject{
+class ArrayList extends \ArrayIterator{
     
 	/**
      * Uses as standard array
 	 * @var int
 	 */
-    const STANDARD_ARRAY = 1;
+    const STANDARD_ARRAY    = 1;
     
 	/**
      * Uses as object
 	 * @var int
 	 */
-    const OBJECT_ARRAY = 2;
+    const OBJECT_ARRAY      = 2;
     
 	/**
      * Value Sort algorithm
 	 * @var int
 	 */
-    const VALUE_SORT = 3;
+    const VALUE_SORT        = 3;
     
 	/**
      * Key Sort algorithm
 	 * @var int 
 	 */
-    const KEY_SORT = 4;
+    const KEY_SORT          = 4;
     
 	/**
      * Natural Case Sensitive Sort algorithm
@@ -43,19 +44,19 @@ class ArrayList extends \ArrayObject{
      * Natural Sort algorithm
 	 * @var int 
 	 */
-    const NATURAL_SORT = 6;
+    const NATURAL_SORT      = 6;
     
 	/**
      * Compare Sort algorithm
 	 * @var int
 	 */
-    const CMP_SORT = 7;
+    const CMP_SORT          = 7;
     
 	/**
      * Key Compare Sort algorithm
 	 * @var int
 	 */
-    const KEY_CMP_SORT = 8;
+    const KEY_CMP_SORT      = 8;
     
     /**
      * Creates an instance of Database
@@ -93,15 +94,6 @@ class ArrayList extends \ArrayObject{
      */
     public function set($index, $value){
         $this->offsetSet($index, $value);
-    }
-    
-    /**
-     * Overwrite the object with an data array
-     * @param array $data
-     * @return void
-     */
-    public function overwrite($data){
-        $this->exchangeArray($data);
     }
     
     /**
@@ -172,12 +164,16 @@ class ArrayList extends \ArrayObject{
                 $this->natsort();
                 break;
             case self::CMP_SORT:
-                if(!empty($callback)) $this->uasort($callback);
-                else throw new \InvalidArgumentException("The selected sort requires a callback function");
+                if(empty($callback)){
+                    throw new \InvalidArgumentException("The selected sort requires a callback function");
+                }
+                $this->uasort($callback);
                 break;
             case self::KEY_CMP_SORT:
-                if(!empty($callback)) $this->uksort($callback);
-                else throw new \InvalidArgumentException("The selected sort requires a callback function");
+                if(empty($callback)){
+                    throw new \InvalidArgumentException("The selected sort requires a callback function");
+                }
+                $this->uksort($callback);
                 break;
         }
     }
@@ -187,15 +183,9 @@ class ArrayList extends \ArrayObject{
 	 */
     public function __toString(){
         $return = "";
-        $iterator = $this->getIterator();
-        if($this->size()>0){
-            while($iterator->valid()){
-                $value = $iterator->current();
-                $return .= (is_numeric($value) || $value instanceof \ArrayObject || $value instanceof JsonObject)?
-                    "$value, ":"\"$value\", ";
-                $iterator->next();
-            }
-            $return = substr($return, 0, -2);
+        foreach($this as $value){
+            $return .= (is_numeric($value) || $value instanceof \ArrayObject || $value instanceof JsonObject)?
+                "$value, ":"\"$value\", ";
         }
         return "[$return]";
     }

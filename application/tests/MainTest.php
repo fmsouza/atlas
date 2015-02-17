@@ -1,4 +1,5 @@
 <?php
+
 namespace application\tests;
 
 use core\tools\test\UnitTest;
