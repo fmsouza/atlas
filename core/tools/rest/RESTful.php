@@ -42,7 +42,7 @@ class RESTful{
             $handler = str_replace('.', '\\', $resource);
             $resource = new $handler();
             if(!$resource instanceof Resource)
-                throw new \InvalidArgumentException('Invalid resource');
+                throw new \InvalidArgumentException("$handler is not an instance of Resource");
 
             $this->annotations[] = new RESTfulAnnotation($resource);
         }
@@ -55,7 +55,7 @@ class RESTful{
      */
 	public function serve(){
         $environmentData = System::getEnvironmentData();
-        if(!isset($environmentData['PATH_INFO'])) throw new WebServiceNotFoundException('Undefined service');
+        if(!isset($environmentData['PATH_INFO'])) throw new WebServiceNotFoundException("Service not found");
         RESTfulAnnotation::$urlPath = $environmentData['PATH_INFO'];
         RESTfulAnnotation::$request = $environmentData['REQUEST_METHOD'];
         foreach ($this->annotations as $ann) {

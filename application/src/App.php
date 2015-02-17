@@ -16,6 +16,7 @@ class App{
     * @return void
     */
     public static function main(){
-        System::display(GenericElement::layoutInflater("hello.html"));
+        //System::display(GenericElement::layoutInflater("hello.html"));
+        print_r(System::getEnvironmentData());
     }
 }

@@ -1,6 +1,7 @@
 {
 	"emailAdmin": "admin@localhost",
 	"encoding": "UTF-8",
+  	"contentType": "text/html",
   	"timezone": "America/Los_Angeles",
 	"baseURL": "http://localhost/atlas/",
 	"logPath": "errors.log",

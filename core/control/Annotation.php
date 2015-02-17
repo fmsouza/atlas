@@ -77,7 +77,7 @@ abstract class Annotation{
 	 * @param string $methodArgSeparator
 	 * @return Annotation
 	 */
-	public function __construct(\stdClass $obj, $identifier='@', $lineDelimiter='\n', $methodDelimiter=':', $methodArgSeparator=','){
+	public function __construct($obj, $identifier='@', $lineDelimiter='\n', $methodDelimiter=':', $methodArgSeparator=','){
 		$this->reflection = new \ReflectionClass(get_class($obj));
 		$this->object = $obj;
 		$this->identifier = $identifier;

@@ -143,7 +143,7 @@ class System implements ISingleton{
 		$config = self::getConfig();
 		try{
 			session_start();
-			header("Content-Type: text/html; charset={$config->encoding}");
+			header("Content-Type: {$config->contentType}; charset={$config->encoding}");
 			if($config->runTest) self::runTests();
 			App::main();
 		}catch(\ErrorException $e){
