@@ -121,6 +121,10 @@ class System implements ISingleton{
 		}
 	}
 
+	/**
+	 * Gets the environment configuration data
+	 * @return array
+	 */
 	public static function getEnvironmentData(){
 		return $_SERVER;
 	}

@@ -17,6 +17,6 @@ class MainTest extends UnitTest{
      * @return bool
      */
     public function testIfTrue(){
-        return $this->assertTrue(false);
+        return $this->assertTrue(true);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace core\control\error;
 
-
 use core\control\System;
 use core\datatypes\ArrayList;
 use core\datatypes\JsonObject;
