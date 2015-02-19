@@ -6,19 +6,19 @@
 	"baseURL": "http://localhost/atlas/",
 	"logPath": "errors.log",
   	"debugMode": true,
-  	"errorMode": "HTML",
+  	"errorMode": "CONSOLE",
   	"runTest": true,
 	"tests": [
 		"application.tests.MainTest"
 	],
 	"database": {
-		"host": 		"",
-		"user": 		"",
-		"password": 	"",
-		"dbName": 		"",
+		"host": 		"localhost",
+		"user": 		"fred",
+		"password": 	"fred",
+		"dbName": 		"test",
 		"tblPrefix": 	"",
 		"charset": 		"",
-		"driver": 		""
+		"driver": 		"core.control.database.driver.Mysql"
 	},
 	"resources": [],
 	"viewPath": "application/static"

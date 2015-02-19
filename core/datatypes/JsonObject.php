@@ -105,6 +105,14 @@ class JsonObject{
     public function __set($key, $value){
         $this->data[$key] = $value;
     }
+
+    /**
+     * Gets the JSON data as scalar array
+     * @return array
+     */
+    public function toArray(){
+        return $this->data;
+    }
     
     /**
      * @ignore

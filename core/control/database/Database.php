@@ -3,6 +3,7 @@
 namespace core\control\database;
 
 use core\control\database\driver\DatabaseDriver;
+use core\control\System;
 use core\tools\designpattern\ISingleton;
 
 /**
@@ -20,7 +21,7 @@ class Database implements ISingleton{
 	 * Database connection configuration data
 	 * @var array
 	 */
-	static public $connInf;
+	static private $connInf;
 	/**
 	 * Database Instance
 	 * @var Database
@@ -57,21 +58,26 @@ class Database implements ISingleton{
 	 * @throws DatabaseException
 	 */
 	static public function getInstance(){
-		if(empty(self::$selectDriver))
-			if(isset(self::$connInf['driver'])) self::$selectDriver = self::$connInf['driver'];
-			else{
-				$db = debug_backtrace();
-	    		throw new DatabaseException("Driver name not configured", 1, 0, $db[0]['file'], $db[0]['line']);
+		if(empty(self::$connInf)){
+			self::$connInf = System::getConfig()->database->toArray();
+		}
+		if(empty(self::$selectDriver)){
+			if(isset(self::$connInf['driver'])){
+				self::$selectDriver = str_replace('.', '\\', self::$connInf['driver']);
 			}
-			
+			else{
+				$db = debug_backtrace()[0];
+	    		throw new DatabaseException("Driver name not configured", 1, 0, $db['file'], $db['line']);
+			}
+		}
 
 		if(is_null(self::$instance)){
 			try{
 				self::$instance = new Database(new self::$selectDriver(self::$connInf));
 				self::$instance->selectDatabase(self::$connInf['dbName']);
 			}catch(\ErrorException $e){
-				$db = debug_backtrace();
-	    		throw new DatabaseException($e->getMessage(), $e->getCode(), 0, $db[0]['file'], $db[0]['line'] );
+				$db = debug_backtrace()[0];
+	    		throw new DatabaseException($e->getMessage(), $e->getCode(), 0, $db['file'], $db['line']);
 			}
 		}
 		return self::$instance;
