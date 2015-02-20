@@ -2,7 +2,7 @@
 	"emailAdmin": "admin@localhost",
 	"encoding": "UTF-8",
   	"contentType": "text/html",
-  	"timezone": "America/Los_Angeles",
+  	"timezone": "America/Bahia",
 	"baseURL": "http://localhost/atlas/",
 	"logPath": "errors.log",
   	"debugMode": true,
@@ -12,13 +12,13 @@
 		"application.tests.MainTest"
 	],
 	"database": {
-		"host": 		"localhost",
-		"user": 		"fred",
-		"password": 	"fred",
-		"dbName": 		"test",
+		"host": 		"",
+		"user": 		"",
+		"password": 	"",
+		"dbName": 		"",
 		"tblPrefix": 	"",
 		"charset": 		"",
-		"driver": 		"core.control.database.driver.Mysql"
+		"driver": 		""
 	},
 	"resources": [],
 	"viewPath": "application/static"
