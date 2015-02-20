@@ -74,7 +74,6 @@ class Database implements ISingleton{
 		if(is_null(self::$instance)){
 			try{
 				self::$instance = new Database(new self::$selectDriver(self::$connInf));
-				self::$instance->selectDatabase(self::$connInf['dbName']);
 			}catch(\ErrorException $e){
 				$db = debug_backtrace()[0];
 	    		throw new DatabaseException($e->getMessage(), $e->getCode(), 0, $db['file'], $db['line']);

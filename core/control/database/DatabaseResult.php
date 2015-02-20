@@ -25,15 +25,29 @@ class DatabaseResult{
 	private $numRows;
 	
 	/**
-	 * Set a new row to the result
+	 * Set a new row to the result object
 	 * @param array $data Data array
 	 * @return boolean
 	 */
 	public function setRow(array $data){
-		if(empty($data)) return FALSE;
-		$this->rows[] = (object)$data;
+		if(empty($data)) return false;
+		$this->rows[] = (object) $data;
 		$this->numRows++;
-		return TRUE;
+		return true;
+	}
+
+	/**
+	 * Sets all rows to the result object
+	 * @param array $data
+	 * @return boolean
+	 */
+	public function setRows(array $data){
+		if(empty($data)) return false;
+        $tmp = [];
+        foreach($data as $row) $tmp[] = (object) $row;
+        $this->rows = $tmp;
+        $this->numRows = count($this->rows);
+		return true;
 	}
 	
 	/**
@@ -42,7 +56,7 @@ class DatabaseResult{
 	 */
 	public function getRow(){
 		$this->cursor = ($this->cursor<$this->getNumRows()) ? $this->cursor+1 : $this->cursor; 
-		return ($this->cursor==-1 || $this->cursor==$this->getNumRows()) ? NULL : $this->rows[$this->cursor];
+		return ($this->cursor==-1 || $this->cursor==$this->getNumRows()) ? null : $this->rows[$this->cursor];
 	}
 	
 	/**

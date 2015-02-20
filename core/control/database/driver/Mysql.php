@@ -57,9 +57,11 @@ class Mysql extends \mysqli implements DatabaseDriver{
 			if($result instanceof \mysqli_result){
 				$tmp = new DatabaseResult();
 				while($tmp->setRow((array)$result->fetch_assoc()));
-				unset($result);
+				$result->free();
 				return $tmp;
-			} elseif(!$result) throw new \ErrorException("There's an error in your SQL statement.");
+			}
+			elseif(!$result) throw new \ErrorException("There's an error in your SQL statement.");
+			else return $result;
 		}catch(\ErrorException $e){
 			$db = debug_backtrace()[0];
     		throw new DatabaseException($e->getMessage(), $e->getCode(), 0, $db['file'], $db['line']);
