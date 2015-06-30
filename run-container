@@ -1,0 +1,1 @@
+docker run -d --name atlas -v $(pwd):/app -p 8080:80 tutum/apache-php
